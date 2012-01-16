@@ -7,5 +7,22 @@ namespace PetStore.Domain
 {
     public class Customer
     {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int EmailPromotion { get; set; }
+        public bool IsActive { get; set; }
+        public bool IsDeleted { get; set; }
+        public DateTime DateCreated { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime DateModified { get; set; }
+        public string ModifiedBy { get; set; }
+
+        public Customer()
+        {
+            DateCreated = DateTime.Now;
+            DateModified = DateTime.Now;
+        }
     }
 }

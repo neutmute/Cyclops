@@ -75,6 +75,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressRepositoryTest.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="CustomerRepositoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

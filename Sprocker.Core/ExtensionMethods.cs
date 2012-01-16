@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -103,5 +105,18 @@ namespace Sprocker.Core
         /// Gets the code that represents the <see cref="Enum"/> member.
         /// </summary>
         public string Code { get; private set; }
+    }
+
+    /// <summary>
+    /// Convenient retrieval of an output parameter
+    /// </summary>
+    public static class DbCommandExtension
+    {
+        public static T GetParameterValue<T>(this IDbCommand command, string parameterName) where T : struct
+        {
+            SqlParameter sqlParameter = ((SqlParameter)command.Parameters[parameterName]);
+            object value = sqlParameter.Value;
+            return (value == null || value == DBNull.Value) ? default(T) : (T)value;
+        }
     }
 }

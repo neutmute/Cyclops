@@ -66,7 +66,7 @@ namespace PetStore.IntegrationTest
         public void TestMethod1()
         {
             IAddressRepository addressRepository = new AddressRepository();
-            ((SqlRepository)addressRepository).Database = new SprockerSqlDatabase(@"Data Source=(local)\Sql2008;Initial Catalog=PetStore.TestDatabase;Integrated Security=SSPI;");
+            ((SqlRepository)addressRepository).Database = new SprockerSqlDatabase(Constants.TestDatabaseConnectionString);
 
             List<Address> addresses = addressRepository.GetAll();
 

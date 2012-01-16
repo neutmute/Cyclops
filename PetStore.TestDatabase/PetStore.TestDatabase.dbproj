@@ -205,6 +205,12 @@
     <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\Address_GetAll.proc.sql">
       <SubType>Code</SubType>
     </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\Customer_Save.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\Customer_Get.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
   </ItemGroup>
   <ItemGroup>
     <NotInBuild Include="Data Generation Plans\DataGenerationPlan.FunctionalTesting.dgen">
