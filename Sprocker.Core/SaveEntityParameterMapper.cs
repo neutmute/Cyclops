@@ -37,8 +37,7 @@ namespace Sprocker.Core
         {
             if (parameterValues.Length != 1)
             {
-                throw new SprockerException(
-                    "The SaveEntityParameterMapper can only be used with a single domain entity parameter.", null);
+                throw SprockerException.Create("The SaveEntityParameterMapper can only be used with a single domain entity parameter.");
             }
 
             TEntity entity = parameterValues[0] as TEntity;
@@ -46,9 +45,7 @@ namespace Sprocker.Core
 
             if (entity == null)
             {
-                throw new SprockerException(
-                    string.Format("The supplied domain entity parameter was not a valid instance of {0}.",
-                                  entityType.FullName), null);
+                throw SprockerException.Create("The supplied domain entity parameter was not a valid instance of {0}.", entityType.FullName);
             }
 
             // TODO: [PF] Cache the results of the DiscoverParameters call.
@@ -93,12 +90,10 @@ namespace Sprocker.Core
                     }
                     if (propInfo == null)
                     {
-                        throw new SprockerException(
-                            string.Format(
-                                "SaveEntityParameterMapper cannot map parameters: {0} does not contain a public property called '{1}'.",
-                                entityType,
-                                propertyName),
-                            null);
+                        throw SprockerException.Create(
+                            "SaveEntityParameterMapper cannot map parameters: {0} does not contain a public property called '{1}'."
+                            , entityType
+                            , propertyName);
                     }
                 }
 
