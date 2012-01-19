@@ -10,7 +10,6 @@ namespace PetStore.Infrastructure
 {
     public class CustomerRepository : SqlRepository, ICustomerRepository
     {
-        #region IEntityRepository<Customer> Members
 
         public Customer GetOne(Predicate<Customer> filter)
         {
@@ -31,6 +30,8 @@ namespace PetStore.Infrastructure
         {
             DbCommand command = DbCommandBuilder<Customer>.MapAllParameters(Database, "Customer_Save")
                                                             .Build(customer);
+
+
             Database.ExecuteNonQuery(command);
             customer.Id = command.GetParameterValue<int>("@Id");
             return customer;
@@ -40,7 +41,5 @@ namespace PetStore.Infrastructure
         {
             throw new NotImplementedException();
         }
-
-        #endregion
     }
 }
