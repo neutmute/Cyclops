@@ -64,7 +64,6 @@
     <Compile Include="DbCommandBuilder.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="MapBuilderExtensionMethods.cs" />
-    <Compile Include="ParameterCache.cs" />
     <Compile Include="ParameterMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SprockerSprocAccessor.cs" />

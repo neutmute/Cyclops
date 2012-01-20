@@ -14,6 +14,7 @@ namespace Sprocker.Core
     {
         private readonly Database _database;
         private readonly Dictionary<string, Func<TEntity, object>> _parameterMaps;
+        private static readonly ParameterCache parameterCache = new ParameterCache();
 
         /// <summary>
         /// <see cref="Regex"/> for stripping the parameter token (@) from the beginning of a stored procedure name.
@@ -50,7 +51,8 @@ namespace Sprocker.Core
 
         public void AssignParameters(DbCommand command, TEntity entity)
         {
-            ParameterCache.Populate(_database, command);
+            // Normally the database.AssignParameters would handle this but that call is being bypassed
+            parameterCache.SetParameters(command, _database);
 
             Type entityType = entity.GetType();
 
