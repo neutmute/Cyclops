@@ -15,6 +15,8 @@ namespace PetStore.IntegrationTest
     [TestClass]
     public class AddressRepositoryTest
     {
+        private IAddressRepository _addressRepository;
+
         public AddressRepositoryTest()
         {
             //
@@ -22,56 +24,56 @@ namespace PetStore.IntegrationTest
             //
         }
 
-        private TestContext testContextInstance;
+         [TestInitialize()]
+         public void MyTestInitialize()
+         {
+             _addressRepository = new AddressRepository();
+             ((SqlRepository)_addressRepository).Database = new SprockerSqlDatabase(Constants.TestDatabaseConnectionString);
+         }
 
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
 
-        #region Additional test attributes
-        //
-        // You can use the following additional attributes as you write your tests:
-        //
-        // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
-        // Use ClassCleanup to run code after all tests in a class have run
-        // [ClassCleanup()]
-        // public static void MyClassCleanup() { }
-        //
-        // Use TestInitialize to run code before running each test 
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
-        // Use TestCleanup to run code after each test has run
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
-        //
-        #endregion
 
         [TestMethod]
-        public void TestMethod1()
+        public void AddressRepository_BasicUse_GetsAll()
         {
-            IAddressRepository addressRepository = new AddressRepository();
-            ((SqlRepository)addressRepository).Database = new SprockerSqlDatabase(Constants.TestDatabaseConnectionString);
 
-            List<Address> addresses = addressRepository.GetAll();
 
-            Console.WriteLine(addresses.Count);
+            //List<Address> addresses = addressRepository.GetAll();
+
+            //Console.WriteLine(addresses.Count);
 
         }
+
+
+        [TestMethod]
+        public void AddressRepository_NonGenericAccessor_GetsAll()
+        {
+            //IAddressRepository addressRepository = new AddressRepository();
+            //((SqlRepository)addressRepository).Database = new SprockerSqlDatabase(Constants.TestDatabaseConnectionString);
+
+            //List<Address> addresses = addressRepository.GetAll();
+
+            //Console.WriteLine(addresses.Count);
+
+        }
+
+        [TestMethod]
+        public void AddressRepository_BasicUse_SaveInstance()
+        {
+           // IAddressRepository addressRepository = new AddressRepository();
+           // ((SqlRepository)addressRepository).Database = new SprockerSqlDatabase(Constants.TestDatabaseConnectionString);
+
+           // Address address = new Address();
+           // address.AddressLine1 = "";
+            
+           // addressRepository.Save()
+            
+           // List<Address> addresses = addressRepository.GetAll();
+
+           //// Console.WriteLine(addresses.Count);
+
+        }
+
+
     }
 }
