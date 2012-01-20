@@ -4,15 +4,40 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NLog.Targets;
 using PetStore.Domain;
 using PetStore.Infrastructure;
 using Sprocker.Core;
+using NLog;
 
 namespace PetStore.IntegrationTest
 {
     [TestClass]
     public class CustomerRepositoryTest
     {
+        public MemoryTarget GetMemoryTarget()
+        {
+            return GetMemoryTarget("${message}|${exception:format=tostring}", LogLevel.Info);
+        }
+
+        /// <summary>
+        /// Get a target to allow assertions to be made against the Nlog
+        /// </summary>
+        public MemoryTarget GetMemoryTarget(LogLevel logLevel)
+        {
+            return GetMemoryTarget("${message}", logLevel);
+        }
+
+        /// <summary>
+        /// Get a target to allow assertions to be made against the Nlog
+        /// </summary>
+        public MemoryTarget GetMemoryTarget(string layout, LogLevel logLevel)
+        {
+            MemoryTarget memoryTarget = new MemoryTarget { Layout = layout };
+            NLog.Config.SimpleConfigurator.ConfigureForTargetLogging(memoryTarget, logLevel);
+            return memoryTarget;
+        }
+
         public Customer GetWellKnownCustomer()
         {
             Customer customer = new Customer
@@ -49,8 +74,7 @@ exec Customer_Save @Id=@p1 output,@Title=N'Super He',@FirstName=N'Captain',@Last
         [TestMethod]
         public void Customer_Saves_Success()
         {
-            CustomerRepository customerRepository = new CustomerRepository();
-            customerRepository.Database = new SprockerSqlDatabase(Constants.TestDatabaseConnectionString);
+            CustomerRepository customerRepository = CreateCustomerRepo();
 
             Customer customer = GetWellKnownCustomer();
 
@@ -61,6 +85,40 @@ exec Customer_Save @Id=@p1 output,@Title=N'Super He',@FirstName=N'Captain',@Last
             Assert.IsTrue(customer.Id > 0, "Persisted! Probably.");
 
             
+        }
+
+        private CustomerRepository CreateCustomerRepo()
+        {
+            CustomerRepository customerRepository = new CustomerRepository();
+            customerRepository.Database = new SprockerSqlDatabase(Constants.TestDatabaseConnectionString);
+            return customerRepository;
+        }
+
+        [TestMethod]
+        public void Sprocker_MapsParameters_Success()
+        {
+            CustomerRepository customerRepository = CreateCustomerRepo();
+            Customer customer = new Customer {Id = 1, IsDeleted = false};
+            customerRepository.Delete(customer);
+        }
+
+        [TestMethod]
+        public void Sprocker_LogsFailure()
+        {
+            MemoryTarget target = GetMemoryTarget();
+            try
+            {
+                CustomerRepository customerRepository = CreateCustomerRepo();
+                Customer customer = new Customer { Id = 1, IsDeleted = true };
+                customerRepository.Delete(customer);
+            }
+            catch (Exception e)
+            {
+                
+            }
+
+            List<string> logs = target.Logs.ToList();
+            Assert.AreEqual(logs[0], "Failed CommandText: \r\nDECLARE @RETURN_VALUE INT\r\n\t\t,@Id INT\r\n\t\t,@IsDeleted BIT;\r\nSELECT @RETURN_VALUE = -5\r\n\t\t,@Id = 1\r\n\t\t,@IsDeleted = 1;\r\nEXEC dbo.Customer_Delete\r\n\t\t@RETURN_VALUE = @RETURN_VALUE \r\n\t\t,@Id = @Id \r\n\t\t,@IsDeleted = @IsDeleted ;|");
         }
     }
 }

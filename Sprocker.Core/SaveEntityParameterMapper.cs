@@ -28,7 +28,7 @@ namespace Sprocker.Core
         /// <summary>
         /// Assigns <paramref name="parameterValues"/> to the parametes of <paramref name="command"/>.
         /// </summary>
-        public void AssignParameters(DbCommand command, object[] parameterValues)
+        public void AssignParameters(SprockerCommand command, object[] parameterValues)
         {
             ParameterMapper<TEntity> parameterMapper = new ParameterMapper<TEntity>(_database, _parameterMaps);
             parameterMapper.AssignParameters(command, parameterValues);
@@ -83,6 +83,11 @@ namespace Sprocker.Core
                     return _builderContext;
                 }
             }
+        }
+
+        public void AssignParameters(DbCommand command, object[] parameterValues)
+        {
+            throw new NotImplementedException();
         }
     }
 

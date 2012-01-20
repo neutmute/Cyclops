@@ -10,7 +10,6 @@ namespace PetStore.Infrastructure
 {
     public class CustomerRepository : SqlRepository, ICustomerRepository
     {
-
         public Customer GetOne(Predicate<Customer> filter)
         {
             throw new NotImplementedException();
@@ -23,23 +22,23 @@ namespace PetStore.Infrastructure
 
         public List<Customer> GetAll()
         {
-            return Database.ExecuteSprocAccessor<Customer>(90, "dbo.Customer_Get").ToList();
+            return BuildCommand("dbo.Customer_Get").Execute<Customer>();
         }
 
         public Customer Save(Customer customer)
         {
-            DbCommand command = DbCommandBuilder<Customer>.MapAllParameters(Database, "Customer_Save")
-                                                            .Build(customer);
+            SprockerCommand command = SprockerCommandBuilder<Customer>
+                                        .MapAllParameters(Database, "dbo.Customer_Save")
+                                        .Build(customer);
 
-
-            Database.ExecuteNonQuery(command);
+            command.ExecuteNonQuery();
             customer.Id = command.GetParameterValue<int>("@Id");
             return customer;
         }
 
         public void Delete(Customer instance)
         {
-            throw new NotImplementedException();
+            BuildCommand("dbo.Customer_Delete").ExecuteNonQuery(instance.Id, instance.IsDeleted);
         }
     }
 }

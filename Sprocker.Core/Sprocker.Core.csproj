@@ -61,7 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseExtensionMethods.cs" />
-    <Compile Include="DbCommandBuilder.cs" />
+    <Compile Include="SprockerCommandBuilder.cs" />
+    <Compile Include="DbCommandDumper.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="MapBuilderExtensionMethods.cs" />
     <Compile Include="ParameterMapper.cs" />
@@ -69,7 +70,7 @@
     <Compile Include="SprockerSprocAccessor.cs" />
     <Compile Include="SprockerSqlDatabase.cs" />
     <Compile Include="SaveEntityParameterMapper.cs" />
-    <Compile Include="Sprocker.cs" />
+    <Compile Include="SprockerCommand.cs" />
     <Compile Include="SprockerException.cs" />
     <Compile Include="SqlRepository.cs" />
   </ItemGroup>

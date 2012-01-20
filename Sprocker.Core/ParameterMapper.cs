@@ -31,7 +31,7 @@ namespace Sprocker.Core
         /// <summary>
         /// Assigns <paramref name="parameterValues"/> to the parametes of <paramref name="command"/>.
         /// </summary>
-        public void AssignParameters(DbCommand command, object[] parameterValues)
+        public void AssignParameters(SprockerCommand command, object[] parameterValues)
         {
             if (parameterValues.Length != 1)
             {
@@ -49,10 +49,10 @@ namespace Sprocker.Core
             AssignParameters(command, entity);
         }
 
-        public void AssignParameters(DbCommand command, TEntity entity)
+        public void AssignParameters(SprockerCommand command, TEntity entity)
         {
             // Normally the database.AssignParameters would handle this but that call is being bypassed
-            parameterCache.SetParameters(command, _database);
+            parameterCache.SetParameters(command.DbCommand, _database);
 
             Type entityType = entity.GetType();
 
