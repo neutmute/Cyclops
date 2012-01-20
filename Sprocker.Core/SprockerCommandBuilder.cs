@@ -14,21 +14,41 @@ namespace Sprocker.Core
 
     public class SprockerCommandBuilder<TEntity> where TEntity : class
     {
-        public static ISprockerCommandBuilderContext<TEntity> MapAllParameters(Database database, string storedProcedureName)
+        private readonly string _procedureName;
+        private readonly Database _database;
+
+        //public static ISprockerCommandBuilderContext<TEntity> MapAllParameters(Database database, string storedProcedureName)
+        //{
+        //    ISprockerCommandBuilderContext<TEntity> context = new SprockerCommandBuilderContext(database, storedProcedureName);
+        //    return context;
+        //}
+
+        public ISprockerCommandBuilderContext<TEntity> MapAllParameters()
         {
-            ISprockerCommandBuilderContext<TEntity> context = new SprockerCommandBuilderContext(database, storedProcedureName);
+            ISprockerCommandBuilderContext<TEntity> context = new SprockerCommandBuilderContext(_database, _procedureName);
             return context;
+        }
+
+        public SprockerCommandBuilder()
+        {
+            
+        }
+
+        public SprockerCommandBuilder(Database database, string procedureName)
+        {
+            _procedureName = procedureName;
+            _database = database;
         }
 
         private class SprockerCommandBuilderContext : ISprockerCommandBuilderContext<TEntity>
         {
             private readonly Dictionary<string, Func<TEntity, object>> _parameterMaps;
-            private readonly string _storedProcedureName;
+            private readonly string _procedureName;
             private readonly Database _database;
 
-            public SprockerCommandBuilderContext(Database database, string storedProcedureName)
+            public SprockerCommandBuilderContext(Database database, string procedureName)
             {
-                _storedProcedureName = storedProcedureName;
+                _procedureName = procedureName;
                 _database = database;
                 _parameterMaps = new Dictionary<string, Func<TEntity, object>>();
             }
@@ -40,7 +60,7 @@ namespace Sprocker.Core
 
             public SprockerCommand Build(TEntity entity)
             {
-                SprockerCommand command = new SprockerCommand(_database, _storedProcedureName);
+                SprockerCommand command = new SprockerCommand(_database, _procedureName);
                 ParameterMapper<TEntity> mapper = new ParameterMapper<TEntity>(_database, _parameterMaps);
                 mapper.AssignParameters(command, entity);
                 return command;

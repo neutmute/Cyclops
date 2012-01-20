@@ -12,23 +12,23 @@ namespace PetStore.Infrastructure
     {
         public Customer GetOne(Predicate<Customer> filter)
         {
-            throw new NotImplementedException();
+            return GetAll(filter).FirstOrDefault();
         }
 
         public List<Customer> GetAll(Predicate<Customer> filter)
         {
-            throw new NotImplementedException();
+            return GetAll().FindAll(filter);
         }
 
         public List<Customer> GetAll()
         {
-            return BuildCommand("dbo.Customer_Get").Execute<Customer>();
+            return ConstructCommand("dbo.Customer_Get").ExecuteRowMap<Customer>();
         }
 
         public Customer Save(Customer customer)
         {
-            SprockerCommand command = SprockerCommandBuilder<Customer>
-                                        .MapAllParameters(Database, "dbo.Customer_Save")
+            SprockerCommand command = ConstructCommand<Customer>("dbo.Customer_Save")
+                                        .MapAllParameters()
                                         .Build(customer);
 
             command.ExecuteNonQuery();
@@ -38,7 +38,7 @@ namespace PetStore.Infrastructure
 
         public void Delete(Customer instance)
         {
-            BuildCommand("dbo.Customer_Delete").ExecuteNonQuery(instance.Id, instance.IsDeleted);
+            ConstructCommand("dbo.Customer_Delete").ExecuteNonQuery(instance.Id, instance.IsDeleted);
         }
     }
 }
