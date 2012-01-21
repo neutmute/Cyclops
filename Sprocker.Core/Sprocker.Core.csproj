@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseExtensionMethods.cs" />
+    <Compile Include="DbCommandLogger.cs" />
     <Compile Include="EntityMapper.cs" />
     <Compile Include="SprockerCommandBuilder.cs" />
     <Compile Include="DbCommandDumper.cs" />

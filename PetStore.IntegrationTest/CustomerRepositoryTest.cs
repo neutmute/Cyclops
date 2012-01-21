@@ -60,7 +60,11 @@ namespace PetStore.IntegrationTest
 
             customerRepository.Database.ExecuteNonQuery(CommandType.Text,
                                                         @"
+DELETE FROM OrderLine;
+DELETE FROM Customer_Order;
+DELETE FROM [Order];
 DELETE FROM Customer;
+
 
 declare @p1 int
 exec Customer_Save @Id=@p1 output,@Title=N'Super He',@FirstName=N'Captain',@LastName=N'Hero',@EmailPromotion=0,@IsActive=1,@IsDeleted=0,@DateCreated='2012-01-16 22:35:02.423',@CreatedBy='Dave Jesser',@DateModified='2012-01-16 22:35:02.423',@ModifiedBy='Xandir'

@@ -84,12 +84,10 @@ namespace Sprocker.Core
             return entities;
         }
 
-       
-
         public DataSet ExecuteDataSet()
         {
             DataSet dataSet;
-
+            DbCommandLogger logger = new DbCommandLogger(this);
             try
             {
                 dataSet = Database.ExecuteDataSet(DbCommand);
@@ -97,12 +95,16 @@ namespace Sprocker.Core
             catch (Exception)
             {
                 Log.Info("Failed CommandText: {0}", new DbCommandDumper(DbCommand).GetLogDump());
-                throw; 
+                throw;
+            }
+            finally
+            {
+                logger.Complete();
             }
 
             return dataSet;
         }
-
+        
         private DataTable ExecuteDataTable()
         {
             DataSet dataSet = ExecuteDataSet();
