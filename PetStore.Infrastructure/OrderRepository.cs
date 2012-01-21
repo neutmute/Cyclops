@@ -37,13 +37,22 @@ namespace PetStore.Infrastructure
         /// <returns></returns>
         public List<Order> GetAll()
         {
+            // This proc returns customer and order dataTables
             DataSet dataSet = ConstructCommand("dbo.Order_Get").ExecuteDataSet();
+
+            // Just have to know the order with magic numbers
             DataTable orderTable = dataSet.Tables[0];
             DataTable customerTable = dataSet.Tables[1];
 
+            // Construct the customers first (child objects)
             List<Customer> customerList = CustomerRepository.MapAddresses(customerTable);
+
+            // Build a method to find a customer given an Id
             Func<int, Customer> getCustomer = i => customerList.Find(c => i == c.Id);
+
+            // Construct the orders and pass in the function with how to find the required customer
             List<Order> orders = EntityMapper.Map(orderTable, GetRowMapper(getCustomer));
+
             return orders;
         }
 
