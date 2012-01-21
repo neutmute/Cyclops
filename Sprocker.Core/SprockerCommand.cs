@@ -60,6 +60,7 @@ namespace Sprocker.Core
         public int ExecuteNonQuery()
         {
             int result = 0;
+            DbCommandLogger commandLogger = new DbCommandLogger(this);
             try
             {
                 result = Database.ExecuteNonQuery(DbCommand);
@@ -68,6 +69,10 @@ namespace Sprocker.Core
             {
                 Log.Info("Failed CommandText: {0}", new DbCommandDumper(DbCommand).GetLogDump());
                 throw;
+            }
+            finally
+            {
+                commandLogger.Complete();
             }
             return result;
         }
@@ -87,7 +92,7 @@ namespace Sprocker.Core
         public DataSet ExecuteDataSet()
         {
             DataSet dataSet;
-            DbCommandLogger logger = new DbCommandLogger(this);
+            DbCommandLogger commandLogger = new DbCommandLogger(this);
             try
             {
                 dataSet = Database.ExecuteDataSet(DbCommand);
@@ -99,7 +104,7 @@ namespace Sprocker.Core
             }
             finally
             {
-                logger.Complete();
+                commandLogger.Complete();
             }
 
             return dataSet;
