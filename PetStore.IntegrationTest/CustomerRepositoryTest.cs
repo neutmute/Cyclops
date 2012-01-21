@@ -112,7 +112,7 @@ exec Customer_Save @Id=@p1 output,@Title=N'Super He',@FirstName=N'Captain',@Last
                 Customer customer = new Customer { Id = 1, IsDeleted = true };
                 customerRepository.Delete(customer);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 
             }

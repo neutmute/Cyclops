@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Linq;
 using System.Text;
@@ -39,6 +40,11 @@ namespace PetStore.Infrastructure
         public void Delete(Customer instance)
         {
             ConstructCommand("dbo.Customer_Delete").ExecuteNonQuery(instance.Id, instance.IsDeleted);
+        }
+
+        public static List<Customer> MapAddresses(DataTable customerTable)
+        {
+            return EntityMapper.Map<Customer>(customerTable);
         }
     }
 }

@@ -7,20 +7,22 @@ BEGIN
 
 	SET NOCOUNT ON
  
+	CREATE TABLE #__CustomerLoad
+	(
+		SortOrder				INT IDENTITY(1,1)
+		,CustomerId				INT
+	)
+
+	INSERT #__CustomerLoad
+	(
+		CustomerId
+	)
 	SELECT	Id
-			,Title
-			,FirstName
-			,LastName
-			,EmailPromotion
-			,IsActive
-			,IsDeleted
-			,DateCreated
-			,CreatedBy
-			,DateModified
-			,ModifiedBy
 	FROM	dbo.Customer
 	WHERE	Id = @Id 
 	OR 		@Id IS NULL
+
+	EXEC dbo.Customer_Load
 			   
 END
 GO   

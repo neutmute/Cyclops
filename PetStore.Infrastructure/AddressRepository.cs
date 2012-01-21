@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using PetStore.Domain;
 using Sprocker.Core;
@@ -24,7 +25,7 @@ namespace PetStore.Infrastructure
         /// <returns></returns>
         public List<Address> GetAll()
         {
-            return Database.ExecuteSprocAccessor<Address>(90, "dbo.Address_GetAll").ToList();
+            return ConstructCommand("dbo.Address_Get").ExecuteRowMap<Address>();
         }
 
         public Address Save(Address instance)
@@ -40,6 +41,11 @@ namespace PetStore.Infrastructure
         public Address GetAddressForCustomer(Customer customer)
         {
             throw new NotImplementedException();
+        }
+
+        public static List<Address> MapAddresses(DataTable addressTable)
+        {
+            return EntityMapper.Map<Address>(addressTable);
         }
     }
 }

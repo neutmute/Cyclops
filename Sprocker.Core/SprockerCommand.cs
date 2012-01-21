@@ -74,25 +74,19 @@ namespace Sprocker.Core
 
         public List<TEntity> ExecuteRowMap<TEntity>()  where TEntity : new()
         {
-            IRowMapper<TEntity> defaultRowMapper = MapBuilder<TEntity>.BuildAllProperties();
-            return ExecuteRowMap(defaultRowMapper);
+            return ExecuteRowMap(EntityMapper.GetDefaultMapper<TEntity>());
         }
 
         public List<TEntity> ExecuteRowMap<TEntity>(IRowMapper<TEntity> mapper)
         {
             DataTable dataTable = ExecuteDataTable();
-            SprockerResultSetMapper<TEntity> setMapper = new SprockerResultSetMapper<TEntity>(mapper);
-            
-            List<TEntity> entities = new List<TEntity>();
-            using (var reader = dataTable.CreateDataReader())
-            {
-                entities.AddRange(setMapper.MapSet(reader).ToList());
-            }
-
+            List<TEntity> entities = EntityMapper.Map(dataTable, mapper);
             return entities;
         }
 
-        private DataSet ExecuteDataSet()
+       
+
+        public DataSet ExecuteDataSet()
         {
             DataSet dataSet;
 
