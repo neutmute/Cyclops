@@ -75,6 +75,7 @@
     <Compile Include="SprockerCommand.cs" />
     <Compile Include="SprockerException.cs" />
     <Compile Include="SqlRepository.cs" />
+    <Compile Include="TableSet.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

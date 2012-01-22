@@ -10,6 +10,8 @@ BEGIN
 		CREATE TABLE #__CustomerLoad (ThisKillsCompilerWarning int)
 	END
 
+	SELECT 'Customer'
+
 	SELECT	Id
 			,Title
 			,FirstName
