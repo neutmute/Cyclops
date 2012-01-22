@@ -48,5 +48,16 @@ namespace Sprocker.Core
         protected SqlRepository()
         {
         }
+
+        public SprockerCommand ConstructCommand(string procedureName)
+        {
+            return new SprockerCommand(Database, procedureName);
+        }
+
+        public SprockerCommandBuilder<TEntity> ConstructCommand<TEntity>(string procedureName) where TEntity : class
+        {
+            return new SprockerCommandBuilder<TEntity>(Database, procedureName);
+        }
+
     }
 }

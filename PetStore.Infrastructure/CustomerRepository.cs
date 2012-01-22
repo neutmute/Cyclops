@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Linq;
 using System.Text;
@@ -10,36 +11,40 @@ namespace PetStore.Infrastructure
 {
     public class CustomerRepository : SqlRepository, ICustomerRepository
     {
-
         public Customer GetOne(Predicate<Customer> filter)
         {
-            throw new NotImplementedException();
+            return GetAll(filter).FirstOrDefault();
         }
 
         public List<Customer> GetAll(Predicate<Customer> filter)
         {
-            throw new NotImplementedException();
+            return GetAll().FindAll(filter);
         }
 
         public List<Customer> GetAll()
         {
-            return Database.ExecuteSprocAccessor<Customer>(90, "dbo.Customer_Get").ToList();
+            return ConstructCommand("dbo.Customer_Get").ExecuteRowMap<Customer>();
         }
 
         public Customer Save(Customer customer)
         {
-            DbCommand command = DbCommandBuilder<Customer>.MapAllParameters(Database, "Customer_Save")
-                                                            .Build(customer);
+            SprockerCommand command = ConstructCommand<Customer>("dbo.Customer_Save")
+                                        .MapAllParameters()
+                                        .Build(customer);
 
-
-            Database.ExecuteNonQuery(command);
+            command.ExecuteNonQuery();
             customer.Id = command.GetParameterValue<int>("@Id");
             return customer;
         }
 
         public void Delete(Customer instance)
         {
-            throw new NotImplementedException();
+            ConstructCommand("dbo.Customer_Delete").ExecuteNonQuery(instance.Id, instance.IsDeleted);
+        }
+
+        public static List<Customer> MapAddresses(DataTable customerTable)
+        {
+            return EntityMapper.Map<Customer>(customerTable);
         }
     }
 }
