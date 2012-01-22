@@ -22,6 +22,8 @@ BEGIN
 	FROM	dbo.[Order]				O
 	JOIN	dbo.#__OrderLoad		L ON O.Id = L.OrderId
 
+	SELECT 'Order'
+
 	SELECT	Id
 			,OrderDate
 			,ShipDate

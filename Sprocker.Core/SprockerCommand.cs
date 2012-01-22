@@ -89,6 +89,11 @@ namespace Sprocker.Core
             return entities;
         }
 
+        public TableSet ExecuteTableSet()
+        {
+            return TableSet.Create(ExecuteDataSet());
+        }
+
         public DataSet ExecuteDataSet()
         {
             DataSet dataSet;
@@ -113,7 +118,15 @@ namespace Sprocker.Core
         private DataTable ExecuteDataTable()
         {
             DataSet dataSet = ExecuteDataSet();
-            return dataSet.Tables.Count > 0 ? dataSet.Tables[0] : null;
+            switch(dataSet.Tables.Count)
+            {
+                case 0:                 
+                    return null;
+                case 1:                 
+                    return dataSet.Tables[0];
+                default:                            // If more than one and we only asked for one, infer that this proc is returning a named record set load pattern
+                    return dataSet.Tables[1];
+            }
         }
 
         /// <summary>
