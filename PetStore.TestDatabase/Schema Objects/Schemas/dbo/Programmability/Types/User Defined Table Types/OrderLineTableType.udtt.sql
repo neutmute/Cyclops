@@ -8,8 +8,8 @@ CREATE TYPE dbo.OrderLineTableType AS TABLE
 	,UnitPriceCents		INT				
 	,IsActive			BIT				
 	,IsDeleted			BIT				
-	,DateCreated		DATETIME		
+	,DateCreated		DATETIME2		
 	,CreatedBy			VARCHAR(80)		
-	,DateModified		DATETIME		
+	,DateModified		DATETIME2		
 	,ModifiedBy			VARCHAR(80)		
 )

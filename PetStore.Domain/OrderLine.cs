@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PetStore.Domain
 {
-    class OrderLine
+    public class OrderLine
     {
         public int Id { get; set; }
         public int OrderId { get; set; }

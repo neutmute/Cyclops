@@ -58,7 +58,7 @@ namespace Sprocker.Core
 
             for (int i = SqlRepository.UserParametersStartIndex; i < command.Parameters.Count; i++)
             {
-                DbParameter dbParameter = command.Parameters[i];
+                 DbParameter dbParameter = command.Parameters[i];
 
                 string parameterName = dbParameter.ParameterName;
                 string propertyName = SqlParameterToken.Replace(parameterName, String.Empty);
@@ -75,36 +75,47 @@ namespace Sprocker.Core
                     object funcResult = _parameterMaps[propertyName](entity);
                     dbParameter.Value = (funcResult == null) ? DBNull.Value : funcResult;
                 }
-                // Automatically map @ModifiedBy to the current Windows identity (if a mapping function was not already specified)
-                else if (dbParameter.ParameterName == "@ModifiedBy")
+                //THIS IS TOO IMPLEMENTATION SPECIFIC
+                //// Automatically map @ModifiedBy to the current Windows identity (if a mapping function was not already specified)
+                //else if (dbParameter.ParameterName == "@ModifiedBy")
+                //{
+                //    dbParameter.Value = "HARDCODED USER NAME";
+                //}
+                else
                 {
-
-                    dbParameter.Value = "HARDCODED USER NAME";
-                }
-
-
-                // Try to find a publi instance property with the guessed property name
-                PropertyInfo propInfo = entityType.GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public);
-                if (propInfo == null)
-                {
-                    // If no matching property was found and the guessed property name is the entity type name with "Id" on the end,
-                    // look for a public instance property named "Id".
-                    if (propertyName == entityType.Name + "Id")
-                    {
-                        propInfo = entityType.GetProperty("Id", BindingFlags.Instance | BindingFlags.Public);
-                    }
-                    if (propInfo == null)
+                    FieldInfo fieldInfo = entityType.GetField(propertyName, BindingFlags.Instance | BindingFlags.Public);
+                    if (fieldInfo != null)
                     {
                         throw SprockerException.Create(
-                            "SaveEntityParameterMapper cannot map parameters: {0} does not contain a public property called '{1}'."
-                            , entityType
-                            , propertyName);
+                            "ParameterMapper cannot map parameters: {0} contains a public field called '{1}' - perhaps this should be a public property instead?",
+                            entityType,
+                            propertyName);
                     }
-                }
 
-                // Map the property value to the parameter
-                object propertyValue = propInfo.GetValue(entity, null);
-                dbParameter.Value = (propertyValue == null) ? DBNull.Value : propertyValue;
+                    // Try to find a publi instance property with the guessed property name
+                    PropertyInfo propInfo = entityType.GetProperty(propertyName,
+                                                                   BindingFlags.Instance | BindingFlags.Public);
+                    if (propInfo == null)
+                    {
+                        // If no matching property was found and the guessed property name is the entity type name with "Id" on the end,
+                        // look for a public instance property named "Id".
+                        if (propertyName == entityType.Name + "Id")
+                        {
+                            propInfo = entityType.GetProperty("Id", BindingFlags.Instance | BindingFlags.Public);
+                        }
+                        if (propInfo == null)
+                        {
+                            throw SprockerException.Create(
+                                "ParameterMapper cannot map parameters: {0} does not contain a public property called '{1}'.",
+                                entityType,
+                                propertyName);
+                        }
+                    }
+
+                    // Map the property value to the parameter
+                    object propertyValue = propInfo.GetValue(entity, null);
+                    dbParameter.Value = (propertyValue == null) ? DBNull.Value : propertyValue;
+                }
             }
         }
     }

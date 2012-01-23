@@ -20,6 +20,13 @@ namespace PetStore.Domain
         public DateTime DateModified { get; set; }
         public string ModifiedBy { get; set; }
 
+        public List<OrderLine> OrderLines { get; private set; }
+
         public Customer Customer {get;set;}
+
+        public Order()
+        {
+            OrderLines = new List<OrderLine>();
+        }
     }
 }

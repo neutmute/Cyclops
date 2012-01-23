@@ -114,8 +114,14 @@ namespace Sprocker.Core
 
             return dataSet;
         }
-        
-        private DataTable ExecuteDataTable()
+
+        public DataTable ExecuteDataTable(params object[] parameters)
+        {
+            _parameterMapper.AssignParameters(DbCommand, parameters);
+            return ExecuteDataTable();
+        }
+
+        public DataTable ExecuteDataTable()
         {
             DataSet dataSet = ExecuteDataSet();
             switch(dataSet.Tables.Count)

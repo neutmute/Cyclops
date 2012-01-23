@@ -238,6 +238,9 @@
     <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\Tool_TableTypeReflector.proc.sql">
       <SubType>Code</SubType>
     </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\Order_Save.proc.sql">
+      <SubType>Code</SubType>
+    </Build>
   </ItemGroup>
   <ItemGroup>
     <NotInBuild Include="Data Generation Plans\DataGenerationPlan.FunctionalTesting.dgen">

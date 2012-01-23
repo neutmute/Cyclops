@@ -7,8 +7,8 @@
 	UnitPriceCents		int				NOT NULL,
 	IsActive			bit				NOT NULL,
 	IsDeleted			bit				NOT NULL,
-	DateCreated			datetime		NOT NULL,
+	DateCreated			datetime2		NOT NULL,
 	CreatedBy			varchar(80)		NOT NULL,
-	DateModified		datetime		NOT NULL,
+	DateModified		datetime2		NOT NULL,
 	ModifiedBy			varchar(80)		NOT NULL
 )
