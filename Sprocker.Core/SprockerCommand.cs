@@ -145,6 +145,13 @@ namespace Sprocker.Core
             return (value == null || value == DBNull.Value) ? default(T) : (T)value;
         }
 
+        public void SetParameterToStructuredType(string parameterName, string typeName)
+        {
+            
+            ((SqlParameter)DbCommand.Parameters[parameterName]).SqlDbType = SqlDbType.Structured;
+            ((SqlParameter)DbCommand.Parameters[parameterName]).TypeName = typeName;
+        }
+
     }
 
     /// <summary>

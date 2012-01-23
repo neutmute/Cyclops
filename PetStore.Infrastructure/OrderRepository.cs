@@ -52,31 +52,9 @@ namespace PetStore.Infrastructure
 
         public void Save(Order instance)
         {
-            DataTable linesTableValuedParam = ConstructCommand("dbo.Tool_TableTypeReflector").ExecuteDataTable("OrderLineTableType");
-
-            // Tried some VAlueInjector here but wasn't working so did it manually for now
-            foreach (OrderLine line in instance.OrderLines)
-            {
-                DataRow dataRow = linesTableValuedParam.NewRow();
-                
-                dataRow["CreatedBy"] = line.CreatedBy;
-                dataRow["DateCreated"] = line.DateCreated;
-                dataRow["DateModified"] = line.DateModified;
-                dataRow["Id"] = line.Id;
-                dataRow["IsActive"] = line.IsActive;
-                dataRow["IsDeleted"] = line.IsDeleted;
-                dataRow["ModifiedBy"] = line.ModifiedBy;
-                dataRow["OrderId"] = line.OrderId;
-                dataRow["OrderQty"] = line.OrderQty;
-                dataRow["ProductId"] = line.ProductId;
-                dataRow["UnitPriceCents"] = line.UnitPriceCents;
-
-                linesTableValuedParam.Rows.Add(dataRow);
-            }
-
-            //tableValuedParamTemplate.InjectFrom <DataRowInjection<Order>>(instance.OrderLines);
-            //int result = ConstructCommand("dbo.OrderLine_save").ExecuteNonQuery(tableValuedParamTemplate);
-
+            const string orderLineTableType = "OrderLineTableType";
+            DataTable linesTableValuedParam = MapToDataTable(orderLineTableType, instance.OrderLines);
+            
             SprockerCommand command = ConstructCommand<Order>("dbo.Order_Save")
                                        .MapAllParameters()
                                        .Map("@CustomerId").WithFunc(o => o.Customer.Id)
@@ -85,68 +63,68 @@ namespace PetStore.Infrastructure
                                        .Map("@Lines").WithFunc(o => linesTableValuedParam)
                                        .Build(instance);
 
-            ((SqlParameter)command.Parameters["@Lines"]).SqlDbType = SqlDbType.Structured;
-            ((SqlParameter)command.Parameters["@Lines"]).TypeName = "OrderLineTableType";
+
+            // Make this a Map.WithFunc?
+            command.SetParameterToStructuredType("@Lines", orderLineTableType);
 
             command.ExecuteNonQuery();
 
             instance.Id = command.GetParameterValue<int>("@Id");
         }
 
-        public void Delete(Order instance)
+        public DataTable MapToDataTable<T>(string tableTypeName, List<T> listT)
         {
-            throw new NotImplementedException();
+            DataTable linesTableValuedParam = ConstructCommand("dbo.Tool_TableTypeReflector").ExecuteDataTable(tableTypeName);
+
+            foreach (T line in listT)
+            {
+                DataRow dataRow = linesTableValuedParam.NewRow();
+                dataRow.InjectFrom<DataRowInjection>(line);
+
+                linesTableValuedParam.Rows.Add(dataRow);
+            }
+            return linesTableValuedParam;
         }
 
-        public Order GetOrderForCustomer(Customer customer)
-        {
-            throw new NotImplementedException();
-        }
+        //public DataTable MapOrderLineToDataTable(List<OrderLine> lines)
+        //{
+        //    DataTable linesTableValuedParam = ConstructCommand("dbo.Tool_TableTypeReflector").ExecuteDataTable("OrderLineTableType");
+
+        //    foreach (OrderLine line in lines)
+        //    {
+        //        DataRow dataRow = linesTableValuedParam.NewRow();
+        //        dataRow.InjectFrom<DataRowInjection>(line);
+
+        //        linesTableValuedParam.Rows.Add(dataRow);
+        //    }
+        //    return linesTableValuedParam;
+        //}
+
+        //public void Delete(Order instance)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public Order GetOrderForCustomer(Customer customer)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 
-    //public class DataTableInjection<T> : ValueInjection where T : new()
-    //{
-    //    protected override void Inject(object source, object target)
-    //    {
-    //        var list = source as IList<T>;
-    //        var dataTable = target as DataTable;
 
-    //        foreach(T listItem in list)
-    //        {
-    //            DataRow dataRow = dataTable.NewRow();
-    //            dataRow.InjectFrom<DataRowInjection<T>>(listItem);
-    //            dataTable.Rows.Add(dataRow);
-    //        }
-    //    }
-    //}
+    /// <summary>
+    /// This can go up into Sprocker (will require ValueInjector dependency)
+    /// </summary>
+     public class DataRowInjection : KnownTargetValueInjection<DataRow>
+     {
+         protected override void Inject(object source, ref DataRow target)
+         {
+             foreach (PropertyDescriptor property in source.GetProps())
+             {
+                 target[property.Name] = property.GetValue(source);
+             }
+         }
+     }
 
-    //public class DataRowInjection<T> : KnownSourceValueInjection<T>
-    //{
-    //    protected override void Inject(T source, object target)
-    //    {
-    //        DataRow dataRow = target as DataRow;
-
-            
-    //        foreach (DataColumn column in dataRow.Table.Columns)
-    //        {
-    //            dataRow[column.ColumnName] = 
-    //        }
-            
-    //        foreach (DataColumn column in dataRow.Table.Columns)
-    //        {
-    //            dataRow[column.ColumnName] = 
-    //        }
-    //        //for (var i = 0; i < source.FieldCount; i++)
-    //        //{
-    //        //    var activeTarget = target.GetProps().GetByName(source.GetName(i), true);
-    //        //    if (activeTarget == null) continue;
-
-    //        //    var value = source.GetValue(i);
-    //        //    if (value == DBNull.Value) continue;
-
-    //        //    activeTarget.SetValue(target, value);
-    //        //}
-    //    }
-    //}
 
 }
