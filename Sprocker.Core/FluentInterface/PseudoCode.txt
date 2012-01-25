@@ -1,0 +1,16 @@
+﻿
+
+Sprocker.AggrateRoot<type>()
+	.IsTransactional(false)
+	.StoredProcedure("ProcName")
+		.AutoMap()
+		.InputMapper(Mapper)
+		.OutputMapper(Mapper)
+	.ChildEntity<type>()
+		.StoredProcedure("ProcName") or
+		.UseNextResultSet("IdentityCol")
+		.InputMapper(Mapper)
+		.OutputMapper(Mapper)
+	.Execute();
+
+

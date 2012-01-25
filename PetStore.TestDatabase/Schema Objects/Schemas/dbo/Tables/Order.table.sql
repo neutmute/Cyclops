@@ -1,15 +1,15 @@
 ﻿CREATE TABLE [dbo].[Order]
 (
 	Id					int				NOT NULL IDENTITY(1,1),
-	OrderDate			datetime		NOT NULL,
-	ShipDate			datetime		NULL,
+	OrderDate			datetime2		NOT NULL,
+	ShipDate			datetime2		NULL,
 	CustomerId			int				NOT NULL,
 	BillToAddressId		int				NOT NULL,
 	ShipToAddressId		int				NOT NULL,
 	IsActive			bit				NOT NULL,
 	IsDeleted			bit				NOT NULL,
-	DateCreated			datetime		NOT NULL,
+	DateCreated			datetime2		NOT NULL,
 	CreatedBy			varchar(80)		NOT NULL,
-	DateModified		datetime		NOT NULL,
+	DateModified		datetime2		NOT NULL,
 	ModifiedBy			varchar(80)		NOT NULL
 )

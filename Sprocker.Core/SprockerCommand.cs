@@ -114,8 +114,14 @@ namespace Sprocker.Core
 
             return dataSet;
         }
-        
-        private DataTable ExecuteDataTable()
+
+        public DataTable ExecuteDataTable(params object[] parameters)
+        {
+            _parameterMapper.AssignParameters(DbCommand, parameters);
+            return ExecuteDataTable();
+        }
+
+        public DataTable ExecuteDataTable()
         {
             DataSet dataSet = ExecuteDataSet();
             switch(dataSet.Tables.Count)
@@ -137,6 +143,13 @@ namespace Sprocker.Core
             SqlParameter sqlParameter = ((SqlParameter) Parameters[parameterName]);
             object value = sqlParameter.Value;
             return (value == null || value == DBNull.Value) ? default(T) : (T)value;
+        }
+
+        public void SetParameterToStructuredType(string parameterName, string typeName)
+        {
+            
+            ((SqlParameter)DbCommand.Parameters[parameterName]).SqlDbType = SqlDbType.Structured;
+            ((SqlParameter)DbCommand.Parameters[parameterName]).TypeName = typeName;
         }
 
     }

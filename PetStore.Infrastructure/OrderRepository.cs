@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using PetStore.Domain;
@@ -47,19 +48,81 @@ namespace PetStore.Infrastructure
             return orders;
         }
 
-        public Order Save(Order instance)
+        public void Save(Order instance)
         {
-            throw new NotImplementedException();
+            const string orderLineTableType = "OrderLineTableType";
+            DataTable linesTableValuedParam = MapToDataTable(orderLineTableType, instance.OrderLines);
+            
+            SprockerCommand command = ConstructCommand<Order>("dbo.Order_Save")
+                                       .MapAllParameters()
+                                       .Map("@CustomerId").WithFunc(o => o.Customer.Id)
+                                       .Map("@BillToAddressId").WithFunc(o => 1)
+                                       .Map("@ShipToAddressId").WithFunc(o => 1)
+                                       .Map("@Lines").WithFunc(o => linesTableValuedParam)
+                                       .Build(instance);
+
+
+            // Make this a Map.WithFunc?
+            command.SetParameterToStructuredType("@Lines", orderLineTableType);
+
+            command.ExecuteNonQuery();
+
+            instance.Id = command.GetParameterValue<int>("@Id");
         }
 
-        public void Delete(Order instance)
+        public DataTable MapToDataTable<T>(string tableTypeName, List<T> listT)
         {
-            throw new NotImplementedException();
+            DataTable linesTableValuedParam = ConstructCommand("dbo.Tool_TableTypeReflector").ExecuteDataTable(tableTypeName);
+
+            foreach (T line in listT)
+            {
+                DataRow dataRow = linesTableValuedParam.NewRow();
+                dataRow.InjectFrom<DataRowInjection>(line);
+
+                linesTableValuedParam.Rows.Add(dataRow);
+            }
+            return linesTableValuedParam;
         }
 
-        public Order GetOrderForCustomer(Customer customer)
-        {
-            throw new NotImplementedException();
-        }
+        //public DataTable MapOrderLineToDataTable(List<OrderLine> lines)
+        //{
+        //    DataTable linesTableValuedParam = ConstructCommand("dbo.Tool_TableTypeReflector").ExecuteDataTable("OrderLineTableType");
+
+        //    foreach (OrderLine line in lines)
+        //    {
+        //        DataRow dataRow = linesTableValuedParam.NewRow();
+        //        dataRow.InjectFrom<DataRowInjection>(line);
+
+        //        linesTableValuedParam.Rows.Add(dataRow);
+        //    }
+        //    return linesTableValuedParam;
+        //}
+
+        //public void Delete(Order instance)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public Order GetOrderForCustomer(Customer customer)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
+
+
+    /// <summary>
+    /// This can go up into Sprocker (will require ValueInjector dependency)
+    /// </summary>
+     public class DataRowInjection : KnownTargetValueInjection<DataRow>
+     {
+         protected override void Inject(object source, ref DataRow target)
+         {
+             foreach (PropertyDescriptor property in source.GetProps())
+             {
+                 target[property.Name] = property.GetValue(source);
+             }
+         }
+     }
+
+
 }

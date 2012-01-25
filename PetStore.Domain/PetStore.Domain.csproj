@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
+    <Compile Include="AddressCriteria.cs" />
     <Compile Include="Core\IEntityRepository.cs" />
     <Compile Include="Core\IValueObjectRepository.cs" />
     <Compile Include="Customer.cs" />
