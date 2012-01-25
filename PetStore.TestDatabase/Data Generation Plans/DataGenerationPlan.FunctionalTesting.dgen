@@ -895,7 +895,7 @@
 						<Annotation Type="ColumnConfigAnnotation">
 							<Property Name="Selected" Value="True" />
 							<Property Name="Seed" Value="5" />
-							<Property Name="GeneratorExtensionHandleXml" Value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xD;&#xA;&lt;ExtensionHandle AssemblyName=&quot;Microsoft.Data.Schema.Generators.Sql, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&quot; TypeName=&quot;Microsoft.Data.Schema.Generators.Sql.SqlDateTimeGenerator&quot; /&gt;" />
+							<Property Name="GeneratorExtensionHandleXml" Value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xD;&#xA;&lt;ExtensionHandle AssemblyName=&quot;Microsoft.Data.Schema.Generators.Sql, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&quot; TypeName=&quot;Microsoft.Data.Schema.Generators.Sql.DateTime2Generator&quot; /&gt;" />
 							<Property Name="OutputKey" Value="Result" />
 						</Annotation>
 					</Element>
@@ -917,7 +917,7 @@
 						<Annotation Type="ColumnConfigAnnotation">
 							<Property Name="Selected" Value="True" />
 							<Property Name="Seed" Value="5" />
-							<Property Name="GeneratorExtensionHandleXml" Value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xD;&#xA;&lt;ExtensionHandle AssemblyName=&quot;Microsoft.Data.Schema.Generators.Sql, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&quot; TypeName=&quot;Microsoft.Data.Schema.Generators.Sql.SqlDateTimeGenerator&quot; /&gt;" />
+							<Property Name="GeneratorExtensionHandleXml" Value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xD;&#xA;&lt;ExtensionHandle AssemblyName=&quot;Microsoft.Data.Schema.Generators.Sql, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&quot; TypeName=&quot;Microsoft.Data.Schema.Generators.Sql.DateTime2Generator&quot; /&gt;" />
 							<Property Name="OutputKey" Value="Result" />
 						</Annotation>
 					</Element>
@@ -1050,7 +1050,7 @@
 						<Annotation Type="ColumnConfigAnnotation">
 							<Property Name="Selected" Value="True" />
 							<Property Name="Seed" Value="5" />
-							<Property Name="GeneratorExtensionHandleXml" Value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xD;&#xA;&lt;ExtensionHandle AssemblyName=&quot;Microsoft.Data.Schema.Generators.Sql, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&quot; TypeName=&quot;Microsoft.Data.Schema.Generators.Sql.SqlDateTimeGenerator&quot; /&gt;" />
+							<Property Name="GeneratorExtensionHandleXml" Value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xD;&#xA;&lt;ExtensionHandle AssemblyName=&quot;Microsoft.Data.Schema.Generators.Sql, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&quot; TypeName=&quot;Microsoft.Data.Schema.Generators.Sql.DateTime2Generator&quot; /&gt;" />
 							<Property Name="OutputKey" Value="Result" />
 						</Annotation>
 					</Element>
@@ -1096,7 +1096,7 @@
 						<Annotation Type="ColumnConfigAnnotation">
 							<Property Name="Selected" Value="True" />
 							<Property Name="Seed" Value="5" />
-							<Property Name="GeneratorExtensionHandleXml" Value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xD;&#xA;&lt;ExtensionHandle AssemblyName=&quot;Microsoft.Data.Schema.Generators.Sql, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&quot; TypeName=&quot;Microsoft.Data.Schema.Generators.Sql.SqlDateTimeGenerator&quot; /&gt;" />
+							<Property Name="GeneratorExtensionHandleXml" Value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xD;&#xA;&lt;ExtensionHandle AssemblyName=&quot;Microsoft.Data.Schema.Generators.Sql, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&quot; TypeName=&quot;Microsoft.Data.Schema.Generators.Sql.DateTime2Generator&quot; /&gt;" />
 							<Property Name="OutputKey" Value="Result" />
 						</Annotation>
 					</Element>
@@ -1135,7 +1135,7 @@
 				<Property Name="Selected" Value="True" />
 			</Annotation>
 			<Annotation Type="CardinalityConfigAnnotation">
-				<Property Name="PrimaryTableName" Value="[dbo].[Address]" />
+				<Property Name="PrimaryTableName" Value="[dbo].[Customer]" />
 				<Property Name="PrimaryCardinality" Value="1" />
 				<Property Name="ForeignCardinality" Value="1" />
 			</Annotation>
@@ -1314,7 +1314,7 @@
 						<Annotation Type="ColumnConfigAnnotation">
 							<Property Name="Selected" Value="True" />
 							<Property Name="Seed" Value="5" />
-							<Property Name="GeneratorExtensionHandleXml" Value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xD;&#xA;&lt;ExtensionHandle AssemblyName=&quot;Microsoft.Data.Schema.Generators.Sql, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&quot; TypeName=&quot;Microsoft.Data.Schema.Generators.Sql.SqlDateTimeGenerator&quot; /&gt;" />
+							<Property Name="GeneratorExtensionHandleXml" Value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xD;&#xA;&lt;ExtensionHandle AssemblyName=&quot;Microsoft.Data.Schema.Generators.Sql, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&quot; TypeName=&quot;Microsoft.Data.Schema.Generators.Sql.DateTime2Generator&quot; /&gt;" />
 							<Property Name="OutputKey" Value="Result" />
 						</Annotation>
 					</Element>
@@ -1360,7 +1360,7 @@
 						<Annotation Type="ColumnConfigAnnotation">
 							<Property Name="Selected" Value="True" />
 							<Property Name="Seed" Value="5" />
-							<Property Name="GeneratorExtensionHandleXml" Value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xD;&#xA;&lt;ExtensionHandle AssemblyName=&quot;Microsoft.Data.Schema.Generators.Sql, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&quot; TypeName=&quot;Microsoft.Data.Schema.Generators.Sql.SqlDateTimeGenerator&quot; /&gt;" />
+							<Property Name="GeneratorExtensionHandleXml" Value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xD;&#xA;&lt;ExtensionHandle AssemblyName=&quot;Microsoft.Data.Schema.Generators.Sql, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a&quot; TypeName=&quot;Microsoft.Data.Schema.Generators.Sql.DateTime2Generator&quot; /&gt;" />
 							<Property Name="OutputKey" Value="Result" />
 						</Annotation>
 					</Element>
@@ -1395,13 +1395,13 @@
 				</Entry>
 			</Relationship>
 			<Annotation Type="TableConfigAnnotation">
-				<Property Name="NumRows" Value="100" />
+				<Property Name="NumRows" Value="50" />
 				<Property Name="Selected" Value="True" />
 			</Annotation>
 			<Annotation Type="CardinalityConfigAnnotation">
 				<Property Name="PrimaryTableName" Value="[dbo].[Order]" />
 				<Property Name="PrimaryCardinality" Value="1" />
-				<Property Name="ForeignCardinality" Value="2" />
+				<Property Name="ForeignCardinality" Value="1" />
 			</Annotation>
 		</Element>
 		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_Address]">
