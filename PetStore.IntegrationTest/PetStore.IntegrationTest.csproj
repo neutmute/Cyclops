@@ -73,6 +73,7 @@
     <Compile Include="CustomerRepositoryTest.cs" />
     <Compile Include="OrderRepositoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SprockerBuilderTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="README.txt" />

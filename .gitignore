@@ -24,12 +24,12 @@
 *.sdf
 *.opensdf
 *.unsuccessfulbuild
+*.dbmdl
 ipch/
 obj/
 [Bb]in
 [Dd]ebug*/
 [Rr]elease*/
-Ankh.NoLoad
 
 #Tooling
 _ReSharper*/
@@ -38,9 +38,6 @@ _ReSharper*/
 
 #Project files
 [Bb]uild/
-
-#Subversion files
-.svn
 
 # Office Temp Files
 ~$*
