@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Microsoft.Practices.EnterpriseLibrary.Data;
+using Omu.ValueInjecter;
 using PetStore.Domain;
 using Sprocker.Core;
 
