@@ -41,17 +41,33 @@ namespace PetStore.IntegrationTest
             Order order = repo.GetOne(o => o.Id == 1);
         }
 
+        /// <summary>
+        /// Test expects data to have been generated and requries transactions to rollback other tests.
+        /// just hacked for now
+        /// </summary>
+        [TestMethod]
+        public void Order_GetOne_Success()
+        {
+            OrderRepository repo = GetNewRepo();
+            Order order = repo.Get(1);
+
+            Assert.AreEqual(1, order.Id);
+        }
+
+        /// <summary>
+        /// Test expects data to have been generated and requries transactions to rollback other tests.
+        /// just hacked for now
+        /// </summary>
         [TestMethod]
         public void TableValuedParameterDemo()
         {
             OrderRepository repo = GetNewRepo();
             Order order = GetUnpersistedOrder();
-
             repo.Save(order);
         }
 
         /// <summary>
-        /// OMG! sorry - had to for testing my valueinjector
+        /// AssertBuilder! OMG! sorry - had to for testing my valueinjector
         /// </summary>
         [TestMethod]
         public void OrderLineList_MapsTo_DataTAble()

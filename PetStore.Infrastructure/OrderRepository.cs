@@ -29,6 +29,11 @@ namespace PetStore.Infrastructure
             return GetAll(filter).FirstOrDefault();
         }
 
+        public Order Get(int id)
+        {
+            return GetWorker(id).FirstOrDefault();
+        }
+
         public List<Order> GetAll(Predicate<Order> filter)
         {
             return GetAll().FindAll(filter).ToList();
@@ -36,7 +41,14 @@ namespace PetStore.Infrastructure
 
         public List<Order> GetAll()
         {
-            var tableSet = ConstructCommand("dbo.Order_Get").ExecuteTableSet();
+            return GetWorker(null);
+        }
+
+        public List<Order> GetWorker(int? id)
+        {
+            SprockerCommand command = ConstructCommand("dbo.Order_Get");
+            
+            var tableSet = command.ExecuteTableSet(id);
             
             // Construct the customers first (child objects)
             List<Customer> customerList = CustomerRepository.MapAddresses(tableSet["Customer"]);
@@ -49,7 +61,7 @@ namespace PetStore.Infrastructure
 
             return orders;
         }
-
+        
         public void Save(Order instance)
         {
             const string orderLineTableType = "OrderLineTableType";
