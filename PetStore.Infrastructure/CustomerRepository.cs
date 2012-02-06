@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Common;
 using System.Linq;
 using System.Text;
+using Microsoft.Practices.EnterpriseLibrary.Data;
 using PetStore.Domain;
 using Sprocker.Core;
 
@@ -11,6 +12,15 @@ namespace PetStore.Infrastructure
 {
     public class CustomerRepository : SqlRepository, ICustomerRepository
     {
+        private static IRowMapper<Customer> _rowMapper;
+
+        static CustomerRepository()
+        {
+            _rowMapper = MapBuilder<Customer>
+                                        .MapAllProperties()
+                                        .Build();
+        }
+
         public Customer GetOne(Predicate<Customer> filter)
         {
             return GetAll(filter).FirstOrDefault();
@@ -44,7 +54,7 @@ namespace PetStore.Infrastructure
 
         public static List<Customer> MapAddresses(DataTable customerTable)
         {
-            return EntityMapper.Map<Customer>(customerTable);
+            return EntityMapper.Map(customerTable, _rowMapper);
         }
     }
 }

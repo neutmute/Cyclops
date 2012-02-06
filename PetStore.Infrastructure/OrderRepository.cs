@@ -13,15 +13,27 @@ namespace PetStore.Infrastructure
 {
     public class OrderRepository : SqlRepository //, IOrderRepository
     {
-        public IRowMapper<Order> GetRowMapper(Func<int, Customer> getCustomer, Func<int, List<OrderLine>> getLines)
-        {
-            IRowMapper<Order> rowMapper =
-                MapBuilder<Order>.MapAllProperties()
-               .Map(o => o.Customer)    .WithFunc(row => getCustomer((int) row["CustomerId"]))
-               .Map(o => o.OrderLines)  .WithFunc(row => getLines   ((int) row["Id"]))
-               .Build();
+        private static IRowMapper<OrderLine> __orderLineMapper;
 
+        public static IRowMapper<Order> GetOrderRowMapper(Func<int, Customer> getCustomer, Func<int, List<OrderLine>> getLines)
+        {
+            IRowMapper<Order> rowMapper = MapBuilder<Order>
+                                        .MapAllProperties()
+                                        .Map(o => o.Customer).WithFunc(row => getCustomer((int)row["CustomerId"]))
+                                        .Map(o => o.OrderLines).WithFunc(row => getLines((int)row["Id"]))
+                                        .Build();
             return rowMapper;
+        }
+
+        public static IRowMapper<OrderLine> GetOrderLineRowMapper()
+        {
+            if (__orderLineMapper == null)
+            {
+                __orderLineMapper = MapBuilder<OrderLine>
+                    .MapAllProperties()
+                    .Build();
+            }
+            return __orderLineMapper;
         }
 
         public Order GetOne(Predicate<Order> filter)
@@ -60,7 +72,7 @@ namespace PetStore.Infrastructure
             Func<int, List<OrderLine>> getLines = i => orderLineCache.FindAll(l => l.OrderId == i);
 
             // Construct the parent (orders) and pass in the function with how to find the required customer for the rowmapper
-            List<Order> orders = EntityMapper.Map(tableSet["Order"], GetRowMapper(getCustomer, getLines));
+            List<Order> orders = EntityMapper.Map(tableSet["Order"], GetOrderRowMapper(getCustomer, getLines));
 
             return orders;
         }
@@ -89,7 +101,7 @@ namespace PetStore.Infrastructure
 
         public static List<OrderLine> MapOrderLines(DataTable dataTable)
         {
-            return EntityMapper.Map<OrderLine>(dataTable);
+            return EntityMapper.Map(dataTable, GetOrderLineRowMapper());
         }
 
         public DataTable MapToDataTable<T>(string tableTypeName, List<T> listT)

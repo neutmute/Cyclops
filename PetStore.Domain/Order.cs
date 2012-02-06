@@ -23,5 +23,10 @@ namespace PetStore.Domain
         {
             OrderLines = new List<OrderLine>();
         }
+
+        public override string ToString()
+        {
+            return string.Format("Id={0}, OrderDate={1}, Customer=[{2}]", Id, OrderDate, Customer);
+        }
     }
 }

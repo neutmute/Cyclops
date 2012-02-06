@@ -34,14 +34,14 @@ namespace PetStore.IntegrationTest
             return repo;
         }
 
-        [TestMethod]
-        public void Order_Get()
-        {
-            OrderRepository repo = GetNewRepo();
-            Order order = repo.GetOne(o => o.Id == 1);
+        //[TestMethod]
+        //public void Order_Get()
+        //{
+        //    OrderRepository repo = GetNewRepo();
+        //    Order order = repo.GetOne(o => o.Id == 1);
 
 
-        }
+        //}
 
         /// <summary>
         /// Test expects data to have been generated and requries transactions to rollback other tests.
@@ -55,6 +55,7 @@ namespace PetStore.IntegrationTest
 
             Assert.AreEqual(1, order.Id);
             Assert.IsTrue(order.OrderLines.Count > 0);
+            Assert.IsNotNull(order.Customer);
         }
 
         /// <summary>
