@@ -1395,13 +1395,13 @@
 				</Entry>
 			</Relationship>
 			<Annotation Type="TableConfigAnnotation">
-				<Property Name="NumRows" Value="50" />
+				<Property Name="NumRows" Value="250" />
 				<Property Name="Selected" Value="True" />
 			</Annotation>
 			<Annotation Type="CardinalityConfigAnnotation">
 				<Property Name="PrimaryTableName" Value="[dbo].[Order]" />
 				<Property Name="PrimaryCardinality" Value="1" />
-				<Property Name="ForeignCardinality" Value="1" />
+				<Property Name="ForeignCardinality" Value="5" />
 			</Annotation>
 		</Element>
 		<Element Type="ISql100PrimaryKeyConstraint" Name="[dbo].[PK_Address]">

@@ -39,6 +39,8 @@ namespace PetStore.IntegrationTest
         {
             OrderRepository repo = GetNewRepo();
             Order order = repo.GetOne(o => o.Id == 1);
+
+
         }
 
         /// <summary>
@@ -46,12 +48,13 @@ namespace PetStore.IntegrationTest
         /// just hacked for now
         /// </summary>
         [TestMethod]
-        public void Order_GetOne_Success()
+        public void Order_Get_Success()
         {
             OrderRepository repo = GetNewRepo();
             Order order = repo.Get(1);
 
             Assert.AreEqual(1, order.Id);
+            Assert.IsTrue(order.OrderLines.Count > 0);
         }
 
         /// <summary>

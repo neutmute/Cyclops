@@ -13,12 +13,12 @@ namespace PetStore.Infrastructure
 {
     public class OrderRepository : SqlRepository //, IOrderRepository
     {
-        public IRowMapper<Order> GetRowMapper(Func<int, Customer> getCustomer)
+        public IRowMapper<Order> GetRowMapper(Func<int, Customer> getCustomer, Func<int, List<OrderLine>> getLines)
         {
             IRowMapper<Order> rowMapper =
                 MapBuilder<Order>.MapAllProperties()
-
-               .Map(o => o.Customer).WithFunc(row => getCustomer((int) row["CustomerId"]))
+               .Map(o => o.Customer)    .WithFunc(row => getCustomer((int) row["CustomerId"]))
+               .Map(o => o.OrderLines)  .WithFunc(row => getLines   ((int) row["Id"]))
                .Build();
 
             return rowMapper;
@@ -53,11 +53,14 @@ namespace PetStore.Infrastructure
             // Construct the customers first (child objects)
             List<Customer> customerList = CustomerRepository.MapAddresses(tableSet["Customer"]);
 
+            List<OrderLine> orderLineCache = MapOrderLines(tableSet["OrderLine"]);
+
             // Build a method to find a customer given an Id
             Func<int, Customer> getCustomer = i => customerList.Find(c => i == c.Id);
+            Func<int, List<OrderLine>> getLines = i => orderLineCache.FindAll(l => l.OrderId == i);
 
             // Construct the parent (orders) and pass in the function with how to find the required customer for the rowmapper
-            List<Order> orders = EntityMapper.Map(tableSet["Order"], GetRowMapper(getCustomer));
+            List<Order> orders = EntityMapper.Map(tableSet["Order"], GetRowMapper(getCustomer, getLines));
 
             return orders;
         }
@@ -82,6 +85,11 @@ namespace PetStore.Infrastructure
             command.ExecuteNonQuery();
 
             instance.Id = command.GetParameterValue<int>("@Id");
+        }
+
+        public static List<OrderLine> MapOrderLines(DataTable dataTable)
+        {
+            return EntityMapper.Map<OrderLine>(dataTable);
         }
 
         public DataTable MapToDataTable<T>(string tableTypeName, List<T> listT)
