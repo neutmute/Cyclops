@@ -54,7 +54,8 @@ namespace Sprocker.Core
             // Normally the database.AssignParameters would handle this but that call is being bypassed
             ParameterCache.SetParameters(command.DbCommand, _database);
 
-            Type entityType = entity.GetType();
+            // Allow null params for case where want to map a TableValueParam and nothing else (eg: Mib_Scan)
+            Type entityType = entity == null? null : entity.GetType();
 
             for (int i = SqlRepository.UserParametersStartIndex; i < command.Parameters.Count; i++)
             {
@@ -81,7 +82,7 @@ namespace Sprocker.Core
                 //{
                 //    dbParameter.Value = "HARDCODED USER NAME";
                 //}
-                else
+                else if (entityType != null)
                 {
                     FieldInfo fieldInfo = entityType.GetField(propertyName, BindingFlags.Instance | BindingFlags.Public);
                     if (fieldInfo != null)

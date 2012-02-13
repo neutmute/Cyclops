@@ -60,6 +60,11 @@ namespace Sprocker.Core
                 return command;
             }
 
+            public SprockerCommand Build()
+            {
+                return Build(null);
+            }
+
             private class SprockerCommandBuilderContextParameterMap : ISprockerCommandBuilderContextMap<TEntity>
             {
                 private readonly string _parameterName;
@@ -92,6 +97,8 @@ namespace Sprocker.Core
         ISprockerCommandBuilderContextMap<TEntity> Map(string parameterName);
 
         SprockerCommand Build(TEntity entity);
+
+        SprockerCommand Build();
     }
 
     /// <summary>
