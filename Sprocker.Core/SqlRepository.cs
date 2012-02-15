@@ -59,5 +59,6 @@ namespace Sprocker.Core
             return new SprockerCommandBuilder<TEntity>(Database, procedureName);
         }
 
+
     }
 }

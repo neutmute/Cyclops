@@ -24,5 +24,10 @@ namespace PetStore.Domain
             DateCreated = DateTime.Now;
             DateModified = DateTime.Now;
         }
+
+        public override string ToString()
+        {
+            return string.Format("Id={0}, FirstName={1}", Id, FirstName);
+        }
     }
 }
