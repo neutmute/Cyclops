@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Sprocker.Core.FluentInterface.Behaviours
 {
-    public interface IChildNodeBuilder<T>
+    public interface IChildNodeBuilder
     {
-        IChildNodeBuilder<T> IsTransactional(bool isTransactional);
-        INodeBuilder<T> MapChildNode();
+        IChildNodeBuilder IsTransactional(bool isTransactional);
+        //INodeBuilder ChildNode(string element); 
     }
 }

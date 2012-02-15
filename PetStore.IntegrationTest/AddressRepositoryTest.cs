@@ -17,13 +17,6 @@ namespace PetStore.IntegrationTest
     {
         private IAddressRepository _addressRepository;
 
-        public AddressRepositoryTest()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
-
          [TestInitialize()]
          public void MyTestInitialize()
          {
@@ -36,12 +29,9 @@ namespace PetStore.IntegrationTest
         [TestMethod]
         public void AddressRepository_BasicUse_GetsAll()
         {
+            List<Address> addresses = _addressRepository.GetAll();
 
-
-            //List<Address> addresses = addressRepository.GetAll();
-
-            //Console.WriteLine(addresses.Count);
-
+            Console.WriteLine(addresses.Count);
         }
 
 

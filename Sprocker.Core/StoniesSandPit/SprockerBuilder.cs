@@ -10,56 +10,27 @@ namespace Sprocker.Core.FluentInterface
     /// <summary>
     /// might need a new builder per typer to avoid this T variance problem
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class SprockerBuilder<T> : INodeBuilder<T>, IChildNodeBuilder<T>
+    public class SprockerBuilder : INodeBuilder, IChildNodeBuilder
     {
         private Sprocker _sprocker { get; set; }
 
-        public INodeBuilder<T> Configure()
+        public INodeBuilder MapGraph()
         {
             _sprocker = new Sprocker();
             return this;
         }
 
-        public IChildNodeBuilder<T> ConfigureChildNode()
-        {
-            return this;
-        }
-
-        // could use an unbound generic perhaps?
-        //Type unboundSprocker = typeof(Sprocker<>);
-
-        // IsTransactional
-
-        // StoredProcedure
-
-        // InputMapper
-
-        // OutputMapper
-
-        // AutoMap
-
-        public INodeBuilder<T> InputMapper(IParameterMapper parameterMapper)
+        public INodeBuilder InputMapper(IParameterMapper parameterMapper)
         {
             throw new NotImplementedException();
         }
 
-        public INodeBuilder<T> OutputMapper(IRowMapper<T> rowMapper)
+        public IChildNodeBuilder Proc(string procName)
         {
             throw new NotImplementedException();
         }
 
-        public IChildNodeBuilder<T> StoredProcedure(string procName)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IChildNodeBuilder<T> IsTransactional(bool isTransactional)
-        {
-            throw new NotImplementedException();
-        }
-
-        public INodeBuilder<T> MapChildNode()
+        public IChildNodeBuilder IsTransactional(bool isTransactional)
         {
             throw new NotImplementedException();
         }

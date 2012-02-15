@@ -14,6 +14,7 @@ namespace Sprocker.Core
     {
         private readonly Database _database;
         private readonly Dictionary<string, Func<TEntity, object>> _parameterMaps;
+
         private static readonly ParameterCache parameterCache = new ParameterCache();
 
         /// <summary>

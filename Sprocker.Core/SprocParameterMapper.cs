@@ -11,12 +11,12 @@ namespace Sprocker.Core
     /// <summary>
     /// TODO: [AS] try and build a decoupled parameter mapper... might be having a lend of myself. 
     /// </summary>
-    public class SprocParameterMapper<TMapTo> : IParameterMapper
+    public class SprocParameterMapBuilder<TMapTo> : IParameterMapper
     {
         // one per instance? or a static collection?
         private readonly ParameterCache parameterCache = new ParameterCache();
 
-        public SprocParameterMapper()
+        public SprocParameterMapBuilder()
         {
             
         }
