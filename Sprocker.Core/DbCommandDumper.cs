@@ -9,10 +9,8 @@ using NLog;
 
 namespace Sprocker.Core
 {
-    public class DbCommandDumper
+    internal class DbCommandDumper
     {
-        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
-
         public DbCommand Command { get; set; }
 
         public DbCommandDumper(DbCommand command)
@@ -20,22 +18,29 @@ namespace Sprocker.Core
             Command = command;
         }
         
-        public string GetLogDump()
+        /// <summary>
+        /// Log a simulated, reproducible command text to the log
+        /// </summary>
+        /// <remarks>Does not recreate TVP</remarks>
+        /// <param name="durationMilliseconds">When known, pass in MS for extra log metadata</param>
+        /// <returns></returns>
+        public string GetLogDump(int? durationMilliseconds = null)
         {
             // Format parameters into a user friendly string
             string parametersAsString = ConvertSqlParametersToCsv();
 
-            string commandText = Command.CommandText;
+            StringBuilder simulatedCommandText = new StringBuilder();
+            simulatedCommandText.Append(Command.CommandText);
 
             // When formulating the log text, need to do a little more work when it is a stored proc
             // in order to simulate executable text
             if (Command.CommandType == CommandType.StoredProcedure)
             {
-                commandText = "EXEC " + commandText + "\r\n";
+                simulatedCommandText.Append("EXEC " + simulatedCommandText + "\r\n");
                 bool prePendCommaForParameter = false;
                 foreach (SqlParameter p in Command.Parameters)
                 {
-                    commandText += string.Format(
+                    simulatedCommandText.AppendFormat(
                         "\t\t{1}{0} = {0} "
                         , p.ParameterName
                         , prePendCommaForParameter ? "," : string.Empty);
@@ -44,15 +49,25 @@ namespace Sprocker.Core
 
                     if (p.Direction == ParameterDirection.InputOutput || p.Direction == ParameterDirection.Output)
                     {
-                        commandText += " OUTPUT";
+                        simulatedCommandText.Append(" OUTPUT");
                     }
-                    commandText += "\r\n";
+                    simulatedCommandText.Append("\r\n");
                 }
-                commandText = commandText.Remove(commandText.Length - 2, 2); // remove trailing semi colon
+                simulatedCommandText = simulatedCommandText.Remove(simulatedCommandText.Length - 2, 2); // remove trailing semi colon
             }
 
-            string traceMessage = string.Format("\r\n{0}\r\n{1};", parametersAsString, commandText);
-            return traceMessage;
+            // Construct final log dump string
+            StringBuilder traceMessage = new StringBuilder();
+            traceMessage.Append("\r\n");
+
+            if (durationMilliseconds != null)
+            {
+                traceMessage.AppendFormat("-- Execution time: {0}ms\r\n", durationMilliseconds);
+            }
+
+            traceMessage.AppendFormat("{0}\r\n", parametersAsString);
+            traceMessage.Append(simulatedCommandText);
+            return traceMessage.ToString();
         }
 
         /// <summary>

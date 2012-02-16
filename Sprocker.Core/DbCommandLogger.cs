@@ -7,12 +7,17 @@ using NLog;
 
 namespace Sprocker.Core
 {
-    public class DbCommandLogger
+    internal class DbCommandLogger
     {
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
         private readonly DateTime _startTime;
         private readonly SprockerCommand _sprockerCommand;
+
+        /// <summary>
+        /// Was useful in AcpCommand to blanket emit for report procs
+        /// </summary>
+        public bool ForceLogToInfo { get; set; }
 
         public DbCommandLogger(SprockerCommand sprockerCommand)
         {
@@ -22,12 +27,12 @@ namespace Sprocker.Core
 
         public void Complete()
         {
-            bool forceLogToInfo = false;        // was in AcpCommand. Keep for future use. Was useful for report commands.
-            if (forceLogToInfo || Log.IsTraceEnabled)
+            if (ForceLogToInfo || Log.IsTraceEnabled)
             {
-                int durationMs = Convert.ToInt32(DateTime.Now.Subtract(_startTime).TotalMilliseconds);
-                LogLevel logLevel = forceLogToInfo ? LogLevel.Info : LogLevel.Trace;
-                LogEventInfo eventInfo = new LogEventInfo(logLevel, Log.Name, new DbCommandDumper(_sprockerCommand.DbCommand).GetLogDump());
+                TimeSpan commandDuration = DateTime.Now.Subtract(_startTime);
+                int durationMs = Convert.ToInt32(commandDuration.TotalMilliseconds);
+                LogLevel logLevel = ForceLogToInfo ? LogLevel.Info : LogLevel.Trace;
+                LogEventInfo eventInfo = new LogEventInfo(logLevel, Log.Name, new DbCommandDumper(_sprockerCommand.DbCommand).GetLogDump(durationMs));
                 eventInfo.Properties["Duration"] = string.Format("{0}ms", durationMs);
                 Log.Log(eventInfo);
             }
