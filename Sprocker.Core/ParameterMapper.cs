@@ -21,7 +21,6 @@ namespace Sprocker.Core
         /// </summary>
         private static readonly Regex SqlParameterToken = new Regex("^" + SqlRepository.ParameterToken);
 
-
         public ParameterMapper(Database database, Dictionary<string, Func<TEntity, object>> parameterMaps)
         {
             _parameterMaps = parameterMaps;
