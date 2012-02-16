@@ -91,7 +91,7 @@ exec Customer_Save @Id=@p1 output,@Title=N'Super He',@FirstName=N'Captain',@Last
             
         }
 
-        private CustomerRepository CreateCustomerRepo()
+        public static CustomerRepository CreateCustomerRepo()
         {
             CustomerRepository customerRepository = new CustomerRepository();
             customerRepository.Database = new SprockerSqlDatabase(Constants.TestDatabaseConnectionString);

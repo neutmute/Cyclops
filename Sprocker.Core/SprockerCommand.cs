@@ -71,7 +71,7 @@ namespace Sprocker.Core
 
         public int ExecuteNonQuery()
         {
-            int result = 0;
+            int result;
             DbCommandLogger commandLogger = new DbCommandLogger(this);
             try
             {
