@@ -13,33 +13,40 @@ namespace Sprocker.Core
     {
         public DbCommand Command { get; set; }
 
+        public int? DurationMs { get; set; }
+
+        public Exception ExceptionTrapped { get; set; }
+        
         public DbCommandDumper(DbCommand command)
         {
             Command = command;
         }
-        
+
         /// <summary>
         /// Log a simulated, reproducible command text to the log
         /// </summary>
         /// <remarks>Does not recreate TVP</remarks>
-        /// <param name="durationMilliseconds">When known, pass in MS for extra log metadata</param>
         /// <returns></returns>
-        public string GetLogDump(int? durationMilliseconds = null)
+        public string GetLogDump()
         {
             // Format parameters into a user friendly string
             string parametersAsString = ConvertSqlParametersToCsv();
 
             StringBuilder simulatedCommandText = new StringBuilder();
-            simulatedCommandText.Append(Command.CommandText);
 
             // When formulating the log text, need to do a little more work when it is a stored proc
             // in order to simulate executable text
             if (Command.CommandType == CommandType.StoredProcedure)
             {
-                simulatedCommandText.Append("EXEC " + simulatedCommandText + "\r\n");
+                simulatedCommandText.Append("EXEC " + Command.CommandText + "\r\n");
                 bool prePendCommaForParameter = false;
                 foreach (SqlParameter p in Command.Parameters)
                 {
+                    if (p.ParameterName == "@RETURN_VALUE")
+                    {
+                        continue;
+                    }
+
                     simulatedCommandText.AppendFormat(
                         "\t\t{1}{0} = {0} "
                         , p.ParameterName
@@ -60,13 +67,19 @@ namespace Sprocker.Core
             StringBuilder traceMessage = new StringBuilder();
             traceMessage.Append("\r\n");
 
-            if (durationMilliseconds != null)
+            if (ExceptionTrapped != null)
             {
-                traceMessage.AppendFormat("-- Execution time: {0}ms\r\n", durationMilliseconds);
+                traceMessage.AppendLine("-- COMMAND FAILED: " + ExceptionTrapped.Message);
+            }
+
+            if (DurationMs != null)
+            {
+                traceMessage.AppendFormat("-- Execution time: {0}ms\r\n", DurationMs);
             }
 
             traceMessage.AppendFormat("{0}\r\n", parametersAsString);
             traceMessage.Append(simulatedCommandText);
+            traceMessage.AppendLine();
             return traceMessage.ToString();
         }
 
@@ -80,13 +93,13 @@ namespace Sprocker.Core
 
             List<string> selectValues = new List<string>();
             List<string> declareValues = new List<string>();
+            string tableValueParamInserts = string.Empty;
+
             foreach (SqlParameter p in Command.Parameters)
             {
                 string parameterValue = ConvertToSqlString(p.Value);
-                selectValues.Add(string.Format(selectFormat, p.ParameterName, parameterValue));
-
-                // rough declaration of declare. near enough to help debug
-                string declarationText = string.Format(declareFormat, p.ParameterName, p.SqlDbType.ToString().ToUpper());
+                string assignmentText = string.Format(selectFormat, p.ParameterName, parameterValue);
+                string sqlTypeText = p.SqlDbType.ToString().ToUpper();
 
                 switch (p.SqlDbType)
                 {
@@ -99,12 +112,36 @@ namespace Sprocker.Core
                         {
                             sizeString = "MAX";
                         }
-                        declarationText += string.Format("({0})", sizeString);
+                        sqlTypeText += string.Format("({0})", sizeString);
+                        break;
+
+                    case SqlDbType.Structured:
+                        sqlTypeText = "dbo." + p.TypeName;
+                        assignmentText = string.Empty;
+
+                        DataTable dataTable = p.Value as DataTable;
+                        if (dataTable != null)
+                        {
+                            StringBuilder tableInserts = new StringBuilder();
+                            foreach (DataRow dataRow in dataTable.Rows)
+                            {
+                                tableInserts.AppendFormat("INSERT INTO {0} VALUES (", p.ParameterName);
+                                for(int columnIndex = 0; columnIndex < dataTable.Columns.Count; columnIndex++)
+                                {
+                                    tableInserts.AppendFormat("{0},", ConvertToSqlString(dataRow[columnIndex]));
+                                }
+                                tableInserts.Remove(tableInserts.Length - 1, 1); //trailing comma removal
+                                tableInserts.AppendFormat(")\r\n");
+                            }
+                            tableValueParamInserts += tableInserts.ToString();
+                        }
                         break;
                 }
 
-
+                string declarationText = string.Format(declareFormat, p.ParameterName, sqlTypeText);
                 declareValues.Add(declarationText);
+
+                selectValues.Add(assignmentText);
             }
 
             string declareSql = string.Empty;
@@ -114,9 +151,14 @@ namespace Sprocker.Core
             {
                 declareSql = "DECLARE " + ToCsv(declareValues) + ";";
                 selectSql = "SELECT " + ToCsv(selectValues) + ";";
+
+                if (!string.IsNullOrEmpty(tableValueParamInserts))
+                {
+                    selectSql += "\r\n\r\n" + tableValueParamInserts;
+                }
             }
 
-            return declareSql + "\r\n" + selectSql;
+            return declareSql + "\r\n\r\n" + selectSql;
         }
 
         private static string ToCsv(List<string> list)
@@ -125,8 +167,11 @@ namespace Sprocker.Core
 
             foreach (string value in list)
             {
-                sb.Append("\t\t,");
-                sb.AppendLine(value);
+                if (!string.IsNullOrEmpty(value))
+                {
+                    sb.Append("\t\t,");
+                    sb.AppendLine(value);
+                }
             }
 
             if (sb.Length > 0)

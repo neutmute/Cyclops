@@ -46,16 +46,25 @@ namespace Sprocker.Core
 
         private readonly SprockerPerformancePoint _peformancePoint;
         private readonly SprockerCommand _sprockerCommand;
+        private Exception _exceptionTrapped;
+        
+        public LogLevel LogLevel { get; set; }
 
-        /// <summary>
-        /// Was useful in AcpCommand to blanket emit for report procs
-        /// </summary>
-        public bool ForceLogToInfo { get; set; }
 
         public DbCommandLogger(SprockerCommand sprockerCommand)
         {
+            LogLevel = LogLevel.Trace;
             _peformancePoint = new SprockerPerformancePoint();
             _sprockerCommand = sprockerCommand;
+        }
+
+        /// <summary>
+        /// Elevates the log level to WARN automatically
+        /// </summary>
+        public void ExceptionTrapped(Exception e)
+        {
+            _exceptionTrapped = e;
+            LogLevel = LogLevel.Warn;
         }
 
         public void Complete()
@@ -68,11 +77,13 @@ namespace Sprocker.Core
                 PerformanceMonitorNotify(_peformancePoint);
             }
 
-            if (ForceLogToInfo || Log.IsTraceEnabled)
+            if (Log.IsEnabled(LogLevel))
             {
                 int durationMs = Convert.ToInt32(_peformancePoint.Duration.TotalMilliseconds);
-                LogLevel logLevel = ForceLogToInfo ? LogLevel.Info : LogLevel.Trace;
-                LogEventInfo eventInfo = new LogEventInfo(logLevel, Log.Name, new DbCommandDumper(_sprockerCommand.DbCommand).GetLogDump(durationMs));
+                var commandDumper = new DbCommandDumper(_sprockerCommand.DbCommand);
+                commandDumper.ExceptionTrapped = _exceptionTrapped;
+                commandDumper.DurationMs = durationMs;
+                LogEventInfo eventInfo = new LogEventInfo(LogLevel, Log.Name, commandDumper.GetLogDump());
                 eventInfo.Properties["Duration"] = string.Format("{0}ms", durationMs);
                 Log.Log(eventInfo);
             }

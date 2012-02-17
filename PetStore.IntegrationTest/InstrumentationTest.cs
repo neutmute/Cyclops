@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using Kraken.Core.Instrumentation;
+using Kraken.Framework.TestMonkey;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NLog.Targets;
+using PetStore.Infrastructure;
 using Sprocker.Core;
 
 namespace PetStore.IntegrationTest
@@ -11,6 +15,29 @@ namespace PetStore.IntegrationTest
     [TestClass]
     public class InstrumentationTest
     {
+        [ExpectedException(typeof(SqlException))]
+        [TestMethod]
+        public void DbCommandLogger_SqlException_EscalatesLogLevelToWarn()
+        {
+            var memoryTarget = CustomerRepositoryTest.GetMemoryTarget(NLog.LogLevel.Warn);
+            var orderRepo = OrderRepositoryTest.GetNewRepo();
+            var order = OrderRepositoryTest.GetUnpersistedOrder();
+
+            // force failure
+            order.Customer.Id = -1;
+
+            try
+            {
+                orderRepo.Save(order);
+            }
+            finally
+            {
+                var assertBuilder = new AssertBuilder();
+                //assertBuilder.Generate(memoryTarget.Logs, "memoryTarget.Logs");
+                Assert.IsTrue(memoryTarget.Logs[0].StartsWith("\r\n-- COMMAND FAILED"));
+            }
+        }
+
         [TestMethod]
         public void DbCommandLogger_PerformanceMonitorNotify_Demo()
         {

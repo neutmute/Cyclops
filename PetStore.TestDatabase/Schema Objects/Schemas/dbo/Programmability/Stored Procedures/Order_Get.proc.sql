@@ -12,6 +12,12 @@ BEGIN
 		SortOrder				INT IDENTITY(1,1)
 		,OrderId				INT
 	)
+
+	-- For testing exception handling
+	IF (@Id = -1)
+	BEGIN
+		RAISERROR('dbo.Order_Get didn''t expect an ID of -1', 15, 1)		
+	END
  
 	INSERT #__OrderLoad
 	(

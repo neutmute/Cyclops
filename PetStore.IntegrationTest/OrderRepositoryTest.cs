@@ -27,7 +27,7 @@ namespace PetStore.IntegrationTest
             return order;
         }
 
-        private OrderRepository GetNewRepo()
+        public static OrderRepository GetNewRepo()
         {
             OrderRepository repo = new OrderRepository();
             repo.Database = new SprockerSqlDatabase(Constants.TestDatabaseConnectionString);

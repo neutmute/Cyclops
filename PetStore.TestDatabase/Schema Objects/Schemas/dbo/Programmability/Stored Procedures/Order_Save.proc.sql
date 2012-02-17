@@ -18,6 +18,13 @@
 AS
 BEGIN
 	SET NOCOUNT ON
+
+	-- For testing exception handling
+	IF (@CustomerId = -1)
+	BEGIN
+		RAISERROR('dbo.Order_Save didn''t expect a @CustomerId of -1', 16, 1)		
+		RETURN
+	END
 	
 	IF NOT EXISTS(SELECT 1 FROM dbo.[Order] WHERE ID = @ID)
 	BEGIN

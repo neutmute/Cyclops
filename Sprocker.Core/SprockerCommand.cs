@@ -72,14 +72,14 @@ namespace Sprocker.Core
         public int ExecuteNonQuery()
         {
             int result;
-            DbCommandLogger commandLogger = new DbCommandLogger(this);
+            var commandLogger = new DbCommandLogger(this);
             try
             {
                 result = Database.ExecuteNonQuery(DbCommand);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Log.Info("Failed CommandText: {0}", new DbCommandDumper(DbCommand).GetLogDump());
+                commandLogger.ExceptionTrapped(e);
                 throw;
             }
             finally
@@ -115,14 +115,14 @@ namespace Sprocker.Core
         public DataSet ExecuteDataSet()
         {
             DataSet dataSet;
-            DbCommandLogger commandLogger = new DbCommandLogger(this);
+            var commandLogger = new DbCommandLogger(this);
             try
             {
                 dataSet = Database.ExecuteDataSet(DbCommand);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Log.Info("Failed CommandText: {0}", new DbCommandDumper(DbCommand).GetLogDump());
+                commandLogger.ExceptionTrapped(e);
                 throw;
             }
             finally
