@@ -11,17 +11,17 @@ namespace Sprocker.Core.FluentInterface
     /// might need a new builder per typer to avoid this T variance problem
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class SprockerBuilder<T> : INodeBuilder<T>, IChildNodeBuilder<T>
+    public class SprockerBuilder : INodeBuilder, IChildNodeBuilder
     {
         private Sprocker _sprocker { get; set; }
 
-        public INodeBuilder<T> Configure()
+        public INodeBuilder Configure()
         {
             _sprocker = new Sprocker();
             return this;
         }
 
-        public IChildNodeBuilder<T> ConfigureChildNode()
+        public IChildNodeBuilder ConfigureChildNode()
         {
             return this;
         }
@@ -38,28 +38,22 @@ namespace Sprocker.Core.FluentInterface
         // OutputMapper
 
         // AutoMap
-
-        public INodeBuilder<T> InputMapper(IParameterMapper parameterMapper)
+        public INodeBuilder InputMapper(IParameterMapper parameterMapper)
         {
             throw new NotImplementedException();
         }
 
-        public INodeBuilder<T> OutputMapper(IRowMapper<T> rowMapper)
+        public IChildNodeBuilder StoredProcedure(string procName)
         {
             throw new NotImplementedException();
         }
 
-        public IChildNodeBuilder<T> StoredProcedure(string procName)
+        public IChildNodeBuilder IsTransactional(bool isTransactional)
         {
             throw new NotImplementedException();
         }
 
-        public IChildNodeBuilder<T> IsTransactional(bool isTransactional)
-        {
-            throw new NotImplementedException();
-        }
-
-        public INodeBuilder<T> MapChildNode()
+        public INodeBuilder MapChildNode()
         {
             throw new NotImplementedException();
         }

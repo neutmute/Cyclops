@@ -63,12 +63,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DatabaseExtensionMethods.cs" />
     <Compile Include="DbCommandLogger.cs" />
     <Compile Include="EntityMapper.cs" />
     <Compile Include="FluentInterface\Behaviours\IChildNodeBuilder.cs" />
     <Compile Include="FluentInterface\Behaviours\INodeBuilder.cs" />
     <Compile Include="FluentInterface\Behaviours\IEntityBuilder.cs" />
+    <Compile Include="FluentInterface\ExtensionMethods.cs" />
+    <Compile Include="SprockerSqlDatabase.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="StoniesSandPit\Sprocker.cs" />
     <Compile Include="StoniesSandPit\SprockerBuilder.cs" />
     <Compile Include="StoniesSandPit\IEntity.cs" />
@@ -78,13 +81,11 @@
     <Compile Include="MapBuilderExtensionMethods.cs" />
     <Compile Include="ParameterMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SprockerSprocAccessor.cs" />
-    <Compile Include="SprockerSqlDatabase.cs" />
-    <Compile Include="SaveEntityParameterMapper.cs" />
     <Compile Include="SprockerCommand.cs" />
     <Compile Include="SprockerException.cs" />
     <Compile Include="SprocParameterMapper.cs" />
     <Compile Include="SqlRepository.cs" />
+    <Compile Include="StoniesSandPit\SprockerChildNodeBuilder.cs" />
     <Compile Include="TableSet.cs" />
   </ItemGroup>
   <ItemGroup>

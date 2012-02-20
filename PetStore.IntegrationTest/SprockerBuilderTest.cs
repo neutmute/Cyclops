@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,24 +17,25 @@ namespace PetStore.IntegrationTest
         [TestMethod]
         public void TestMethod1()
         {
-            SprockerBuilder<Order> sprockerBuilder = new SprockerBuilder<Order>();
+            SprockerBuilder sprockerBuilder = new SprockerBuilder();
 
             IParameterMapper parameterMapper = new SprocParameterMapper<AddressCriteria>();
-            IRowMapper<Order> addressMapper = MapBuilder<Order>.MapAllProperties().Build();
 
+            IRowMapper<Order> orderMapper = MapBuilder<Order>.MapAllProperties().Build();
+            IRowMapper<OrderLine> orderlineMapper = MapBuilder<OrderLine>.MapAllProperties().Build();
+            IRowMapper<Product> ProductMapper = MapBuilder<Product>.MapAllProperties().Build();
 
             sprockerBuilder.Configure()
                 .InputMapper(parameterMapper)
                 .OutputMapper(addressMapper)
                 .StoredProcedure("ProcName")
+                .MapChildNode(Expression<Func<OrderLine,"OrderLines">>)
+                    //.StoredProcedure("ProcName")
                 .MapChildNode()
                     .InputMapper(parameterMapper)
-                    .OutputMapper(addressMapper)
-                    .StoredProcedure("ProcName")
-                .MapChildNode()
-                    .InputMapper(parameterMapper)
-                    .OutputMapper(addressMapper)
                     .StoredProcedure("ProcName");
+
+            
 
 
 

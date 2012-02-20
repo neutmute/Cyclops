@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using Microsoft.Practices.EnterpriseLibrary.Data;
 using PetStore.Domain;
 using Sprocker.Core;
 
@@ -24,8 +25,19 @@ namespace PetStore.Infrastructure
         /// </summary>
         /// <returns></returns>
         public List<Address> GetAll()
-        {
-            return ConstructCommand("dbo.Address_Get").ExecuteRowMap<Address>();
+        {     
+             IRowMapper<Address> ProgramGroupRowMapper = MapBuilder<Address>
+            .MapAllProperties()
+            .DoNotMap(p => p.IsActive)
+            .DoNotMap(p => p.State)
+            .Map(p=> p.State).ToColumn("LegacyCode")
+            .Build();
+
+            List<Address> results = Database.ExecuteSprocAccessor<Address>("dbo.Address_Get",ProgramGroupRowMapper).ToList();
+
+            return results;
+
+            //return ConstructCommand("dbo.Address_Get").ExecuteRowMap<Address>();
         }
 
         public Address Save(Address instance)
