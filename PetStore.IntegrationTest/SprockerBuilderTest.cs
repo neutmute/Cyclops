@@ -34,7 +34,7 @@ namespace PetStore.IntegrationTest
                 .InputMapper(parameterMapper)
                 .OutputMapper(MapBuilder<Order>.MapAllProperties().Build())
                 .Proc("ProcName");
-            //.ChildNode<OrderLine>(o => o.)
+
         }
 
         [Ignore]
