@@ -14,6 +14,12 @@ BEGIN
 		,CustomerId				INT
 	)
 
+	CREATE TABLE #__OrderLineLoad
+	(
+		SortOrder				INT IDENTITY(1,1)
+		,OrderLineId			INT
+	)
+
 	INSERT #__CustomerLoad
 	(
 		CustomerId
@@ -21,6 +27,14 @@ BEGIN
 	SELECT	CustomerId
 	FROM	dbo.[Order]				O
 	JOIN	dbo.#__OrderLoad		L ON O.Id = L.OrderId
+
+	INSERT #__OrderLineLoad
+	(
+		OrderLineId
+	)
+	SELECT	Id
+	FROM	dbo.[OrderLine]			O
+	JOIN	dbo.#__OrderLoad		L ON O.OrderId = L.OrderId
 
 	SELECT 'Order'
 
@@ -41,4 +55,6 @@ BEGIN
 	ORDER BY	L.SortOrder
 
 	EXEC dbo.Customer_Load
+		
+	EXEC dbo.OrderLine_Load
 END

@@ -30,10 +30,15 @@ namespace Sprocker.Core
     /// <remarks>SprockerCommand name since 'Sprocker' by itself conflicts with namespace</remarks>
     public class SprockerCommand
     {
+        #region Fields
+
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
-        private SprockerParameterMapper _parameterMapper;
+        private readonly SprockerParameterMapper _parameterMapper;
+        #endregion
         
+        #region Properties
+
         internal DbCommand DbCommand {get; private set;}
 
         public Database Database { get; set; }
@@ -41,15 +46,22 @@ namespace Sprocker.Core
         public string CommandText { get; set; }
 
         public DbParameterCollection Parameters { get { return DbCommand.Parameters; } }
-        
+
+        #endregion
+
+        #region Constructor
+
         public SprockerCommand(Database database, string procedureName)
         {
-
             Database = database;
             CommandText = procedureName;
             DbCommand = Database.GetStoredProcCommand(CommandText);
             _parameterMapper = new SprockerParameterMapper(Database);
         }
+
+        #endregion
+        
+        #region Execute* Methods
 
         public int ExecuteNonQuery(params object[] parameters)
         {
@@ -59,15 +71,15 @@ namespace Sprocker.Core
 
         public int ExecuteNonQuery()
         {
-            int result = 0;
-            DbCommandLogger commandLogger = new DbCommandLogger(this);
+            int result;
+            var commandLogger = new DbCommandLogger(this);
             try
             {
                 result = Database.ExecuteNonQuery(DbCommand);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Log.Info("Failed CommandText: {0}", new DbCommandDumper(DbCommand).GetLogDump());
+                commandLogger.ExceptionTrapped(e);
                 throw;
             }
             finally
@@ -89,6 +101,12 @@ namespace Sprocker.Core
             return entities;
         }
 
+        public TableSet ExecuteTableSet(params object[] parameters)
+        {
+            _parameterMapper.AssignParameters(DbCommand, parameters);
+            return ExecuteTableSet();
+        }
+
         public TableSet ExecuteTableSet()
         {
             return TableSet.Create(ExecuteDataSet());
@@ -97,14 +115,14 @@ namespace Sprocker.Core
         public DataSet ExecuteDataSet()
         {
             DataSet dataSet;
-            DbCommandLogger commandLogger = new DbCommandLogger(this);
+            var commandLogger = new DbCommandLogger(this);
             try
             {
                 dataSet = Database.ExecuteDataSet(DbCommand);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Log.Info("Failed CommandText: {0}", new DbCommandDumper(DbCommand).GetLogDump());
+                commandLogger.ExceptionTrapped(e);
                 throw;
             }
             finally
@@ -135,6 +153,9 @@ namespace Sprocker.Core
             }
         }
 
+        #endregion
+
+        #region Parameter Helper Methods
         /// <summary>
         /// Extract an output param
         /// </summary>
@@ -152,8 +173,10 @@ namespace Sprocker.Core
             ((SqlParameter)DbCommand.Parameters[parameterName]).TypeName = typeName;
         }
 
+        #endregion
     }
 
+    #region ResultSet Mapper
     /// <summary>
     /// This private class is replicated without alteration from the base <see cref="CommandAccessor{TResult}"/> class
     /// as it is called here by some overridden mehtods.
@@ -178,6 +201,10 @@ namespace Sprocker.Core
             }
         }
     }
+    #endregion
+
+
+    #region ParameterMapper
 
     /// <summary>
     /// This private class is replicated without alteration from the base <see cref="SprocAccessor{TResult}"/> class
@@ -211,4 +238,7 @@ namespace Sprocker.Core
             }
         }
     }
+
+    #endregion
+
 }

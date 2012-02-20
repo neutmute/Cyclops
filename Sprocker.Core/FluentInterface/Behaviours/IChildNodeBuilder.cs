@@ -8,6 +8,6 @@ namespace Sprocker.Core.FluentInterface.Behaviours
     public interface IChildNodeBuilder
     {
         IChildNodeBuilder IsTransactional(bool isTransactional);
-        //INodeBuilder MapChildNode(); 
+        //INodeBuilder ChildNode(string element); 
     }
 }

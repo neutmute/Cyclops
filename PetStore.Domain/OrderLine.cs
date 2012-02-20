@@ -18,5 +18,10 @@ namespace PetStore.Domain
         public string CreatedBy { get; set; }
         public DateTime DateModified { get; set; }
         public string ModifiedBy { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("Id={0}, OrderId={1}", Id, OrderId);
+        }
     }
 }

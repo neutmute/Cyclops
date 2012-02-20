@@ -13,6 +13,6 @@ namespace Sprocker.Core.FluentInterface.Behaviours
     public interface INodeBuilder
     {
         INodeBuilder InputMapper(IParameterMapper parameterMapper);
-        IChildNodeBuilder StoredProcedure(String procName);
+        IChildNodeBuilder Proc(String procedureName);
     }
 }

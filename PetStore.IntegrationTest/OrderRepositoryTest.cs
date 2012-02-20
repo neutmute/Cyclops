@@ -27,31 +27,51 @@ namespace PetStore.IntegrationTest
             return order;
         }
 
-        private OrderRepository GetNewRepo()
+        public static OrderRepository GetNewRepo()
         {
             OrderRepository repo = new OrderRepository();
             repo.Database = new SprockerSqlDatabase(Constants.TestDatabaseConnectionString);
             return repo;
         }
 
+        //[TestMethod]
+        //public void Order_Get()
+        //{
+        //    OrderRepository repo = GetNewRepo();
+        //    Order order = repo.GetOne(o => o.Id == 1);
+
+
+        //}
+
+        /// <summary>
+        /// Test expects data to have been generated and requries transactions to rollback other tests.
+        /// just hacked for now
+        /// </summary>
         [TestMethod]
-        public void Order_Get()
+        public void Order_Get_Success()
         {
             OrderRepository repo = GetNewRepo();
-            Order order = repo.GetOne(o => o.Id == 1);
+            Order order = repo.Get(1);
+
+            Assert.AreEqual(1, order.Id);
+            Assert.IsTrue(order.OrderLines.Count > 0);
+            Assert.IsNotNull(order.Customer);
         }
 
+        /// <summary>
+        /// Test expects data to have been generated and requries transactions to rollback other tests.
+        /// just hacked for now
+        /// </summary>
         [TestMethod]
         public void TableValuedParameterDemo()
         {
             OrderRepository repo = GetNewRepo();
             Order order = GetUnpersistedOrder();
-
             repo.Save(order);
         }
 
         /// <summary>
-        /// OMG! sorry - had to for testing my valueinjector
+        /// AssertBuilder! OMG! sorry - had to for testing my valueinjector
         /// </summary>
         [TestMethod]
         public void OrderLineList_MapsTo_DataTAble()

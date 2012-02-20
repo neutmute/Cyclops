@@ -16,7 +16,7 @@ namespace Sprocker.Core
             return sprockerBuilder;
         }
 
-        public static IChildNodeBuilder MapChildNode<TResult, TMember>(this IChildNodeBuilder sprockerBuilder, Expression<Func<TResult, TMember>> propertySelector)
+        public static IChildNodeBuilder ChildNode<TMember>(this IChildNodeBuilder sprockerBuilder, Func<TMember, object> f)
         {
             return sprockerBuilder;
         }

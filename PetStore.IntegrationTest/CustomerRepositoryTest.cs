@@ -15,7 +15,7 @@ namespace PetStore.IntegrationTest
     [TestClass]
     public class CustomerRepositoryTest
     {
-        public MemoryTarget GetMemoryTarget()
+        public static MemoryTarget GetMemoryTarget()
         {
             return GetMemoryTarget("${message}|${exception:format=tostring}", LogLevel.Info);
         }
@@ -23,7 +23,7 @@ namespace PetStore.IntegrationTest
         /// <summary>
         /// Get a target to allow assertions to be made against the Nlog
         /// </summary>
-        public MemoryTarget GetMemoryTarget(LogLevel logLevel)
+        public static MemoryTarget GetMemoryTarget(LogLevel logLevel)
         {
             return GetMemoryTarget("${message}", logLevel);
         }
@@ -31,7 +31,7 @@ namespace PetStore.IntegrationTest
         /// <summary>
         /// Get a target to allow assertions to be made against the Nlog
         /// </summary>
-        public MemoryTarget GetMemoryTarget(string layout, LogLevel logLevel)
+        public static MemoryTarget GetMemoryTarget(string layout, LogLevel logLevel)
         {
             MemoryTarget memoryTarget = new MemoryTarget { Layout = layout };
             NLog.Config.SimpleConfigurator.ConfigureForTargetLogging(memoryTarget, logLevel);
@@ -91,7 +91,7 @@ exec Customer_Save @Id=@p1 output,@Title=N'Super He',@FirstName=N'Captain',@Last
             
         }
 
-        private CustomerRepository CreateCustomerRepo()
+        public static CustomerRepository CreateCustomerRepo()
         {
             CustomerRepository customerRepository = new CustomerRepository();
             customerRepository.Database = new SprockerSqlDatabase(Constants.TestDatabaseConnectionString);

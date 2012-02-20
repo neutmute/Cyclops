@@ -13,20 +13,37 @@ namespace PetStore.Infrastructure
 {
     public class OrderRepository : SqlRepository //, IOrderRepository
     {
-        public IRowMapper<Order> GetRowMapper(Func<int, Customer> getCustomer)
+        private static IRowMapper<OrderLine> __orderLineMapper;
+
+        public static IRowMapper<Order> GetOrderRowMapper(Func<int, Customer> getCustomer, Func<int, List<OrderLine>> getLines)
         {
-            IRowMapper<Order> rowMapper =
-                MapBuilder<Order>.MapAllProperties()
-
-               .Map(o => o.Customer).WithFunc(row => getCustomer((int) row["CustomerId"]))
-               .Build();
-
+            IRowMapper<Order> rowMapper = MapBuilder<Order>
+                                        .MapAllProperties()
+                                        .Map(o => o.Customer).WithFunc(row => getCustomer((int)row["CustomerId"]))
+                                        .Map(o => o.OrderLines).WithFunc(row => getLines((int)row["Id"]))
+                                        .Build();
             return rowMapper;
+        }
+
+        public static IRowMapper<OrderLine> GetOrderLineRowMapper()
+        {
+            if (__orderLineMapper == null)
+            {
+                __orderLineMapper = MapBuilder<OrderLine>
+                    .MapAllProperties()
+                    .Build();
+            }
+            return __orderLineMapper;
         }
 
         public Order GetOne(Predicate<Order> filter)
         {
             return GetAll(filter).FirstOrDefault();
+        }
+
+        public Order Get(int id)
+        {
+            return GetWorker(id).FirstOrDefault();
         }
 
         public List<Order> GetAll(Predicate<Order> filter)
@@ -36,20 +53,30 @@ namespace PetStore.Infrastructure
 
         public List<Order> GetAll()
         {
-            var tableSet = ConstructCommand("dbo.Order_Get").ExecuteTableSet();
+            return GetWorker(null);
+        }
+
+        public List<Order> GetWorker(int? id)
+        {
+            SprockerCommand command = ConstructCommand("dbo.Order_Get");
+            
+            var tableSet = command.ExecuteTableSet(id);
             
             // Construct the customers first (child objects)
             List<Customer> customerList = CustomerRepository.MapAddresses(tableSet["Customer"]);
 
+            List<OrderLine> orderLineCache = MapOrderLines(tableSet["OrderLine"]);
+
             // Build a method to find a customer given an Id
             Func<int, Customer> getCustomer = i => customerList.Find(c => i == c.Id);
+            Func<int, List<OrderLine>> getLines = i => orderLineCache.FindAll(l => l.OrderId == i);
 
             // Construct the parent (orders) and pass in the function with how to find the required customer for the rowmapper
-            List<Order> orders = EntityMapper.Map(tableSet["Order"], GetRowMapper(getCustomer));
+            List<Order> orders = EntityMapper.Map(tableSet["Order"], GetOrderRowMapper(getCustomer, getLines));
 
             return orders;
         }
-
+        
         public void Save(Order instance)
         {
             const string orderLineTableType = "OrderLineTableType";
@@ -70,6 +97,11 @@ namespace PetStore.Infrastructure
             command.ExecuteNonQuery();
 
             instance.Id = command.GetParameterValue<int>("@Id");
+        }
+
+        public static List<OrderLine> MapOrderLines(DataTable dataTable)
+        {
+            return EntityMapper.Map(dataTable, GetOrderLineRowMapper());
         }
 
         public DataTable MapToDataTable<T>(string tableTypeName, List<T> listT)

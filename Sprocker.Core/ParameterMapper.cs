@@ -14,13 +14,12 @@ namespace Sprocker.Core
     {
         private readonly Database _database;
         private readonly Dictionary<string, Func<TEntity, object>> _parameterMaps;
-        private static readonly ParameterCache parameterCache = new ParameterCache();
+        private static readonly ParameterCache ParameterCache = new ParameterCache();
 
         /// <summary>
         /// <see cref="Regex"/> for stripping the parameter token (@) from the beginning of a stored procedure name.
         /// </summary>
         private static readonly Regex SqlParameterToken = new Regex("^" + SqlRepository.ParameterToken);
-
 
         public ParameterMapper(Database database, Dictionary<string, Func<TEntity, object>> parameterMaps)
         {
@@ -52,13 +51,14 @@ namespace Sprocker.Core
         public void AssignParameters(SprockerCommand command, TEntity entity)
         {
             // Normally the database.AssignParameters would handle this but that call is being bypassed
-            parameterCache.SetParameters(command.DbCommand, _database);
+            ParameterCache.SetParameters(command.DbCommand, _database);
 
-            Type entityType = entity.GetType();
+            // Allow null params for case where want to map a TableValueParam and nothing else (eg: Mib_Scan)
+            Type entityType = entity == null ? null : entity.GetType();
 
             for (int i = SqlRepository.UserParametersStartIndex; i < command.Parameters.Count; i++)
             {
-                 DbParameter dbParameter = command.Parameters[i];
+                DbParameter dbParameter = command.Parameters[i];
 
                 string parameterName = dbParameter.ParameterName;
                 string propertyName = SqlParameterToken.Replace(parameterName, String.Empty);
@@ -81,7 +81,7 @@ namespace Sprocker.Core
                 //{
                 //    dbParameter.Value = "HARDCODED USER NAME";
                 //}
-                else
+                else if (entityType != null)
                 {
                     FieldInfo fieldInfo = entityType.GetField(propertyName, BindingFlags.Instance | BindingFlags.Public);
                     if (fieldInfo != null)
