@@ -1,10 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Sprocker.Core.Mapping
 {
-    public class MapContext<TEntity> : IMapContext<TEntity>
+    /// <summary>
+    /// Container for object to sproc maps
+    /// </summary>
+    /// <typeparam name="TEntity"></typeparam>
+    public class MapContext<TEntity, TCriteria> : IMapContext<TEntity, TCriteria>
     {
-        public IMapContext<TEntity> ToColumn(string columnName)
+        List<CriteriaMap> criteriaMaps = new List<CriteriaMap>();
+        List<ResultMap> resultMaps = new List<ResultMap>();
+
+        public IMapContext<TEntity, TCriteria> ToColumn(string columnName)
         {
             throw new NotImplementedException();
         }

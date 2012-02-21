@@ -54,11 +54,13 @@
     <Compile Include="FluentInterface\Behaviours\INodeBuilder.cs" />
     <Compile Include="FluentInterface\Behaviours\IEntityBuilder.cs" />
     <Compile Include="FluentInterface\ExtensionMethods.cs" />
+    <Compile Include="Mapping\CriteriaMap.cs" />
     <Compile Include="Mapping\IMapContext.cs" />
     <Compile Include="Mapping\MapContext.cs" />
+    <Compile Include="Mapping\ResultMap.cs" />
     <Compile Include="Mapping\Sprocker.cs" />
-    <Compile Include="Mapping\SprockerBuilder.cs" />
-    <Compile Include="Mapping\SprockerChildNodeBuilder.cs" />
+    <Compile Include="FluentInterface\SprockerBuilder.cs" />
+    <Compile Include="FluentInterface\SprockerChildNodeBuilder.cs" />
     <Compile Include="Mapping\SprocMap.cs" />
     <Compile Include="SprockerSprocAccessor.cs" />
     <Compile Include="SprockerSqlDatabase.cs">

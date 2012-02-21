@@ -11,12 +11,9 @@ namespace PetStore.Infrastructure
     {
         public AddressMap()
         {
-
             Proc("Address_Get"); 
-            AutoMapAll();
             MapInput(c => c.aProp);
-            MapResult(a => a.AddressLine1).ToColumn("");
-
+            //MapResult(a => a.AddressLine2).ToColumn("County");
         }
     }
 }

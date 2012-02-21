@@ -11,6 +11,6 @@ Sprocker.AggrateRoot<type>()
 		.UseNextResultSet("IdentityCol")
 		.InputMapper(Mapper)
 		.OutputMapper(Mapper)
-	.Execute();
+	.Build();
 
 

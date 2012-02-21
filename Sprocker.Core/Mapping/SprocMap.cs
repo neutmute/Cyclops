@@ -8,8 +8,9 @@ namespace Sprocker.Core.Mapping
     /// </summary>
     public class SprocMap<TEntity, TCriteria> 
     {
+        public MapContext<TEntity, TCriteria> Type { get; set; }
+
         // parameter map
-            //Cache
 
         // result map
             //Cache expression
@@ -20,7 +21,6 @@ namespace Sprocker.Core.Mapping
             //One-to-one
             
         //DAAB
-
             //.MapAllProperties()
             //.DoNotMap(p => p.IsActive)
             //.DoNotMap(p => p.State)
@@ -28,7 +28,6 @@ namespace Sprocker.Core.Mapping
             //.Build();
 
         // Fluent NHibernate
-
             //        Id(x => x.Id);
             //Map(x => x.Name);
             //HasManyToMany(x => x.Products)
@@ -38,27 +37,19 @@ namespace Sprocker.Core.Mapping
             //    .Cascade.All()
             //    .Inverse();
 
-        public void AutoMapAll()
-        {
-        
-        
-        }
-
-
         public void MapInput(Expression<Func<TCriteria, object>> prameterExpression)
         {
 
         }
 
-        public IMapContext<TEntity> MapResult(Expression<Func<TEntity, object>> memberExpression)
+        public IMapContext<TEntity, TCriteria> MapResult(Expression<Func<TEntity, TCriteria, object>> memberExpression)
         {
 
-            return new MapContext<TEntity>();
+            return new MapContext<TEntity, TCriteria>();
         }
 
         public void Proc(string name)
         {
-
 
         }
 
