@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using Sprocker.Core.FluentInterface.Behaviours;
 
-namespace Sprocker.Core.FluentInterface
+namespace Sprocker.Core.Mapping
 {
     /// <summary>
     /// might need a new builder per typer to avoid this T variance problem

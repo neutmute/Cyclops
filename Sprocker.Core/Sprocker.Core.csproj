@@ -54,14 +54,16 @@
     <Compile Include="FluentInterface\Behaviours\INodeBuilder.cs" />
     <Compile Include="FluentInterface\Behaviours\IEntityBuilder.cs" />
     <Compile Include="FluentInterface\ExtensionMethods.cs" />
+    <Compile Include="Mapping\IMapContext.cs" />
+    <Compile Include="Mapping\MapContext.cs" />
+    <Compile Include="Mapping\Sprocker.cs" />
+    <Compile Include="Mapping\SprockerBuilder.cs" />
+    <Compile Include="Mapping\SprockerChildNodeBuilder.cs" />
+    <Compile Include="Mapping\SprocMap.cs" />
     <Compile Include="SprockerSprocAccessor.cs" />
     <Compile Include="SprockerSqlDatabase.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="StoniesSandPit\IMapContext.cs" />
-    <Compile Include="StoniesSandPit\MapContext.cs" />
-    <Compile Include="StoniesSandPit\Sprocker.cs" />
-    <Compile Include="StoniesSandPit\SprockerBuilder.cs" />
     <Compile Include="SprockerCommandBuilder.cs" />
     <Compile Include="DbCommandDumper.cs" />
     <Compile Include="ExtensionMethods.cs" />
@@ -72,7 +74,6 @@
     <Compile Include="SprockerException.cs" />
     <Compile Include="SprocParameterMapper.cs" />
     <Compile Include="SqlRepository.cs" />
-    <Compile Include="StoniesSandPit\SprocMap.cs" />
     <Compile Include="TableSet.cs" />
   </ItemGroup>
   <ItemGroup>

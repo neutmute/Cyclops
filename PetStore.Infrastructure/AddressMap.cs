@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using PetStore.Domain;
-using Sprocker.Core.StoniesSandPit;
+using Sprocker.Core.Mapping;
 
 namespace PetStore.Infrastructure
 {

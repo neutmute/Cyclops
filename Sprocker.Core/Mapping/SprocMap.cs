@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Sprocker.Core.StoniesSandPit
+namespace Sprocker.Core.Mapping
 {
     /// <summary>
     /// Map an object graph to Stored Procs
