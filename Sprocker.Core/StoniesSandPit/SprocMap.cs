@@ -1,19 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Sprocker.Core.StoniesSandPit
 {
     /// <summary>
     /// Map an object graph to Stored Procs
     /// </summary>
-    public class SprocMap<TEntity, TCriteria>
+    public class SprocMap<TEntity, TCriteria> 
     {
         // parameter map
+            //Cache
 
         // result map
+            //Cache expression
 
         // children 
         	//One-to-many (Collection mappings)
@@ -30,22 +29,37 @@ namespace Sprocker.Core.StoniesSandPit
 
         // Fluent NHibernate
 
-        public SprocMap<TEntity, TCriteria> MapPrameter(Expression<Func<TCriteria, object>> prameterExpression)
-        {
+            //        Id(x => x.Id);
+            //Map(x => x.Name);
+            //HasManyToMany(x => x.Products)
+            //    .Cascade.All()
+            //    .Table("StoreProduct");
+            //HasMany(x => x.Staff)
+            //    .Cascade.All()
+            //    .Inverse();
 
-            return this;
+        public void AutoMapAll()
+        {
+        
+        
         }
 
-        public SprocMap<TEntity, TCriteria> MapResult(Expression<Func<TEntity, object>> memberExpression)
+
+        public void MapInput(Expression<Func<TCriteria, object>> prameterExpression)
         {
 
-            return this;
         }
 
-        public SprocMap<TEntity, TCriteria> Proc(string name)
+        public IMapContext<TEntity> MapResult(Expression<Func<TEntity, object>> memberExpression)
         {
 
-            return this;
+            return new MapContext<TEntity>();
+        }
+
+        public void Proc(string name)
+        {
+
+
         }
 
         public void IsTransactional(bool isTransactional)

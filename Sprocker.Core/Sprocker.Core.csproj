@@ -58,6 +58,8 @@
     <Compile Include="SprockerSqlDatabase.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="StoniesSandPit\IMapContext.cs" />
+    <Compile Include="StoniesSandPit\MapContext.cs" />
     <Compile Include="StoniesSandPit\Sprocker.cs" />
     <Compile Include="StoniesSandPit\SprockerBuilder.cs" />
     <Compile Include="SprockerCommandBuilder.cs" />

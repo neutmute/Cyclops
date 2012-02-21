@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddressMap.cs" />
     <Compile Include="AddressRepository.cs" />
     <Compile Include="CustomerRepository.cs" />
     <Compile Include="OrderRepository.cs" />
