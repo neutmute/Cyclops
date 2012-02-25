@@ -53,6 +53,16 @@ namespace Sprocker.Core
 
         public SprockerCommand(Database database, string procedureName)
         {
+            if (database == null)
+            {
+                throw new ArgumentNullException("database");
+            }
+
+            if (procedureName == null)
+            {
+                throw new ArgumentNullException("procedureName");
+            }
+
             Database = database;
             CommandText = procedureName;
             DbCommand = Database.GetStoredProcCommand(CommandText);
