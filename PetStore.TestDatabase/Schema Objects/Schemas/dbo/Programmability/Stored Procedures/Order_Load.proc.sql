@@ -39,6 +39,7 @@ BEGIN
 	SELECT 'Order'
 
 	SELECT	Id
+			,StatusId
 			,OrderDate
 			,ShipDate
 			,CustomerId

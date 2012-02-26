@@ -43,10 +43,16 @@ namespace Sprocker.Core
         public bool ForceNewConnection { get; set; }
 
         /// <summary>
+        /// Property inject your own map helper
+        /// </summary>
+        public MapHelper Map { get; set; }
+
+        /// <summary>
         /// Load the default database on create
         /// </summary>
         protected SqlRepository()
         {
+            Map = new MapHelper();
         }
 
         public SprockerCommand ConstructCommand(string procedureName)

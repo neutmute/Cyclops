@@ -54,6 +54,7 @@
     <Compile Include="FluentInterface\Behaviours\INodeBuilder.cs" />
     <Compile Include="FluentInterface\Behaviours\IEntityBuilder.cs" />
     <Compile Include="FluentInterface\ExtensionMethods.cs" />
+    <Compile Include="MapHelper.cs" />
     <Compile Include="Mapping\CriteriaMap.cs" />
     <Compile Include="Mapping\IMapContext.cs" />
     <Compile Include="Mapping\MapContext.cs" />
