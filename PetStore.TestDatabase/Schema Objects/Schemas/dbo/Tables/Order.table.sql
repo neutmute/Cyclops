@@ -2,6 +2,7 @@
 (
 	Id					int				NOT NULL IDENTITY(1,1),
 	OrderDate			datetime2		NOT NULL,
+	StatusId			TINYINT			NULL,		
 	ShipDate			datetime2		NULL,
 	CustomerId			int				NOT NULL,
 	BillToAddressId		int				NOT NULL,

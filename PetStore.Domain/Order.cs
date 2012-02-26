@@ -5,9 +5,19 @@ using System.Text;
 
 namespace PetStore.Domain
 {
+    public enum OrderStatus
+    {
+        InShoppingCart = 0,
+        Picking = 1,
+        Shipped = 2,
+        Delivered = 3,
+        OnBackOrder =4
+    }
+
     public class Order
     {
         public int Id { get; set; }
+        public OrderStatus Status  {get;set;}
         public DateTime OrderDate { get; set; }
         public DateTime ShipDate { get; set; }
         public bool IsActive { get; set; }

@@ -1,6 +1,7 @@
 ﻿CREATE PROCEDURE dbo.Order_Save
 (
 	@Id					INT OUTPUT
+	,@StatusId			TINYINT
 	,@OrderDate			DATETIME2
 	,@ShipDate			DATETIME2
 	,@CustomerId		INT
@@ -32,6 +33,7 @@ BEGIN
 		INSERT dbo.[Order]
 		(
 			OrderDate
+			,StatusId
 			,ShipDate
 			,CustomerId
 			,BillToAddressId
@@ -46,6 +48,7 @@ BEGIN
 		VALUES
 		(
 			@OrderDate
+			,@StatusId
 			,@ShipDate
 			,@CustomerId
 			,@BillToAddressId
@@ -66,6 +69,7 @@ BEGIN
 	
 		UPDATE 	dbo.[Order]
 		SET		OrderDate = @OrderDate
+				,StatusId = @StatusId
 				,ShipDate = @ShipDate
 				,CustomerId = @CustomerId
 				,BillToAddressId = @BillToAddressId

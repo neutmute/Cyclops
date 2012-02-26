@@ -11,18 +11,39 @@ using Sprocker.Core;
 
 namespace PetStore.Infrastructure
 {
+
+    #region OrderMapHelper
+
+    public class OrderMapHelper : MapHelper
+    {
+        // Add custom project map helper methods here
+
+    }
+    #endregion
+
     public class OrderRepository : SqlRepository //, IOrderRepository
     {
         private static IRowMapper<OrderLine> __orderLineMapper;
+        private static IRowMapper<Order> __orderRowMapper;
 
-        public static IRowMapper<Order> GetOrderRowMapper(Func<int, Customer> getCustomer, Func<int, List<OrderLine>> getLines)
+
+        public OrderRepository()
         {
-            IRowMapper<Order> rowMapper = MapBuilder<Order>
-                                        .MapAllProperties()
-                                        .Map(o => o.Customer).WithFunc(row => getCustomer((int)row["CustomerId"]))
-                                        .Map(o => o.OrderLines).WithFunc(row => getLines((int)row["Id"]))
-                                        .Build();
-            return rowMapper;
+            Map = new OrderMapHelper();  // superfluous  - cant think of a good example at moment
+        }
+
+        public IRowMapper<Order> GetOrderRowMapper(Func<int, Customer> getCustomer, Func<int, List<OrderLine>> getLines)
+        {
+            if (__orderRowMapper == null)
+            {
+                __orderRowMapper = MapBuilder<Order>
+                    .MapAllProperties()
+                    .Map(o => o.Customer).WithFunc(row => getCustomer((int) row["CustomerId"]))
+                    .Map(o => o.OrderLines).WithFunc(row => getLines((int) row["Id"]))
+                    .Map(o => o.Status).WithFunc(row => Map.ToEnum<OrderStatus>(row, "StatusId"))
+                    .Build();
+            }
+            return __orderRowMapper;
         }
 
         public static IRowMapper<OrderLine> GetOrderLineRowMapper()
@@ -85,6 +106,7 @@ namespace PetStore.Infrastructure
             SprockerCommand command = ConstructCommand<Order>("dbo.Order_Save")
                                        .MapAllParameters()
                                        .Map("@CustomerId").WithFunc(o => o.Customer.Id)
+                                       .Map("@StatusId").WithFunc(o => o.Status)
                                        .Map("@BillToAddressId").WithFunc(o => 1)
                                        .Map("@ShipToAddressId").WithFunc(o => 1)
                                        .Map("@Lines").WithFunc(o => linesTableValuedParam)
@@ -117,46 +139,27 @@ namespace PetStore.Infrastructure
             }
             return linesTableValuedParam;
         }
-
-        //public DataTable MapOrderLineToDataTable(List<OrderLine> lines)
-        //{
-        //    DataTable linesTableValuedParam = ConstructCommand("dbo.Tool_TableTypeReflector").ExecuteDataTable("OrderLineTableType");
-
-        //    foreach (OrderLine line in lines)
-        //    {
-        //        DataRow dataRow = linesTableValuedParam.NewRow();
-        //        dataRow.InjectFrom<DataRowInjection>(line);
-
-        //        linesTableValuedParam.Rows.Add(dataRow);
-        //    }
-        //    return linesTableValuedParam;
-        //}
-
-        //public void Delete(Order instance)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public Order GetOrderForCustomer(Customer customer)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 
+
+    #region DataRowInjection class
 
     /// <summary>
     /// This can go up into Sprocker (will require ValueInjector dependency)
     /// </summary>
-     public class DataRowInjection : KnownTargetValueInjection<DataRow>
-     {
-         protected override void Inject(object source, ref DataRow target)
-         {
-             foreach (PropertyDescriptor property in source.GetProps())
-             {
-                 target[property.Name] = property.GetValue(source);
-             }
-         }
-     }
+    public class DataRowInjection : KnownTargetValueInjection<DataRow>
+    {
+        protected override void Inject(object source, ref DataRow target)
+        {
+            foreach (PropertyDescriptor property in source.GetProps())
+            {
+                target[property.Name] = property.GetValue(source);
+            }
+        }
+    }
+
+    #endregion
+
 
 
 }
