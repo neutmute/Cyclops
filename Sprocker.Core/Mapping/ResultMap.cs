@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Sprocker.Core.Mapping
 {
-    public class ResultMap
+    public class ResultMap<TEntity>
     {
-        // members to result set. 
+        public List<Expression<Func<TEntity, object>>> CriteriaExpressions { get; set; }
     }
 }

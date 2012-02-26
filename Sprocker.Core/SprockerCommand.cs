@@ -15,17 +15,6 @@ namespace Sprocker.Core
 {
 
     /// <summary>
-    /// 
-    /// ok the idea here is to wrap the sproc accessor provided bu DAABs database objects.
-    /// 
-    /// We need to 
-    /// 
-    /// support collections of IParameterMappers both
-    ///     *  SaveEntityParameterMapper
-    ///     *  
-    ///
-    /// those need to be passed to the DataAccessor class (SprocAccessor)
-    /// 
     /// </summary>
     /// <remarks>SprockerCommand name since 'Sprocker' by itself conflicts with namespace</remarks>
     public class SprockerCommand
