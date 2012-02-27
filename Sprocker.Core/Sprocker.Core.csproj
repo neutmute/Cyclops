@@ -48,6 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\linked\GlobalAssemblyInfo.cs">
+      <Link>Properties\GlobalAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="DbCommandLogger.cs" />
     <Compile Include="EntityMapper.cs" />
     <Compile Include="FluentInterface\Behaviours\IChildNodeBuilder.cs" />
