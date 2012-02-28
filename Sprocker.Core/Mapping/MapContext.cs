@@ -4,10 +4,11 @@ using System.Collections.Generic;
 namespace Sprocker.Core.Mapping
 {
     /// <summary>
-    /// Container for object to sproc maps
+    /// Container for all the mappings related to a given 
+    /// Proc or collection of procs
     /// </summary>
-    /// <typeparam name="TEntity"></typeparam>
-    /// <typeparam name="TCriteria"></typeparam>
+    /// <typeparam name="TEntity">the output object graph - maps to the procs results </typeparam>
+    /// <typeparam name="TCriteria">the input criteria object - maps to the procs parameters</typeparam>
     public class MapContext<TEntity, TCriteria> : IMapContext<TEntity, TCriteria>
     {
         public List<CriteriaMap<TCriteria>> CriteriaMaps { get; set; }
@@ -21,7 +22,8 @@ namespace Sprocker.Core.Mapping
 
         public IMapContext<TEntity, TCriteria> ToColumn(string columnName)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return null;
         }
     }
 }

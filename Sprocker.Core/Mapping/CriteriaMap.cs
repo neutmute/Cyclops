@@ -19,13 +19,12 @@ namespace Sprocker.Core.Mapping
 
         private SqlParameterCollection sqlParameterCollection; 
         
+        // tied to the command object - not ideal
         //private readonly ParameterCache parameterCache = new ParameterCache();
 
         public CriteriaMap()
         {
-            
-        
-
+            CriteriaExpressions = new List<Expression<Func<TCriteria, object>>>();
         }
     }
 }

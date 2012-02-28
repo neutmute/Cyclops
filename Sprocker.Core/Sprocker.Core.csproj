@@ -86,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FluentInterface\PseudoCode.txt" />
+    <Content Include="Mapping\NOTES.txt" />
     <Content Include="README.txt" />
   </ItemGroup>
   <ItemGroup>

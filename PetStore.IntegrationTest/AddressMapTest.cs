@@ -12,12 +12,11 @@ namespace PetStore.IntegrationTest
     [TestClass]
     public class AddressMapTest
     {
-
+        [TestMethod]
         public void AddressMap_CanDiscover_ProcPerameters()
         {
             AddressMap addressMap = new AddressMap();
-            
-            // setup an asm trust to test internals [AS]
+            addressMap.discoverProcParmeters();
         }
     }
 }

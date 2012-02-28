@@ -14,39 +14,12 @@ namespace Sprocker.Core.Mapping
 
         public IMapContext<TEntity, TCriteria> MapContext { get; set; }
 
-        // parameter map
-
-        // result map
-        //Cache expression
-
-        // children 
-        //One-to-many (Collection mappings)
-        //Many-to-many
-        //One-to-one
-
-        //DAAB
-        //.MapAllProperties()
-        //.DoNotMap(p => p.IsActive)
-        //.DoNotMap(p => p.State)
-        //.Map(p=> p.State).ToColumn("LegacyCode")
-        //.Build();
-
-        // Fluent NHibernate - remembering that these are more complicated because the required sql must be derrived from them. 
-        //        Id(x => x.Id);
-        //Map(x => x.Name);
-        //HasManyToMany(x => x.Products)
-        //    .Cascade.All()
-        //    .Table("StoreProduct");
-        //HasMany(x => x.Staff)
-        //    .Cascade.All()
-        //    .Inverse();
-
         /// <summary>
         /// ctor
         /// </summary>
         public SprocMap()
         {
-
+            MapContext = new MapContext<TEntity, TCriteria>();
         }
 
         public void MapInput(Expression<Func<TCriteria, object>> parameterExpression)
