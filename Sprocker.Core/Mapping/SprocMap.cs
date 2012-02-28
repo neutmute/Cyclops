@@ -77,7 +77,7 @@ namespace Sprocker.Core.Mapping
 
                 foreach (SqlParameter sqlParameter in command.Parameters)
                 {
-
+                    Console.WriteLine(sqlParameter.Value);
                 }
             }
         }
