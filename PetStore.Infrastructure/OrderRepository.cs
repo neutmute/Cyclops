@@ -77,6 +77,12 @@ namespace PetStore.Infrastructure
             return GetWorker(null);
         }
 
+        public void ExecuteWithBadAutoMapping()
+        {
+            SprockerCommand command = ConstructCommand("dbo.Order_Get");
+            command.ExecuteTableSet("this", "set", "of params won't automap");
+        }
+
         public List<Order> GetWorker(int? id)
         {
             SprockerCommand command = ConstructCommand("dbo.Order_Get");
