@@ -18,5 +18,13 @@ namespace PetStore.IntegrationTest
             AddressMap addressMap = new AddressMap();
             addressMap.discoverProcParmeters();
         }
+
+        [TestMethod]
+        public void Address_map_Maps()
+        {
+
+            AddressMap addressMap = new AddressMap();
+           // addressMap.MapContext.CriteriaMaps.Where()
+        }
     }
 }
