@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sprocker.Core", "Sprocker.Core\Sprocker.Core.csproj", "{4F38A7BA-1F8F-4C93-8DA8-56F7F743B89F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sprocker.Core.UnitTest", "Sprocker.Core.UnitTest\Sprocker.Core.UnitTest.csproj", "{C4B5CBD0-C947-4BB1-8F7B-46C697F0D39F}"
-EndProject
 Project("{C8D11400-126E-41CD-887F-60BD40844F9E}") = "PetStore.TestDatabase", "PetStore.TestDatabase\PetStore.TestDatabase.dbproj", "{67CBC824-A49E-4E9B-A947-360F3DFE65C3}"
 EndProject
 Project("{C8D11400-126E-41CD-887F-60BD40844F9E}") = "PetStore.TestDatabaseServer", "PetStore.TestDatabaseServer\PetStore.TestDatabaseServer.dbproj", "{28775C40-ED9B-402B-A692-F32B40ABA096}"
@@ -36,6 +34,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "entlib\Blocks\Data\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "entlib\Blocks\Common\Src\Common.csproj", "{A09297C8-2C40-470B-8856-D856676DDFFA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sprocker.Core.UnitTest", "Sprocker.Core.UnitTest\Sprocker.Core.UnitTest.csproj", "{EF326ED8-14B6-4E2B-AB87-DB9B8826C610}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Sprocker.vsmdi
@@ -59,16 +59,6 @@ Global
 		{4F38A7BA-1F8F-4C93-8DA8-56F7F743B89F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{4F38A7BA-1F8F-4C93-8DA8-56F7F743B89F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{4F38A7BA-1F8F-4C93-8DA8-56F7F743B89F}.Release|x86.ActiveCfg = Release|Any CPU
-		{C4B5CBD0-C947-4BB1-8F7B-46C697F0D39F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C4B5CBD0-C947-4BB1-8F7B-46C697F0D39F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C4B5CBD0-C947-4BB1-8F7B-46C697F0D39F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{C4B5CBD0-C947-4BB1-8F7B-46C697F0D39F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{C4B5CBD0-C947-4BB1-8F7B-46C697F0D39F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{C4B5CBD0-C947-4BB1-8F7B-46C697F0D39F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C4B5CBD0-C947-4BB1-8F7B-46C697F0D39F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C4B5CBD0-C947-4BB1-8F7B-46C697F0D39F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{C4B5CBD0-C947-4BB1-8F7B-46C697F0D39F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{C4B5CBD0-C947-4BB1-8F7B-46C697F0D39F}.Release|x86.ActiveCfg = Release|Any CPU
 		{67CBC824-A49E-4E9B-A947-360F3DFE65C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{67CBC824-A49E-4E9B-A947-360F3DFE65C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67CBC824-A49E-4E9B-A947-360F3DFE65C3}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
@@ -147,13 +137,23 @@ Global
 		{A09297C8-2C40-470B-8856-D856676DDFFA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{A09297C8-2C40-470B-8856-D856676DDFFA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{A09297C8-2C40-470B-8856-D856676DDFFA}.Release|x86.ActiveCfg = Release|Any CPU
+		{EF326ED8-14B6-4E2B-AB87-DB9B8826C610}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF326ED8-14B6-4E2B-AB87-DB9B8826C610}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF326ED8-14B6-4E2B-AB87-DB9B8826C610}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{EF326ED8-14B6-4E2B-AB87-DB9B8826C610}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{EF326ED8-14B6-4E2B-AB87-DB9B8826C610}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EF326ED8-14B6-4E2B-AB87-DB9B8826C610}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF326ED8-14B6-4E2B-AB87-DB9B8826C610}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF326ED8-14B6-4E2B-AB87-DB9B8826C610}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{EF326ED8-14B6-4E2B-AB87-DB9B8826C610}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{EF326ED8-14B6-4E2B-AB87-DB9B8826C610}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{C4B5CBD0-C947-4BB1-8F7B-46C697F0D39F} = {1BE8A447-777A-4756-BA68-1AA8ADEBAEED}
 		{4F38A7BA-1F8F-4C93-8DA8-56F7F743B89F} = {1BE8A447-777A-4756-BA68-1AA8ADEBAEED}
+		{EF326ED8-14B6-4E2B-AB87-DB9B8826C610} = {1BE8A447-777A-4756-BA68-1AA8ADEBAEED}
 		{41C116C1-9427-48A8-BF8C-2548B85AE227} = {8B57F266-9D1F-4311-A1EF-DC1241CDF71B}
 		{48B31009-8A19-4608-9086-0B02166397B8} = {8B57F266-9D1F-4311-A1EF-DC1241CDF71B}
 		{D349B6D8-992F-443F-BB57-57E50DD98794} = {41C116C1-9427-48A8-BF8C-2548B85AE227}
