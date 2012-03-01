@@ -43,6 +43,14 @@ namespace PetStore.IntegrationTest
 
         //}
 
+        [ExpectedException(typeof(SprockerException), "Failed to auto assign parameters. [this,set,of params won't automap] => dbo.Order_Get(@Id)")]
+        [TestMethod]
+        public void SprockerCommand_GivenBadAutoMapParameters_ReturnsUsefulException()
+        {
+            var repo = GetNewRepo();
+            repo.ExecuteWithBadAutoMapping();
+        }
+
         /// <summary>
         /// Test expects data to have been generated and requries transactions to rollback other tests.
         /// just hacked for now

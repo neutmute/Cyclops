@@ -222,7 +222,27 @@ namespace Sprocker.Core
             if (parameterValues.Length > 0)
             {
                 GuardParameterDiscoverySupported();
-                _database.AssignParameters(command, parameterValues);
+                try
+                {
+                    _database.AssignParameters(command, parameterValues);
+                }
+                catch(InvalidOperationException e)
+                {
+                    var paramNames = (
+                                        from DbParameter parameter in command.Parameters 
+                                        where parameter.Direction != ParameterDirection.ReturnValue
+                                        select parameter.ParameterName
+                                     ).ToList();
+
+                    string message = string.Format(
+                        "Failed to auto assign parameters. [{0}] => {2}({1})"
+                        , string.Join(",", parameterValues)
+                        , string.Join(",", paramNames)
+                        , command.CommandText
+                        );
+
+                    throw SprockerException.Create(e, message);
+                }
             }
         }
 
