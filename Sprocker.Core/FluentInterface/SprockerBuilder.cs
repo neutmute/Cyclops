@@ -7,13 +7,13 @@ namespace Sprocker.Core.Mapping
     /// <summary>
     /// might need a new builder per typer to avoid this T variance problem
     /// </summary>
-    public class SprockerBuilder : INodeBuilder, IChildNodeBuilder
+    public class SprockerBuilder<TEntity,TMap> : INodeBuilder, IChildNodeBuilder
     {
-        private Sprocker _sprocker { get; set; }
+        private SprockerExecute<TMap> _sprockerMapExecutor { get; set; }
 
         public INodeBuilder MapGraph()
         {
-            _sprocker = new Sprocker();
+            _sprockerMapExecutor = new SprockerExecute<TMap>();
             return this;
         }
 

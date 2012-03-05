@@ -12,6 +12,12 @@ namespace Sprocker.Core.Mapping
     /// <summary>
     /// Holds the mapping between a criteria object and proc prams'
     /// </summary>
+    /// <remarks>
+    /// 
+    /// collect names and types of criteria members.
+    /// 
+    /// 
+    /// </remarks>
     /// <typeparam name="TCriteria"></typeparam>
     public class CriteriaMap<TCriteria>
     {

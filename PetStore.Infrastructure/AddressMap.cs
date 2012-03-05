@@ -7,13 +7,18 @@ using Sprocker.Core.Mapping;
 
 namespace PetStore.Infrastructure
 {
-    public class AddressMap : SprocMap<Address,AddressCriteria>
+    public class AddressMap : SprocMap<int,Address>
     {
-        public AddressMap()
+        public AddressMap("Address_Get")
         {
-            Proc("Address_Get"); 
-            MapInput(c => c.aProp);
-            //MapResult(a => a.AddressLine2).ToColumn("County");
+
+            this.SprocParameters[0].Value = 10;
+
+            // map overrides criteria to the proc
+
+            // map overrides for the output of the proc. 
+
+            // set other settings 
         }
     }
 }
