@@ -11,7 +11,7 @@ using Microsoft.Practices.EnterpriseLibrary.Data.Instrumentation;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using NLog;
 
-namespace Sprocker.Core
+namespace TheSprocker.Core
 {
 
     /// <summary>

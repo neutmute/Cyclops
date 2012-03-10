@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Sprocker.Core.FluentInterface.Behaviours
+namespace TheSprocker.Core.Mapping
 {
-    public interface IEntityBuilder
+    class ResultExpressionTree
     {
     }
 }

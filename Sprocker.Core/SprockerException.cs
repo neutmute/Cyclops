@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sprocker.Core
+namespace TheSprocker.Core
 {
     public class SprockerException : Exception
     {

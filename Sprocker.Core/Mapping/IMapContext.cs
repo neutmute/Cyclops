@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Sprocker.Core.Mapping
+namespace TheSprocker.Core.Mapping
 {
     public interface IMapContext<TEntity, TCriteria>
     {

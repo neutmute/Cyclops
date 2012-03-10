@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PetStore.Domain;
 using PetStore.Infrastructure;
-using Sprocker.Core.Mapping;
+using TheSprocker.Core.Mapping;
 
 namespace PetStore.IntegrationTest
 {
@@ -16,7 +16,7 @@ namespace PetStore.IntegrationTest
         public void AddressMap_CanDiscover_ProcPerameters()
         {
             AddressMap addressMap = new AddressMap();
-            addressMap.discoverProcParmeters();
+            //addressMap.discoverProcParmeters();
         }
 
         [TestMethod]

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Sprocker.Core.Mapping
+namespace TheSprocker.Core.Mapping
 {
     /// <summary>
     /// Container for all the mappings related to a given 

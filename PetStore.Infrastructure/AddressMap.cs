@@ -3,22 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using PetStore.Domain;
-using Sprocker.Core.Mapping;
+using TheSprocker.Core.Mapping;
+using TheSprocker.Core.FluentInterface;
+using TheSprocker.Core.ExtensionMethods;
 
 namespace PetStore.Infrastructure
 {
-    public class AddressMap : SprocMap<int,Address>
+    public class AddressMap : Map<Address>
     {
-        public AddressMap("Address_Get")
+        public AddressMap()
         {
-
-            this.SprocParameters[0].Value = 10;
-
-            // map overrides criteria to the proc
-
-            // map overrides for the output of the proc. 
-
-            // set other settings 
+            Define()
+                .Proc("Address_GetAll")
+                .Criteria<AddressCriteria>()
+                .AutoMapAll()
+                .Build();
         }
     }
 }

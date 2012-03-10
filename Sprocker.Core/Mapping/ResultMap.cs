@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace Sprocker.Core.Mapping
+namespace TheSprocker.Core.Mapping
 {
     public class ResultMap<TEntity>
     {

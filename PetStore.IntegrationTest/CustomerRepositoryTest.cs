@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NLog.Targets;
 using PetStore.Domain;
 using PetStore.Infrastructure;
-using Sprocker.Core;
+using TheSprocker.Core;
 using NLog;
 
 namespace PetStore.IntegrationTest

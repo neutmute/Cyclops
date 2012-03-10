@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
-namespace Sprocker.Core.Mapping
+namespace TheSprocker.Core.Mapping
 {
     /// <summary>
     /// Holds the mapping between a criteria object and proc prams'

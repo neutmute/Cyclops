@@ -7,7 +7,7 @@ using Kraken.Framework.TestMonkey;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PetStore.Domain;
 using PetStore.Infrastructure;
-using Sprocker.Core;
+using TheSprocker.Core;
 
 namespace PetStore.IntegrationTest
 {

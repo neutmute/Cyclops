@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
-namespace Sprocker.Core
+namespace TheSprocker.Core
 {
     /// <summary>
     /// When using the load pattern, preceed each dataTable with a single row and column of the name of the dataTable

@@ -10,6 +10,7 @@ namespace PetStore.Domain
     /// </summary>
     public class AddressCriteria
     {
-        public string aProp { get; set; }
+        public bool IsActive { get; set; }
+        public string Country { get; set; }
     }
 }

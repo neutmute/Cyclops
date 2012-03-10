@@ -9,7 +9,7 @@
     <ProjectGuid>{EF326ED8-14B6-4E2B-AB87-DB9B8826C610}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sprocker.Core.UnitTest</RootNamespace>
+    <RootNamespace>TheSprocker.Core.UnitTest</RootNamespace>
     <AssemblyName>Sprocker.Core.UnitTest</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -38,6 +38,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
@@ -45,9 +46,21 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoMapperTest.cs" />
     <Compile Include="ExpressionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="SprockerTest.cs" />
+    <Compile Include="TypeReflectorTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PetStore.Domain\PetStore.Domain.csproj">
+      <Project>{E3DE1676-BD80-4C6C-B8F3-7AD14E7E7A8E}</Project>
+      <Name>PetStore.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sprocker.Core\Sprocker.Core.csproj">
+      <Project>{4F38A7BA-1F8F-4C93-8DA8-56F7F743B89F}</Project>
+      <Name>Sprocker.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

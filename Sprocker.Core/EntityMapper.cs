@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
-namespace Sprocker.Core
+namespace TheSprocker.Core
 {
     public class EntityMapper
     {

@@ -4,15 +4,16 @@ using System.Linq;
 using System.Text;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
-namespace Sprocker.Core.FluentInterface.Behaviours
+namespace TheSprocker.Core.FluentInterface.Behaviours
 {
     /// <summary>
     /// 
     /// </summary>
     /// <typeparam name="T">this is required for the row mapper</typeparam>
-    public interface INodeBuilder
+    public interface IBaseBuilder
     {
-        INodeBuilder InputMapper(IParameterMapper parameterMapper);
-        IChildNodeBuilder Proc(String procedureName);
+        IBaseBuilder Proc(String procedureName);
+        IBaseBuilder AutoMapAll(); // another interface for the exclusions
+        void Build();
     }
 }

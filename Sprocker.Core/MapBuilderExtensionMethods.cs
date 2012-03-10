@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
-namespace Sprocker.Core
+namespace TheSprocker.Core
 {
     /// <summary>
     /// Extension methods for EntLib <see cref="MapBuilder{TResult}"/> class and its associated

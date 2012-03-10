@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq.Expressions;
 
-namespace Sprocker.Core.Mapping
+namespace TheSprocker.Core.Mapping
 {
     /// <summary>
     /// Map an object graph to Stored Procs
@@ -26,7 +26,7 @@ namespace Sprocker.Core.Mapping
     /// save the expression tree here
     /// 
     /// </remarks>
-    public abstract class SprocMap<TCriteria, TEntity>
+    public class SprocMap<TCriteria, TEntity>
     {
         /// <summary>
         /// Name of the stored proc
@@ -52,6 +52,29 @@ namespace Sprocker.Core.Mapping
             MapContext = new MapContext<TEntity, TCriteria>();
         }
 
+        public void AutoMap()
+        {
+            // specify that convention over configuration should be used
+            // NB: extend this with .Ignore() .ToColumn() ? .All()
+
+             //reflect the criteria object
+             //get parameters off proc 
+             //match these two together
+             //set the type of parameter from the reflected type 
+             //compile an expression tree that will allow the executor to call the proc
+             //save the expression tree here. 
+             
+             //reflect the entity
+             //get the output parameters 
+             //match on name
+             //compile the expression tree that will allow the exector to create the type
+             //save the expression tree here
+
+
+
+
+        }
+
 
         /// <summary>
         /// Explicit mapping overide. 
@@ -74,38 +97,6 @@ namespace Sprocker.Core.Mapping
         {
 
             // add expression to output maps 
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        internal void discoverProcParmeters()
-        {
-
-            using (
-                SqlConnection connection =
-                    new SqlConnection(
-                        @"Data Source=(local)\Sql2008;Initial Catalog=PetStore.TestDatabase;Integrated Security=SSPI;")
-                )
-            {
-                // Create Command
-                SqlCommand command = connection.CreateCommand();
-                command.CommandType = CommandType.StoredProcedure;
-                command.CommandText = ProcName;
-
-                // Open Connection
-                connection.Open();
-
-                // Discover Parameters for Stored Procedure
-                // Populate command.Parameters Collection.
-                SqlCommandBuilder.DeriveParameters(command);
-
-                foreach (SqlParameter sqlParameter in command.Parameters)
-                {
-                    Console.WriteLine(sqlParameter.Value);
-                    SprocParameters.Add(sqlParameter);
-                }
-            }
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using PetStore.Domain;
-using Sprocker.Core;
+using TheSprocker.Core;
 
 namespace PetStore.Infrastructure
 {

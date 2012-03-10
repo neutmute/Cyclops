@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
-namespace Sprocker.Core
+namespace TheSprocker.Core
 {
     /// <summary>
     /// Inherit from this and inject to your your own SqlRepository

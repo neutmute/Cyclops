@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using NLog;
 
-namespace Sprocker.Core
+namespace TheSprocker.Core
 {
     internal class DbCommandDumper
     {

@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PetStore.Domain;
 
-namespace Sprocker.Core.UnitTest
+namespace TheSprocker.Core.UnitTest
 {
     [TestClass]
     public class ExpressionTests
@@ -38,5 +41,30 @@ namespace Sprocker.Core.UnitTest
                 Expression.Call(instance, propertyInfo.GetSetMethod(), parameter),
                 new ParameterExpression[] { instance, parameter }).Compile();
         }
+
+        //[TestMethod]
+        //public void ExpressionTest()
+        //{
+        //    ParameterExpression<AddressCriteria,
+
+
+
+        //}
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <typeparam name="TCritera"></typeparam>
+        ///// <typeparam name="TParameters"></typeparam>
+        ///// <typeparam name="TResult"></typeparam>
+        ///// <param name="?"></param>
+        ///// <returns></returns>
+        //public Func<TCritera, TParameters, TResult> ParameterExpression<TCritera, TParameters, TResult>(List<IDataParameter> SprocParameters)
+        //{
+
+
+
+        //}
+
     }
 }

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace Sprocker.Core
+namespace TheSprocker.Core
 {
 
     /// <summary>

@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
 
-namespace Sprocker.Core
+namespace TheSprocker.Core
 {
     public class ParameterMapper<TEntity> where TEntity : class
     {

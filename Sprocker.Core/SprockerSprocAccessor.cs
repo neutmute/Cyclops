@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
-namespace Sprocker.Core
+namespace TheSprocker.Core
 {
     /// <summary>
     /// Represents a stored procedure call to the database that will return an enumerable of <typeparamref name="TResult"/>.

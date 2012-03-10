@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using NLog;
 
-namespace Sprocker.Core
+namespace TheSprocker.Core
 {
     /// <summary>
     /// Represents a data point for the execution of a command

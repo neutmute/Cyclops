@@ -6,9 +6,9 @@ using System.Linq;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PetStore.Domain;
-using Sprocker.Core;
-using Sprocker.Core.FluentInterface;
-using Sprocker.Core.Mapping;
+using TheSprocker.Core;
+using TheSprocker.Core.FluentInterface;
+using TheSprocker.Core.Mapping;
 
 namespace PetStore.IntegrationTest
 {

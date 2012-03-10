@@ -1,33 +1,25 @@
 ﻿using System;
 using Microsoft.Practices.EnterpriseLibrary.Data;
-using Sprocker.Core.FluentInterface.Behaviours;
+using TheSprocker.Core.FluentInterface.Behaviours;
 
-namespace Sprocker.Core.Mapping
+namespace TheSprocker.Core.Mapping
 {
     /// <summary>
     /// might need a new builder per typer to avoid this T variance problem
     /// </summary>
-    public class SprockerBuilder<TEntity,TMap> : INodeBuilder, IChildNodeBuilder
+    public class SprockerBuilder<TEntity> : IBaseBuilder
     {
-        private SprockerExecute<TMap> _sprockerMapExecutor { get; set; }
-
-        public INodeBuilder MapGraph()
-        {
-            _sprockerMapExecutor = new SprockerExecute<TMap>();
-            return this;
-        }
-
-        public INodeBuilder InputMapper(IParameterMapper parameterMapper)
+        public IBaseBuilder Proc(string procedureName)
         {
             throw new NotImplementedException();
         }
 
-        public IChildNodeBuilder Proc(string procName)
+        public IBaseBuilder AutoMapAll()
         {
             throw new NotImplementedException();
         }
 
-        public IChildNodeBuilder IsTransactional(bool isTransactional)
+        public void Build()
         {
             throw new NotImplementedException();
         }

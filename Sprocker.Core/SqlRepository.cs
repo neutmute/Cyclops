@@ -1,6 +1,6 @@
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
-namespace Sprocker.Core
+namespace TheSprocker.Core
 {
     /// <summary>
     /// base repo for working against as MS Sql server backing store, using Entlib 5.0

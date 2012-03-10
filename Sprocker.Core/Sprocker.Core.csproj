@@ -8,7 +8,7 @@
     <ProjectGuid>{4F38A7BA-1F8F-4C93-8DA8-56F7F743B89F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sprocker.Core</RootNamespace>
+    <RootNamespace>TheSprocker.Core</RootNamespace>
     <AssemblyName>Sprocker.Core</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -55,19 +55,26 @@
     <Compile Include="Config.cs" />
     <Compile Include="DbCommandLogger.cs" />
     <Compile Include="EntityMapper.cs" />
+    <Compile Include="ExtensionMethods\FluentInterfaceExtensionMethods.cs" />
+    <Compile Include="ExtensionMethods\IEnumerableExtensionMethods.cs" />
     <Compile Include="FluentInterface\Behaviours\IChildNodeBuilder.cs" />
     <Compile Include="FluentInterface\Behaviours\INodeBuilder.cs" />
-    <Compile Include="FluentInterface\Behaviours\IEntityBuilder.cs" />
     <Compile Include="FluentInterface\ExtensionMethods.cs" />
     <Compile Include="MapHelper.cs" />
+    <Compile Include="Mapping\Map.cs" />
+    <Compile Include="Mapping\SprocInspector.cs" />
+    <Compile Include="Mapping\TypeReflector.cs" />
     <Compile Include="Mapping\CriteriaMap.cs" />
+    <Compile Include="Mapping\ResultExpressionTree.cs" />
     <Compile Include="Mapping\IMapContext.cs" />
     <Compile Include="Mapping\MapContext.cs" />
+    <Compile Include="Mapping\ParameterExpressionTree.cs" />
     <Compile Include="Mapping\ResultMap.cs" />
     <Compile Include="Mapping\SprockerExecutor.cs" />
     <Compile Include="FluentInterface\SprockerBuilder.cs" />
     <Compile Include="FluentInterface\SprockerChildNodeBuilder.cs" />
-    <Compile Include="Mapping\SprocMap.cs" />
+    <Compile Include="Mapping\ToSproc.cs" />
+    <Compile Include="Sprocker.cs" />
     <Compile Include="SprockerSprocAccessor.cs" />
     <Compile Include="SprockerSqlDatabase.cs">
       <SubType>Code</SubType>
@@ -87,7 +94,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="FluentInterface\PseudoCode.txt" />
     <Content Include="Mapping\NOTES.txt" />
     <Content Include="README.txt" />
   </ItemGroup>

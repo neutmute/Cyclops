@@ -1,4 +1,4 @@
-﻿namespace Sprocker.Core.Mapping
+﻿namespace TheSprocker.Core.Mapping
 {
     public class SprockerChildNodeBuilder
     {
