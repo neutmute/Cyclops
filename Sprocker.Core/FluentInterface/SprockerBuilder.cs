@@ -5,16 +5,16 @@ using TheSprocker.Core.FluentInterface.Behaviours;
 namespace TheSprocker.Core.Mapping
 {
     /// <summary>
-    /// might need a new builder per typer to avoid this T variance problem
+    /// might need a new builder per type to avoid this T variance problem
     /// </summary>
-    public class SprockerBuilder<TEntity> : IBaseBuilder
+    public class SprockerMapBuilder<TEntity> : IRootMapBuilder
     {
-        public IBaseBuilder Proc(string procedureName)
+        public IRootMapBuilder Proc(string procedureName)
         {
             throw new NotImplementedException();
         }
 
-        public IBaseBuilder AutoMapAll()
+        public IRootMapBuilder AutoMapAll()
         {
             throw new NotImplementedException();
         }

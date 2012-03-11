@@ -11,7 +11,10 @@ namespace TheSprocker.Core
     /// <typeparam name="TResult"></typeparam>
     public class Sprocker
     {
-
+        public Sprocker()
+        {
+            
+        }
     }
 
 }

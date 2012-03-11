@@ -6,17 +6,14 @@ using TheSprocker.Core.Mapping;
 
 namespace TheSprocker.Core.Mapping
 {
-    public abstract class Map<TType>
+    public abstract class Map<TRootType>
     {
-        public SprockerBuilder<TType> SprockerBuilder { get; set; }
+        public SprockerMapBuilder<TRootType> SprockerBuilder { get; set; }
 
-        public SprockerBuilder<TType> Define()
+        public SprockerMapBuilder<TRootType> DefineMappings()
         {
-            SprockerBuilder = new SprockerBuilder<TType>();
+            SprockerBuilder = new SprockerMapBuilder<TRootType>();
             return SprockerBuilder;
         }
-
-
-        
     }
 }

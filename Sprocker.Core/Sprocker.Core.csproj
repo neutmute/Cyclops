@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TheSprocker.Core</RootNamespace>
-    <AssemblyName>Sprocker.Core</AssemblyName>
+    <AssemblyName>TheSprocker.Core</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -57,8 +57,9 @@
     <Compile Include="EntityMapper.cs" />
     <Compile Include="ExtensionMethods\FluentInterfaceExtensionMethods.cs" />
     <Compile Include="ExtensionMethods\IEnumerableExtensionMethods.cs" />
-    <Compile Include="FluentInterface\Behaviours\IChildNodeBuilder.cs" />
-    <Compile Include="FluentInterface\Behaviours\INodeBuilder.cs" />
+    <Compile Include="FluentInterface\Behaviours\AggregateMapBuilder.cs" />
+    <Compile Include="FluentInterface\Behaviours\IExplicitMapBuilder.cs" />
+    <Compile Include="FluentInterface\Behaviours\IRootBuilder.cs" />
     <Compile Include="FluentInterface\ExtensionMethods.cs" />
     <Compile Include="MapHelper.cs" />
     <Compile Include="Mapping\Map.cs" />
@@ -73,7 +74,7 @@
     <Compile Include="Mapping\SprockerExecutor.cs" />
     <Compile Include="FluentInterface\SprockerBuilder.cs" />
     <Compile Include="FluentInterface\SprockerChildNodeBuilder.cs" />
-    <Compile Include="Mapping\ToSproc.cs" />
+    <Compile Include="Mapping\SprocMap.cs" />
     <Compile Include="Sprocker.cs" />
     <Compile Include="SprockerSprocAccessor.cs" />
     <Compile Include="SprockerSqlDatabase.cs">

@@ -13,9 +13,10 @@ namespace PetStore.Infrastructure
     {
         public AddressMap()
         {
-            Define()
+            DefineMappings()
                 .Proc("Address_GetAll")
-                .Criteria<AddressCriteria>()
+                .ParameterType<AddressCriteria>()
+                .ResultType<Address>()
                 .AutoMapAll()
                 .Build();
         }
