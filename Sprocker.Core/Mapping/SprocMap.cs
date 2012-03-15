@@ -12,21 +12,21 @@ namespace TheSprocker.Core.Mapping
     /// <remarks>
     /// most of the work is here:
     /// 
-    /// refelect the critera object
-    /// get parmeters off proc 
+    /// reflect the criteria object
+    /// get parameters off proc 
     /// match these two together
-    /// set the type of parameter from the refelcted type 
+    /// set the type of parameter from the reflected type 
     /// compile an expression tree that will allow the executor to call the proc
     /// save the expression tree here. 
     /// 
-    /// refelct the entity
+    /// reflect the entity
     /// get the output parameters 
     /// match on name
-    /// compile the exprestion tree that will allow the exector to create the type
+    /// compile the expression tree that will allow the exector to create the type
     /// save the expression tree here
     /// 
     /// </remarks>
-    public class SprocMap<TCriteria, TEntity>
+    public class SprocMap
     {
         /// <summary>
         /// Name of the stored proc
@@ -38,10 +38,9 @@ namespace TheSprocker.Core.Mapping
         /// </summary>
         public List<IDataParameter> SprocParameters { get; set; } //SqlParameter
 
-        /// <summary>
-        /// Stores the map sets. 
-        /// </summary>
-        public IMapContext<TEntity, TCriteria> MapContext { get; set; }
+        //List<CriteriaMap<TEntity>> CriteriaMaps { get; set; }
+        
+        //List<ResultMap<TEntity>> ResultMaps { get; set; }
 
         /// <summary>
         /// ctor
@@ -49,7 +48,8 @@ namespace TheSprocker.Core.Mapping
         public SprocMap(string procName)
         {
             ProcName = procName;
-            MapContext = new MapContext<TEntity, TCriteria>();
+            //CriteriaMaps = new List<CriteriaMap<TEntity>>();
+            //ResultMaps = new List<ResultMap<TEntity>>();
         }
 
         public void AutoMap()
@@ -69,34 +69,30 @@ namespace TheSprocker.Core.Mapping
              //match on name
              //compile the expression tree that will allow the exector to create the type
              //save the expression tree here
-
-
-
-
         }
 
 
-        /// <summary>
-        /// Explicit mapping overide. 
-        /// </summary>
-        /// <param name="parameterExpression"></param>
-        public void MapInput(Expression<Func<TCriteria, object>> parameterExpression)
-        {
-            CriteriaMap<TCriteria> criteriaMap = new CriteriaMap<TCriteria>();
-            criteriaMap.CriteriaExpressions.Add(parameterExpression);
+        ///// <summary>
+        ///// Explicit mapping overide. 
+        ///// </summary>
+        ///// <param name="parameterExpression"></param>
+        //public void MapInput(Expression<Func<TCriteria, object>> parameterExpression)
+        //{
+        //    CriteriaMap<TCriteria> criteriaMap = new CriteriaMap<TCriteria>();
+        //    criteriaMap.CriteriaExpressions.Add(parameterExpression);
 
-            // add expression to parameter maps. 
-            MapContext.CriteriaMaps.Add(criteriaMap);
-        }
+        //    // add expression to parameter maps. 
+        //   // MapContext.CriteriaMaps.Add(criteriaMap);
+        //}
 
-        /// <summary>
-        /// Explicit output mapping overide. 
-        /// </summary>
-        /// <param name="memberExpression"></param>
-        public void MapResult(Expression<Func<TEntity, object>> memberExpression)
-        {
+        ///// <summary>
+        ///// Explicit output mapping overide. 
+        ///// </summary>
+        ///// <param name="memberExpression"></param>
+        //public void MapResult(Expression<Func<TEntity, object>> memberExpression)
+        //{
 
-            // add expression to output maps 
-        }
+        //    // add expression to output maps 
+        //}
     }
 }

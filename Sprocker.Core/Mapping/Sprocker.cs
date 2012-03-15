@@ -1,25 +1,18 @@
 ﻿using System;
-using System.Data;
+using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Transactions;
+using System.Linq;
+using System.Text;
+using Microsoft.Practices.EnterpriseLibrary.Data;
 
-namespace TheSprocker.Core.Mapping
+namespace TheSprocker.Core
 {
     /// <summary>
-    /// Execute the map
     /// </summary>
-    /// <remarks>
-    /// 
-    /// get the expression trees from the maps and call them on the database 
-    /// 
-    /// </remarks>
-    public class SprockerExecutor<TMap> //where TMap :
+    /// <typeparam name="TResult"></typeparam>
+    public class Sprocker
     {
-        //Transaction transaction // perhaps one can be passed?
-
-        //warn on overwrite? basic last modified warning? throw?
-
-        public SprockerExecutor()
+        public Sprocker()
         {
             
         }
@@ -48,4 +41,5 @@ namespace TheSprocker.Core.Mapping
             }
         }
     }
+
 }
