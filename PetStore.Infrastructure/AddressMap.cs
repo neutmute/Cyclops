@@ -9,13 +9,13 @@ using TheSprocker.Core.ExtensionMethods;
 
 namespace PetStore.Infrastructure
 {
-    public class AddressMap : Map<Address>
+    public class AddressMap : SprockerMap
     {
         public AddressMap()
         {
             DefineMappings()
                 .Proc("Address_GetAll")
-                .ParameterType<AddressCriteria>()
+                .ParameterType<AddressCriteria>() 
                 .ResultType<Address>()
                 .AutoMapAll()
                 .Build();

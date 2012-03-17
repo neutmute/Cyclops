@@ -26,12 +26,27 @@ namespace TheSprocker.Core.Mapping
     /// save the expression tree here
     /// 
     /// </remarks>
-    public class SprocMap
+    public class SprockerMapContext
     {
         /// <summary>
         /// Name of the stored proc
         /// </summary>
-        public string ProcName { get; private set; }
+        public string ProcName { get; set; }
+
+        /// <summary>
+        /// attempt to match purely based on convention 
+        /// </summary>
+        public bool AutomapAll { get;  set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Type ParamtererType { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Type ResultType { get; set; }
 
         /// <summary>
         /// Stores the parameters of the proc
@@ -45,7 +60,7 @@ namespace TheSprocker.Core.Mapping
         /// <summary>
         /// ctor
         /// </summary>
-        public SprocMap(string procName)
+        public SprockerMapContext(string procName)
         {
             ProcName = procName;
             //CriteriaMaps = new List<CriteriaMap<TEntity>>();

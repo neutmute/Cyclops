@@ -7,24 +7,38 @@ namespace TheSprocker.Core.Mapping
     /// <summary>
     /// might need a new builder per type to avoid this T variance problem
     /// </summary>
-    public class SprockerMapBuilder<TRestultEntity> : IRootMapBuilder
+    public class SprockerMapBuilder : IRootMapBuilder
     {
         // open generic?
-        public SprocMap Sprocmap { get; private set; }
+        public SprockerMapContext SprocMap { get; set; }
 
         public IRootMapBuilder Proc(string procedureName)
         {
-            throw new NotImplementedException();
+            SprocMap.ProcName = procedureName;
+            return this;
         }
 
         public IRootMapBuilder AutoMapAll()
         {
-            throw new NotImplementedException();
+            SprocMap.AutomapAll = true;
+            return this;
         }
 
-        public void Build()
+        public SprockerMapContext Build()
         {
-            throw new NotImplementedException();
+            return SprocMap;
+        }
+
+        public IRootMapBuilder ParameterType<TParameterType>()
+        {
+            SprocMap.ParamtererType = typeof(TParameterType);
+            return this;
+        }
+
+        public IRootMapBuilder ResultType<TResultType>()
+        {
+            SprocMap.ResultType = typeof(TResultType);
+            return this;
         }
     }
 }

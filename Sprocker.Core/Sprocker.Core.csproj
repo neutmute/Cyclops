@@ -62,7 +62,7 @@
     <Compile Include="FluentInterface\Behaviours\IRootBuilder.cs" />
     <Compile Include="FluentInterface\ExtensionMethods.cs" />
     <Compile Include="MapHelper.cs" />
-    <Compile Include="FluentInterface\Map.cs" />
+    <Compile Include="Mapping\SprockerMap.cs" />
     <Compile Include="Mapping\SprocInspector.cs" />
     <Compile Include="Mapping\TypeReflector.cs" />
     <Compile Include="Mapping\CriteriaMap.cs" />
@@ -71,7 +71,7 @@
     <Compile Include="Mapping\ResultMap.cs" />
     <Compile Include="FluentInterface\SprockerBuilder.cs" />
     <Compile Include="FluentInterface\SprockerChildNodeBuilder.cs" />
-    <Compile Include="Mapping\SprocMap.cs" />
+    <Compile Include="Mapping\SprockerMapContext.cs" />
     <Compile Include="Mapping\Sprocker.cs" />
     <Compile Include="SprockerSprocAccessor.cs" />
     <Compile Include="SprockerSqlDatabase.cs">

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Practices.EnterpriseLibrary.Data;
+using TheSprocker.Core.Mapping;
 
 namespace TheSprocker.Core.FluentInterface.Behaviours
 {
@@ -12,8 +13,11 @@ namespace TheSprocker.Core.FluentInterface.Behaviours
     /// <typeparam name="T">this is required for the row mapper</typeparam>
     public interface IRootMapBuilder
     {
-        IRootMapBuilder Proc(String procedureName);
-        IRootMapBuilder AutoMapAll(); // another interface for the exclusions
-        void Build();
+        SprockerMapContext SprocMap { get; set; }
+        IRootMapBuilder Proc(string procedureName);
+        IRootMapBuilder ParameterType<TParameterType>();
+        IRootMapBuilder ResultType<TResultType>();
+        IRootMapBuilder AutoMapAll();
+        SprockerMapContext Build();
     }
 }
