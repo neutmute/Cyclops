@@ -9,12 +9,11 @@ namespace TheSprocker.Core.Mapping
     /// </summary>
     public class SprockerMapBuilder : IRootMapBuilder
     {
-        // open generic?
         public SprockerMapContext SprocMap { get; set; }
 
         public IRootMapBuilder Proc(string procedureName)
         {
-            SprocMap.ProcName = procedureName;
+            SprocMap = new SprockerMapContext(procedureName);
             return this;
         }
 
@@ -26,6 +25,7 @@ namespace TheSprocker.Core.Mapping
 
         public SprockerMapContext Build()
         {
+            //TODO: [AS] trigger all the work here. for now just run in tests.  
             return SprocMap;
         }
 

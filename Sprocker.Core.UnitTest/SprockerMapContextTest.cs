@@ -8,12 +8,14 @@ using TheSprocker.Core.Mapping;
 namespace TheSprocker.Core.UnitTest
 {
     [TestClass]
-    public class AutoMapperTest
+    public class SprockerMapContextTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void AutoMap_discovers_types()
         {
-           // AutoMapper autoMapper = new AutoMapper();
+
+
+
         }
     }
 }

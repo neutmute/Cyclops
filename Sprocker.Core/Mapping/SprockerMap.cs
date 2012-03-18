@@ -10,10 +10,17 @@ namespace TheSprocker.Core.Mapping
     {
         public SprockerMapBuilder SprockerBuilder { get; set; }
 
-        public SprockerMapBuilder DefineMappings()
+        protected SprockerMapBuilder DefineMappings()
         {
             SprockerBuilder = new SprockerMapBuilder();
             return SprockerBuilder;
+        }
+
+        public SprockerMapContext GetMapContext()
+        {
+            // some guard or something 
+
+            return SprockerBuilder.SprocMap;
         }
     }
 }

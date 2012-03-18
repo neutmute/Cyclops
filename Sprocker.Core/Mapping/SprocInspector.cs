@@ -14,14 +14,17 @@ namespace TheSprocker.Core.Mapping
         /// <summary>
         /// Stores the parameters of the proc
         /// </summary>
-        public List<IDataParameter> SprocParameters { get; set; } //SqlParameter
+        internal List<IDataParameter> SprocParameters { get; set; } //SqlParameter
 
-        
+        public SprocInspector()
+        {
+            SprocParameters = new List<IDataParameter>();
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        internal void discoverProcParmeters()
+        internal List<IDataParameter> discoverProcParmeters()
         {
 
             using (
@@ -44,10 +47,11 @@ namespace TheSprocker.Core.Mapping
 
                 foreach (SqlParameter sqlParameter in command.Parameters)
                 {
-                    Console.WriteLine(sqlParameter.Value);
                     SprocParameters.Add(sqlParameter);
                 }
             }
+
+            return SprocParameters;
         }
     }
 }

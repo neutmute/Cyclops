@@ -16,8 +16,11 @@ namespace TheSprocker.Core.UnitTest
         [TestMethod]
         public void TestMethod1()
         {
-            TypeReflector<Address> reflector = new TypeReflector<Address>();
-            IList<PropertyInfo> members = reflector.LocateMappingCandidates();
+            TypeReflector reflector = new TypeReflector();
+            IList<PropertyInfo> members = reflector.LocateMappingCandidates(typeof(Address));
+
+            Assert.IsNotNull(members);
+            //Assert.IsTrue(members);
 
             foreach (var propertyInfo in members)
             {

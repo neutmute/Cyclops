@@ -8,19 +8,21 @@ using TheSprocker.Core.ExtensionMethods;
 
 namespace TheSprocker.Core.Mapping
 {
-    public class TypeReflector<TType>
+    public class TypeReflector
     {
         private IList<PropertyInfo> membersForMapping = new List<PropertyInfo>();
 
-        internal IEnumerable<PropertyInfo> ReflectType<TType>()
+        internal IEnumerable<PropertyInfo> ReflectType(Type type)
         {
-            foreach (PropertyInfo property in typeof(TType).GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
+            foreach (PropertyInfo property in typeof(Type).GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
                 yield return property;
         }
 
-        public IList<PropertyInfo> LocateMappingCandidates()
+        public IList<PropertyInfo> LocateMappingCandidates(Type type)
         {
-            IEnumerable<PropertyInfo> propertys = ReflectType<TType>().Where(p => p.MemberType == MemberTypes.Property);
+            // TODO: needs a filter. 
+
+            IEnumerable<PropertyInfo> propertys = ReflectType(type).Where(p => p.MemberType == MemberTypes.Property);
             propertys.Each(m => membersForMapping.Add(m));
 
             return membersForMapping;

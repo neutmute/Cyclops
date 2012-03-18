@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TheSprocker.Core.Mapping
 {
-    class ResultExpressionTree
+    internal class ResultExpressionTree
     {
     }
 }

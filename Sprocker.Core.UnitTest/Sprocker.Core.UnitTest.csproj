@@ -49,6 +49,7 @@
     <Compile Include="AutoMapperTest.cs" />
     <Compile Include="ExpressionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SprockerMapContextTest.cs" />
     <Compile Include="SprockerTest.cs" />
     <Compile Include="TypeReflectorTest.cs" />
   </ItemGroup>

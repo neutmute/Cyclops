@@ -65,10 +65,9 @@
     <Compile Include="Mapping\SprockerMap.cs" />
     <Compile Include="Mapping\SprocInspector.cs" />
     <Compile Include="Mapping\TypeReflector.cs" />
-    <Compile Include="Mapping\CriteriaMap.cs" />
+    <Compile Include="Mapping\AutoMapOverrides.cs" />
     <Compile Include="Mapping\ResultExpressionTree.cs" />
     <Compile Include="Mapping\ParameterExpressionTree.cs" />
-    <Compile Include="Mapping\ResultMap.cs" />
     <Compile Include="FluentInterface\SprockerBuilder.cs" />
     <Compile Include="FluentInterface\SprockerChildNodeBuilder.cs" />
     <Compile Include="Mapping\SprockerMapContext.cs" />
@@ -104,6 +103,9 @@
       <Project>{D349B6D8-992F-443F-BB57-57E50DD98794}</Project>
       <Name>Data</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Mapping\Overrides\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

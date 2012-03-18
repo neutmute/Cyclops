@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace TheSprocker.Core.Mapping
 {
@@ -29,6 +30,16 @@ namespace TheSprocker.Core.Mapping
     public class SprockerMapContext
     {
         /// <summary>
+        /// TODO: inject this 
+        /// </summary>
+        private TypeReflector typeReflector = new TypeReflector();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private  SprocInspector sprocInspector = new SprocInspector();
+
+        /// <summary>
         /// Name of the stored proc
         /// </summary>
         public string ProcName { get; set; }
@@ -53,9 +64,15 @@ namespace TheSprocker.Core.Mapping
         /// </summary>
         public List<IDataParameter> SprocParameters { get; set; } //SqlParameter
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public IList<PropertyInfo> ParameterMembers { get; set; }
+
         //List<CriteriaMap<TEntity>> CriteriaMaps { get; set; }
         
         //List<ResultMap<TEntity>> ResultMaps { get; set; }
+
 
         /// <summary>
         /// ctor
@@ -72,19 +89,30 @@ namespace TheSprocker.Core.Mapping
             // specify that convention over configuration should be used
             // NB: extend this with .Ignore() .ToColumn() ? .All()
 
-             //reflect the criteria object
-             //get parameters off proc 
-             //match these two together
-             //set the type of parameter from the reflected type 
-             //compile an expression tree that will allow the executor to call the proc
-             //save the expression tree here. 
-             
-             //reflect the entity
-             //get the output parameters 
-             //match on name
-             //compile the expression tree that will allow the exector to create the type
-             //save the expression tree here
+            //reflect the criteria object
+            ParameterMembers = typeReflector.LocateMappingCandidates(ParamtererType);
+
+            //get parameters off proc 
+
+            sprocInspector.ProcName = ProcName;
+            SprocParameters = sprocInspector.discoverProcParmeters();
+
+            //match these two together
+
+            //set the type of parameter from the reflected type 
+            //compile an expression tree that will allow the executor to call the proc
+            //save the expression tree here. 
+
+            //reflect the entity
+            //get the output parameters 
+            //match on name
+            //compile the expression tree that will allow the exector to create the type
+            //save the expression tree here
+
+
         }
+
+
 
 
         ///// <summary>

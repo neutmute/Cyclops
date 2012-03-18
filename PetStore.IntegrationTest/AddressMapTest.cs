@@ -16,7 +16,12 @@ namespace PetStore.IntegrationTest
         public void AddressMap_CanDiscover_ProcPerameters()
         {
             AddressMap addressMap = new AddressMap();
-            //addressMap.discoverProcParmeters();
+            SprockerMapContext sprockerMapContext = addressMap.GetMapContext();
+
+            sprockerMapContext.AutoMap();
+
+            Assert.IsNotNull(sprockerMapContext.SprocParameters);
+            Assert.IsTrue(sprockerMapContext.SprocParameters.Count>0);
         }
 
         [TestMethod]
@@ -24,7 +29,7 @@ namespace PetStore.IntegrationTest
         {
 
             AddressMap addressMap = new AddressMap();
-           // addressMap.MapContext.CriteriaMaps.Where()
+     
         }
     }
 }
