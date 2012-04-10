@@ -200,17 +200,17 @@ namespace TheSprocker.Core
             }
         }
 
-        public IEnumerable<TResult> MapSet(IEnumerable<DataRow> dataRows)
-        {
-            DataTable dataTable = dataRows.CopyToDataTable();
-            //return MapSet(dataTable)
-            //foreach (DataRow dataRow in dataRows)
-            //{
-            //    var iDataRecord = new DataRowAdapter(dataRow);
-            //    yield return _rowMapper.MapRow(iDataRecord);
-            //}
-            return null;
-        }
+        //public IEnumerable<TResult> MapSet(IEnumerable<DataRow> dataRows)
+        //{
+        //    DataTable dataTable = dataRows.CopyToDataTable();
+        //    //return MapSet(dataTable)
+        //    //foreach (DataRow dataRow in dataRows)
+        //    //{
+        //    //    var iDataRecord = new DataRowAdapter(dataRow);
+        //    //    yield return _rowMapper.MapRow(iDataRecord);
+        //    //}
+        //    return null;
+        //}
     }
     #endregion
 

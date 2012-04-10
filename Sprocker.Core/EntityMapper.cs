@@ -14,7 +14,12 @@ namespace TheSprocker.Core
         /// </summary>
         public static List<TEntity> Map<TEntity>(IEnumerable<DataRow> dataRows, IRowMapper<TEntity> mapper)
         {
-            var dataTable = dataRows.CopyToDataTable();
+            var dataRowList = dataRows.ToList();
+            if (dataRowList.Count == 0)
+            {
+                return new List<TEntity>();
+            }
+            var dataTable = dataRowList.CopyToDataTable();
             return Map(dataTable, mapper);
         }
 
