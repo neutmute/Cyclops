@@ -15,5 +15,24 @@ namespace TheSprocker.Core
         {
             return (T)Enum.ToObject(typeof(T), (byte)row[columnName]);
         }
+
+        public virtual int ToInt(IDataRecord dr, string columnName)
+        {
+            object value = dr[columnName];
+            if (value is DBNull)
+            {
+                throw SprockerException.Create("{0} was unexpectedly NULL", columnName);
+            }
+            return Convert.ToInt32(value);
+        }
+
+        public virtual int? ToNullableInt(IDataRecord dr, string columnName)
+        {
+            if (dr[columnName] == DBNull.Value)
+            {
+                return null;
+            }
+            return Convert.ToInt32(dr[columnName]);
+        }
     }
 }
