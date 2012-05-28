@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "entlib\Blocks\Com
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sprocker.Core.UnitTest", "Sprocker.Core.UnitTest\Sprocker.Core.UnitTest.csproj", "{EF326ED8-14B6-4E2B-AB87-DB9B8826C610}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sprocker.DependencyInjection", "Sprocker.DependencyInjection\Sprocker.DependencyInjection.csproj", "{99F86154-F1F9-4EF0-A022-E24A590152E1}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Sprocker.vsmdi
@@ -146,6 +148,16 @@ Global
 		{EF326ED8-14B6-4E2B-AB87-DB9B8826C610}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{EF326ED8-14B6-4E2B-AB87-DB9B8826C610}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{EF326ED8-14B6-4E2B-AB87-DB9B8826C610}.Release|x86.ActiveCfg = Release|Any CPU
+		{99F86154-F1F9-4EF0-A022-E24A590152E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99F86154-F1F9-4EF0-A022-E24A590152E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99F86154-F1F9-4EF0-A022-E24A590152E1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{99F86154-F1F9-4EF0-A022-E24A590152E1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{99F86154-F1F9-4EF0-A022-E24A590152E1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{99F86154-F1F9-4EF0-A022-E24A590152E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99F86154-F1F9-4EF0-A022-E24A590152E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99F86154-F1F9-4EF0-A022-E24A590152E1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{99F86154-F1F9-4EF0-A022-E24A590152E1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{99F86154-F1F9-4EF0-A022-E24A590152E1}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -153,6 +165,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{4F38A7BA-1F8F-4C93-8DA8-56F7F743B89F} = {1BE8A447-777A-4756-BA68-1AA8ADEBAEED}
 		{EF326ED8-14B6-4E2B-AB87-DB9B8826C610} = {1BE8A447-777A-4756-BA68-1AA8ADEBAEED}
+		{99F86154-F1F9-4EF0-A022-E24A590152E1} = {1BE8A447-777A-4756-BA68-1AA8ADEBAEED}
 		{41C116C1-9427-48A8-BF8C-2548B85AE227} = {8B57F266-9D1F-4311-A1EF-DC1241CDF71B}
 		{48B31009-8A19-4608-9086-0B02166397B8} = {8B57F266-9D1F-4311-A1EF-DC1241CDF71B}
 		{D349B6D8-992F-443F-BB57-57E50DD98794} = {41C116C1-9427-48A8-BF8C-2548B85AE227}
