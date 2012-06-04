@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using NLog;
@@ -10,28 +11,39 @@ namespace TheSprocker.Core
     /// <summary>
     /// Represents a data point for the execution of a command
     /// </summary>
-    public class SprockerPerformancePoint
+    public class SprockerPerformancePoint : EventArgs
     {
+        private readonly Stopwatch _timer;
+
         /// <summary>
         /// Not the exploded, simulated command text. Just the short sp name
         /// </summary>
         public string CommandText { get; set; }
 
-        public DateTime Start { get; set; }
+        public DateTime Start { get; private set; }
 
-        public DateTime End { get; set; }
+        public DateTime End 
+        { 
+            get { return Start.Add(Duration); }
+        }
 
         public TimeSpan Duration
         {
             get
             {
-                return End.Subtract(Start); 
+                return _timer.Elapsed;
             }
         }
 
         public SprockerPerformancePoint()
         {
             Start = DateTime.Now;
+            _timer = Stopwatch.StartNew();
+        }
+
+        public void Stop()
+        {
+            _timer.Stop();
         }
     }
 
@@ -42,7 +54,7 @@ namespace TheSprocker.Core
         /// <summary>
         /// Allow an external class to subscribe to performance events
         /// </summary>
-        public static Action<SprockerPerformancePoint> PerformanceMonitorNotify { get; set; }
+        public static EventHandler<SprockerPerformancePoint> PerformanceMonitorNotify { get; set; }
 
         private readonly SprockerPerformancePoint _peformancePoint;
         private readonly SprockerCommand _sprockerCommand;
@@ -69,12 +81,12 @@ namespace TheSprocker.Core
 
         public void Complete()
         {
-            _peformancePoint.End = DateTime.Now;
+            _peformancePoint.Stop();
 
             if (PerformanceMonitorNotify != null)
             {
                 _peformancePoint.CommandText = _sprockerCommand.CommandText;
-                PerformanceMonitorNotify(_peformancePoint);
+                PerformanceMonitorNotify(this, _peformancePoint);
             }
 
             if (Log.IsEnabled(LogLevel))

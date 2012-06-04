@@ -46,7 +46,7 @@ namespace PetStore.IntegrationTest
             perfMonitor.Description = "Demonstration of Sprocker PerfMon";
 
             // Wire up the notification to perf monitor
-            DbCommandLogger.PerformanceMonitorNotify = p =>
+            DbCommandLogger.PerformanceMonitorNotify += (sender, p) =>
                                                            {
                                                                // Convert sprocker point to consuming solutions perf capture tool..in this case a Kraken library
                                                                var perfPoint = new PerformancePoint
