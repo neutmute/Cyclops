@@ -39,6 +39,11 @@ namespace TheSprocker.Core
         #endregion
 
         #region Constructor
+        public SprockerCommand(Database database, CommandType commandType, string commandTextFormat, params object[] commandTextArgs) : this(database, "placeholderCommand")
+        {
+            DbCommand.CommandText = string.Format(commandTextFormat, commandTextArgs);
+            DbCommand.CommandType = commandType;
+        }
 
         public SprockerCommand(Database database, string procedureName)
         {

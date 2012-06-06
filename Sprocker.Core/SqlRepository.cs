@@ -1,3 +1,4 @@
+using System.Data;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace TheSprocker.Core
@@ -58,6 +59,12 @@ namespace TheSprocker.Core
         public SprockerCommand ConstructCommand(string procedureName)
         {
             return new SprockerCommand(Database, procedureName);
+        }
+
+
+        public SprockerCommand ConstructCommand(CommandType commandType, string commandTextFormat, params object[] commandTextArgs)
+        {
+            return new SprockerCommand(Database, commandType, commandTextFormat, commandTextArgs);
         }
 
         public SprockerCommandBuilder<TEntity> ConstructCommand<TEntity>(string procedureName) where TEntity : class
