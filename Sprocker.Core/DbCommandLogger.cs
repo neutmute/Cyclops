@@ -13,7 +13,13 @@ namespace TheSprocker.Core
     /// </summary>
     public class SprockerPerformancePoint : EventArgs
     {
+        #region Fields
+
         private readonly Stopwatch _timer;
+
+        #endregion
+        
+        #region Properties
 
         /// <summary>
         /// Not the exploded, simulated command text. Just the short sp name
@@ -35,16 +41,30 @@ namespace TheSprocker.Core
             }
         }
 
+        #endregion
+        
+        #region Ctor
+
         public SprockerPerformancePoint()
         {
             Start = DateTime.Now;
             _timer = Stopwatch.StartNew();
         }
 
+        #endregion
+
+        #region Methods
+
         public void Stop()
         {
             _timer.Stop();
         }
+
+        public override string ToString()
+        {
+            return string.Format("{0} : {1}ms", CommandText, Duration.TotalMilliseconds);
+        }
+        #endregion
     }
 
     public class DbCommandLogger
