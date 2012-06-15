@@ -82,7 +82,6 @@ namespace TheSprocker.Core
         
         public LogLevel LogLevel { get; set; }
 
-
         public DbCommandLogger(SprockerCommand sprockerCommand)
         {
             LogLevel = LogLevel.Trace;

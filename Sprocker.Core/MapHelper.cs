@@ -13,7 +13,19 @@ namespace TheSprocker.Core
     {
         public T ToEnum<T>(IDataRecord row, string columnName)
         {
-            return (T)Enum.ToObject(typeof(T), (byte)row[columnName]);
+            var valueObject = row[columnName];
+            int valueByte;
+            try
+            {
+                valueByte =Convert.ToInt32(valueObject);
+            }
+            catch(Exception e)
+            {
+                string typeName = valueObject == null ? "<null>" : valueObject.GetType().Name;
+                throw SprockerException.Create(e, "Failed to convert '{0}' of type {2} from column '{1}' to an int32 for Enum mapping", valueObject, columnName, typeName);
+            }
+
+            return (T)Enum.ToObject(typeof(T), valueByte);
         }
 
         public virtual int ToInt(IDataRecord dr, string columnName)
