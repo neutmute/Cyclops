@@ -1,14 +1,10 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyCompany("The monkey men of the 12th mountain")]
-[assembly: AssemblyProduct("codenamed Banana")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyCompany("Kraken Technologies")]
+[assembly: AssemblyCopyright("2011-2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-
+[assembly: AssemblyVersion("1.1.*")]
 [assembly: ComVisible(false)]
 
-[assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: AssemblyInformationalVersion("YOURMUMSPLACE")]
