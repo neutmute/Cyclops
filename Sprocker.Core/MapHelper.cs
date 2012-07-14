@@ -38,13 +38,29 @@ namespace TheSprocker.Core
             return Convert.ToInt32(value);
         }
 
+        [Obsolete("Use ToIntNullable - more discoverable via intellisense")]
         public virtual int? ToNullableInt(IDataRecord dr, string columnName)
+        {
+            return ToIntNullable(dr, columnName);
+        }
+
+        public virtual int? ToIntNullable(IDataRecord dr, string columnName)
         {
             if (dr[columnName] == DBNull.Value)
             {
                 return null;
             }
             return Convert.ToInt32(dr[columnName]);
+        }
+
+
+        public string ToStringNullable(IDataRecord dr, string columnName)
+        {
+            if (dr[columnName] == DBNull.Value)
+            {
+                return null;
+            }
+            return dr[columnName].ToString();
         }
     }
 }
