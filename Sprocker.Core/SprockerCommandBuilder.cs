@@ -81,6 +81,15 @@ namespace TheSprocker.Core
                     _builderContext._parameterMaps[_parameterName] = mappingFunc;
                     return _builderContext;
                 }
+
+                /// <summary>
+                /// Syntactic sugar to easily map in a null
+                /// </summary>
+                public ISprockerCommandBuilderContext<TEntity> WithNull()
+                {
+                    _builderContext._parameterMaps[_parameterName] = e => DBNull.Value;
+                    return _builderContext;
+                }
             }
         }
     }
@@ -112,5 +121,10 @@ namespace TheSprocker.Core
         /// Defines the mapping function for the parameter specified in the preceding <see cref="ISprockerCommandBuilderContext{TEntity}.Map"/>.
         /// </summary>
         ISprockerCommandBuilderContext<TEntity> WithFunc(Func<TEntity, object> mappingFunc);
+
+        /// <summary>
+        /// Syntactic sugar to easily map in a null
+        /// </summary>
+        ISprockerCommandBuilderContext<TEntity> WithNull();
     }
 }
