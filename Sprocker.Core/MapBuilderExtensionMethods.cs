@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace TheSprocker.Core
@@ -10,6 +12,30 @@ namespace TheSprocker.Core
     /// </summary>
     public static class MapBuilderExtensionMethods
     {
+        /// <summary>
+        /// Map enums by convention where 'EnumType' has column 'EnumTypeId'
+        /// </summary>
+        public static IMapBuilderContext<TResult> MapAllEnums<TResult>(this IMapBuilderContext<TResult> context) where TResult : class
+        {
+            var properties =
+                from property in typeof(TResult).GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                where IsEnumMappableProperty(property)
+                select property;
+
+            foreach (var property in properties)
+            {
+                context = context.Map(property).ToColumnAsEnum(property.PropertyType.Name + "Id");
+            }
+
+            return context;
+        }
+
+        private static bool IsEnumMappableProperty(PropertyInfo property)
+        {
+            return property.CanWrite
+              && typeof(Enum).IsAssignableFrom(property.PropertyType);
+        }
+
         /// <summary>
         /// Maps the current property to a column with the given name as an enum value. 
         /// </summary>
@@ -30,7 +56,6 @@ namespace TheSprocker.Core
                                                    // (TEnum) row.GetValue will cause a runtime exception if the type of the field is anything
                                                    // other than Int32. The only way to avoid compile time and runtime exceptions for fields
                                                    // that are not Int32 is the 'convert to Int32 - cast to object - cast to TEnum' method below.
-                                                   // TODO: [PF] Monitor performance of these type conversions
                                                    case "System.Byte":
                                                    case "System.Int16":
                                                    case "System.Int64":

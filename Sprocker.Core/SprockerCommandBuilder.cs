@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using Microsoft.Practices.EnterpriseLibrary.Common;
 using Microsoft.Practices.EnterpriseLibrary.Data;
@@ -45,6 +46,35 @@ namespace TheSprocker.Core
                 _procedureName = procedureName;
                 _database = database;
                 _parameterMaps = new Dictionary<string, Func<TEntity, object>>();
+            }
+
+            /// <summary>
+            /// Automatically map enums assuming convention EnumType maps to @EnumTypeId
+            /// </summary>
+            public ISprockerCommandBuilderContext<TEntity> MapAllEnums()
+            {
+                var bindingFlags = BindingFlags.Instance | BindingFlags.Public;
+                var properties =    (from property in typeof(TEntity).GetProperties(bindingFlags)
+                                    where IsEnumMappableProperty(property)
+                                    select property).ToList();
+
+                for (int propertyIndex = 0; propertyIndex < properties.Count; propertyIndex++)
+                {
+                    var property = properties[propertyIndex];
+                    var paramName = string.Format("@{0}Id", property.Name);
+
+                    Map(paramName).WithFunc(e =>
+                                                {
+                                                    var enumValue = property.GetValue(e, bindingFlags, null, null, null);
+                                                    return Convert.ToInt32(enumValue);
+                                                });
+                }
+                return this;
+            }
+
+            private static bool IsEnumMappableProperty(PropertyInfo property)
+            {
+                return typeof(Enum).IsAssignableFrom(property.PropertyType);
             }
 
             public ISprockerCommandBuilderContextMap<TEntity> Map(string parameterName)
@@ -104,6 +134,11 @@ namespace TheSprocker.Core
         /// Must be followed by <see cref="ISprockerCommandBuilderContextMap{TEntity}.WithFunc"/>.
         /// </summary>
         ISprockerCommandBuilderContextMap<TEntity> Map(string parameterName);
+
+        /// <summary>
+        /// Automatically map enums assuming convention EnumType maps to @EnumTypeId
+        /// </summary>
+        ISprockerCommandBuilderContext<TEntity> MapAllEnums();
 
         SprockerCommand Build(TEntity entity);
 
