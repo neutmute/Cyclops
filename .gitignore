@@ -32,3 +32,6 @@ _ReSharper*/
 [Tt]est[Rr]esult*
 [Bb]uild/
 ~$*
+/Sample.Petstore\PetStore.Database\Sandbox/*.ldf
+/Sample.Petstore\PetStore.Database\Sandbox/PetStore.mdf
+/Sample.Petstore\PetStore.Database\Sandbox/PetStore.ldf
