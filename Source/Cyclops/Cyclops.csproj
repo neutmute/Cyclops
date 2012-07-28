@@ -78,7 +78,7 @@
     <Compile Include="Mapping\MapHelper.cs" />
     <Compile Include="CyclopsCommandBuilder.cs" />
     <Compile Include="Instrumentation\DbCommandDumper.cs" />
-    <Compile Include="ExtensionMethods\MapBuilderExtensionMethods.cs" />
+    <Compile Include="ExtensionMethods\MapBuilderContextExtensionMethods.cs" />
     <Compile Include="Mapping\ParameterMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CyclopsCommand.cs" />

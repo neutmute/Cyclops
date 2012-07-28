@@ -51,7 +51,7 @@ namespace Cyclops
             /// </summary>
             public ICyclopsCommandBuilderContext<TEntity> MapAllEnums()
             {
-                var bindingFlags = BindingFlags.Instance | BindingFlags.Public;
+                const BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public;
                 var properties =    (from property in typeof(TEntity).GetProperties(bindingFlags)
                                     where IsEnumMappableProperty(property)
                                     select property).ToList();

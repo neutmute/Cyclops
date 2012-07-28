@@ -10,7 +10,7 @@ namespace Cyclops
     /// <see cref="IMapBuilderContext{TResult}"/> and <see cref="IMapBuilderContextMap{TResult, Object}"/>
     /// classes.
     /// </summary>
-    public static class MapBuilderExtensionMethods
+    public static class MapBuilderContextExtensionMethods
     {
         /// <summary>
         /// Map enums by convention where 'EnumType' has column 'EnumTypeId'
@@ -69,25 +69,25 @@ namespace Cyclops
                                            });
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="resultSetField"></param>
-        /// <returns></returns>
-        public static T? ToOptional<T>(this object resultSetField) where T : struct
-        {
-            return (resultSetField == null || resultSetField == DBNull.Value) ? default(T) : (T)resultSetField;
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <typeparam name="T"></typeparam>
+        ///// <param name="resultSetField"></param>
+        ///// <returns></returns>
+        //public static T? ToOptional<T>(this object resultSetField) where T : struct
+        //{
+        //    return (resultSetField == null || resultSetField == DBNull.Value) ? default(T) : (T)resultSetField;
+        //}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="resultSetField"></param>
-        /// <returns></returns>
-        public static string ToOptional(this object resultSetField)
-        {
-            return (resultSetField == null || resultSetField == DBNull.Value) ? null : (string)resultSetField;
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="resultSetField"></param>
+        ///// <returns></returns>
+        //public static string ToOptional(this object resultSetField)
+        //{
+        //    return (resultSetField == null || resultSetField == DBNull.Value) ? null : (string)resultSetField;
+        //}
     }
 }

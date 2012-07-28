@@ -67,20 +67,14 @@ namespace Cyclops
                 if (_parameterMaps.ContainsKey(parameterName))
                 {
                     object funcResult = _parameterMaps[parameterName](entity);
-                    dbParameter.Value = (funcResult == null) ? DBNull.Value : funcResult;
+                    dbParameter.Value = funcResult ?? DBNull.Value;
                 }
                 // Check for a mapping function keyed with the guessed property name (not including the @)
                 else if (_parameterMaps.ContainsKey(propertyName))
                 {
                     object funcResult = _parameterMaps[propertyName](entity);
-                    dbParameter.Value = (funcResult == null) ? DBNull.Value : funcResult;
+                    dbParameter.Value = funcResult ?? DBNull.Value;
                 }
-                //THIS IS TOO IMPLEMENTATION SPECIFIC
-                //// Automatically map @ModifiedBy to the current Windows identity (if a mapping function was not already specified)
-                //else if (dbParameter.ParameterName == "@ModifiedBy")
-                //{
-                //    dbParameter.Value = "HARDCODED USER NAME";
-                //}
                 else if (entityType != null)
                 {
                     FieldInfo fieldInfo = entityType.GetField(propertyName, BindingFlags.Instance | BindingFlags.Public);
@@ -106,15 +100,16 @@ namespace Cyclops
                         if (propInfo == null)
                         {
                             throw CyclopsException.Create(
-                                "ParameterMapper cannot map parameters: {0} does not contain a public property called '{1}'.",
-                                entityType,
-                                propertyName);
+                                "Cannot map to SQL parameter '{0}'. Expected to find property {1}.{2} but did not."
+                                ,parameterName
+                                ,entityType
+                                ,propertyName);
                         }
                     }
 
                     // Map the property value to the parameter
                     object propertyValue = propInfo.GetValue(entity, null);
-                    dbParameter.Value = (propertyValue == null) ? DBNull.Value : propertyValue;
+                    dbParameter.Value = propertyValue ?? DBNull.Value;
                 }
             }
         }
