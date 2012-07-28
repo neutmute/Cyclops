@@ -1,3 +1,0 @@
-﻿ALTER TABLE [dbo].[OrderLine]
-	ADD CONSTRAINT [PK_OrderLine]
-	PRIMARY KEY (Id)

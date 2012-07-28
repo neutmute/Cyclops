@@ -6,12 +6,12 @@ using System.Linq;
 using System.Text;
 using NLog;
 
-namespace TheSprocker.Core
+namespace Cyclops
 {
     /// <summary>
     /// Represents a data point for the execution of a command
     /// </summary>
-    public class SprockerPerformancePoint : EventArgs
+    public class CyclopsPerformancePoint : EventArgs
     {
         #region Fields
 
@@ -45,7 +45,7 @@ namespace TheSprocker.Core
         
         #region Ctor
 
-        public SprockerPerformancePoint()
+        public CyclopsPerformancePoint()
         {
             Start = DateTime.Now;
             _timer = Stopwatch.StartNew();
@@ -74,19 +74,19 @@ namespace TheSprocker.Core
         /// <summary>
         /// Allow an external class to subscribe to performance events
         /// </summary>
-        public static EventHandler<SprockerPerformancePoint> PerformanceMonitorNotify { get; set; }
+        public static EventHandler<CyclopsPerformancePoint> PerformanceMonitorNotify { get; set; }
 
-        private readonly SprockerPerformancePoint _peformancePoint;
-        private readonly SprockerCommand _sprockerCommand;
+        private readonly CyclopsPerformancePoint _peformancePoint;
+        private readonly CyclopsCommand _CyclopsCommand;
         private Exception _exceptionTrapped;
         
         public LogLevel LogLevel { get; set; }
 
-        public DbCommandLogger(SprockerCommand sprockerCommand)
+        public DbCommandLogger(CyclopsCommand CyclopsCommand)
         {
             LogLevel = LogLevel.Trace;
-            _peformancePoint = new SprockerPerformancePoint();
-            _sprockerCommand = sprockerCommand;
+            _peformancePoint = new CyclopsPerformancePoint();
+            _CyclopsCommand = CyclopsCommand;
         }
 
         /// <summary>
@@ -104,14 +104,14 @@ namespace TheSprocker.Core
 
             if (PerformanceMonitorNotify != null)
             {
-                _peformancePoint.CommandText = _sprockerCommand.CommandText;
+                _peformancePoint.CommandText = _CyclopsCommand.CommandText;
                 PerformanceMonitorNotify(this, _peformancePoint);
             }
 
             if (Log.IsEnabled(LogLevel))
             {
                 int durationMs = Convert.ToInt32(_peformancePoint.Duration.TotalMilliseconds);
-                var commandDumper = new DbCommandDumper(_sprockerCommand.DbCommand);
+                var commandDumper = new DbCommandDumper(_CyclopsCommand.DbCommand);
                 commandDumper.ExceptionTrapped = _exceptionTrapped;
                 commandDumper.DurationMs = durationMs;
                 LogEventInfo eventInfo = new LogEventInfo(LogLevel, Log.Name, commandDumper.GetLogDump());

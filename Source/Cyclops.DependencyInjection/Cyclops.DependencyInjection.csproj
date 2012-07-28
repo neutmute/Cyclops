@@ -8,8 +8,8 @@
     <ProjectGuid>{BBAB4FC2-1706-452B-8635-AF121F2745C6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sprocker.DependencyInjection</RootNamespace>
-    <AssemblyName>Sprocker.DependencyInjection</AssemblyName>
+    <RootNamespace>Cyclops.DependencyInjection</RootNamespace>
+    <AssemblyName>Cyclops.DependencyInjection</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

@@ -9,7 +9,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PetStore.Domain;
 
-namespace TheSprocker.Core.UnitTest
+namespace Cyclops.UnitTest
 {
     [TestClass]
     public class ExpressionTests

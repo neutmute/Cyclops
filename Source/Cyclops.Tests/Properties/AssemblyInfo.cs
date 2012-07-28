@@ -2,14 +2,14 @@
 using System.Runtime.CompilerServices;
 
 
-[assembly: AssemblyTitle("Sprocker.Core")]
-[assembly: AssemblyDescription("Sprocker Core")]
+[assembly: AssemblyTitle("Cyclops")]
+[assembly: AssemblyDescription("Cyclops Core")]
 [assembly: AssemblyConfiguration("")]
 
 #if DEBUG
-[assembly: AssemblyProduct("Sprocker.Core (Debug)")]
+[assembly: AssemblyProduct("Cyclops (Debug)")]
 #else
-[assembly: AssemblyProduct("Sprocker.Core (Release)")]
+[assembly: AssemblyProduct("Cyclops (Release)")]
 #endif
 
 

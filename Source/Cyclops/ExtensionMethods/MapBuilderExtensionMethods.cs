@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
-namespace TheSprocker.Core
+namespace Cyclops
 {
     /// <summary>
     /// Extension methods for EntLib <see cref="MapBuilder{TResult}"/> class and its associated
@@ -63,7 +63,7 @@ namespace TheSprocker.Core
                                                    case "System.Int32":
                                                        return (TEnum) row.GetValue(fieldOrdinal);
                                                    default:
-                                                       throw SprockerException.Create("Mapping from the value not currently supported");
+                                                       throw CyclopsException.Create("Mapping from the value not currently supported");
                                                        //return row[fieldOrdinal].ToString().ToEnumFromCode<TEnum>();
                                                }
                                            });

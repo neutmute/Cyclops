@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using PetStore.Domain;
-using TheSprocker.Core;
+using Cyclops;
 
 namespace PetStore.Infrastructure
 {
-    public class CustomerRepository : SqlRepository, ICustomerRepository
+    public class CustomerRepository : CyclopsRepository, ICustomerRepository
     {
         private static IRowMapper<Customer> _rowMapper;
 
@@ -38,7 +38,7 @@ namespace PetStore.Infrastructure
 
         public Customer Save(Customer customer)
         {
-            SprockerCommand command = ConstructCommand<Customer>("dbo.Customer_Save")
+            CyclopsCommand command = ConstructCommand<Customer>("dbo.Customer_Save")
                                         .MapAllParameters()
                                         .Build(customer);
 

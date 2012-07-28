@@ -6,7 +6,7 @@ using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PetStore.Domain;
 using PetStore.Infrastructure;
-using TheSprocker.Core;
+using Cyclops;
 
 namespace PetStore.IntegrationTest
 {
@@ -22,7 +22,7 @@ namespace PetStore.IntegrationTest
          public void MyTestInitialize()
          {
              _addressRepository = new AddressRepository();
-             ((SqlRepository)_addressRepository).Database = new SqlDatabase(Constants.TestDatabaseConnectionString);
+             ((CyclopsRepository)_addressRepository).Database = new SqlDatabase(Constants.TestDatabaseConnectionString);
          }
 
 
@@ -40,7 +40,7 @@ namespace PetStore.IntegrationTest
         public void AddressRepository_NonGenericAccessor_GetsAll()
         {
             //IAddressRepository addressRepository = new AddressRepository();
-            //((SqlRepository)addressRepository).Database = new SprockerSqlDatabase(Constants.TestDatabaseConnectionString);
+            //((SqlRepository)addressRepository).Database = new CyclopsSqlDatabase(Constants.TestDatabaseConnectionString);
 
             //List<Address> addresses = addressRepository.GetAll();
 
@@ -52,7 +52,7 @@ namespace PetStore.IntegrationTest
         public void AddressRepository_BasicUse_SaveInstance()
         {
            // IAddressRepository addressRepository = new AddressRepository();
-           // ((SqlRepository)addressRepository).Database = new SprockerSqlDatabase(Constants.TestDatabaseConnectionString);
+           // ((SqlRepository)addressRepository).Database = new CyclopsSqlDatabase(Constants.TestDatabaseConnectionString);
 
            // Address address = new Address();
            // address.AddressLine1 = "";

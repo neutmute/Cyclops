@@ -9,37 +9,37 @@ using System.Text;
 using Microsoft.Practices.EnterpriseLibrary.Common;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 
-namespace TheSprocker.Core
+namespace Cyclops
 {
-    public class SprockerCommandBuilder<TEntity> where TEntity : class
+    public class CyclopsCommandBuilder<TEntity> where TEntity : class
     {
         private readonly string _procedureName;
         private readonly Database _database;
         
-        public ISprockerCommandBuilderContext<TEntity> MapAllParameters()
+        public ICyclopsCommandBuilderContext<TEntity> MapAllParameters()
         {
-            ISprockerCommandBuilderContext<TEntity> context = new SprockerCommandBuilderContext(_database, _procedureName);
+            ICyclopsCommandBuilderContext<TEntity> context = new CyclopsCommandBuilderContext(_database, _procedureName);
             return context;
         }
 
-        public SprockerCommandBuilder()
+        public CyclopsCommandBuilder()
         {
             
         }
 
-        public SprockerCommandBuilder(Database database, string procedureName)
+        public CyclopsCommandBuilder(Database database, string procedureName)
         {
             _procedureName = procedureName;
             _database = database;
         }
 
-        private class SprockerCommandBuilderContext : ISprockerCommandBuilderContext<TEntity>
+        private class CyclopsCommandBuilderContext : ICyclopsCommandBuilderContext<TEntity>
         {
             private readonly Dictionary<string, Func<TEntity, object>> _parameterMaps;
             private readonly string _procedureName;
             private readonly Database _database;
 
-            public SprockerCommandBuilderContext(Database database, string procedureName)
+            public CyclopsCommandBuilderContext(Database database, string procedureName)
             {
                 _procedureName = procedureName;
                 _database = database;
@@ -49,7 +49,7 @@ namespace TheSprocker.Core
             /// <summary>
             /// Automatically map enums assuming convention EnumType maps to @EnumTypeId
             /// </summary>
-            public ISprockerCommandBuilderContext<TEntity> MapAllEnums()
+            public ICyclopsCommandBuilderContext<TEntity> MapAllEnums()
             {
                 var bindingFlags = BindingFlags.Instance | BindingFlags.Public;
                 var properties =    (from property in typeof(TEntity).GetProperties(bindingFlags)
@@ -75,36 +75,36 @@ namespace TheSprocker.Core
                 return typeof(Enum).IsAssignableFrom(property.PropertyType);
             }
 
-            public ISprockerCommandBuilderContextMap<TEntity> Map(string parameterName)
+            public ICyclopsCommandBuilderContextMap<TEntity> Map(string parameterName)
             {
-                return new SprockerCommandBuilderContextParameterMap(parameterName, this);
+                return new CyclopsCommandBuilderContextParameterMap(parameterName, this);
             }
 
-            public SprockerCommand Build(TEntity entity)
+            public CyclopsCommand Build(TEntity entity)
             {
-                SprockerCommand command = new SprockerCommand(_database, _procedureName);
+                CyclopsCommand command = new CyclopsCommand(_database, _procedureName);
                 ParameterMapper<TEntity> mapper = new ParameterMapper<TEntity>(_database, _parameterMaps);
                 mapper.AssignParameters(command, entity);
                 return command;
             }
 
-            public SprockerCommand Build()
+            public CyclopsCommand Build()
             {
                 return Build(null);
             }
 
-            private class SprockerCommandBuilderContextParameterMap : ISprockerCommandBuilderContextMap<TEntity>
+            private class CyclopsCommandBuilderContextParameterMap : ICyclopsCommandBuilderContextMap<TEntity>
             {
                 private readonly string _parameterName;
-                private readonly SprockerCommandBuilderContext _builderContext;
+                private readonly CyclopsCommandBuilderContext _builderContext;
 
-                public SprockerCommandBuilderContextParameterMap(string name, SprockerCommandBuilderContext builderContext)
+                public CyclopsCommandBuilderContextParameterMap(string name, CyclopsCommandBuilderContext builderContext)
                 {
                     _parameterName = name;
                     _builderContext = builderContext;
                 }
 
-                public ISprockerCommandBuilderContext<TEntity> WithFunc(Func<TEntity, object> mappingFunc)
+                public ICyclopsCommandBuilderContext<TEntity> WithFunc(Func<TEntity, object> mappingFunc)
                 {
                     _builderContext._parameterMaps[_parameterName] = mappingFunc;
                     return _builderContext;
@@ -113,7 +113,7 @@ namespace TheSprocker.Core
                 /// <summary>
                 /// Syntactic sugar to easily map in a null
                 /// </summary>
-                public ISprockerCommandBuilderContext<TEntity> WithNull()
+                public ICyclopsCommandBuilderContext<TEntity> WithNull()
                 {
                     _builderContext._parameterMaps[_parameterName] = e => DBNull.Value;
                     return _builderContext;
@@ -125,39 +125,39 @@ namespace TheSprocker.Core
     /// <summary>
     /// Fluent interface for defining parameter mappings
     /// </summary>
-    public interface ISprockerCommandBuilderContext<TEntity> : IFluentInterface where TEntity : class
+    public interface ICyclopsCommandBuilderContext<TEntity> : IFluentInterface where TEntity : class
     {
         /// <summary>
         /// Specifies that a parameter with the specified <paramref name="parameterName"/> should be mapped.
-        /// Must be followed by <see cref="ISprockerCommandBuilderContextMap{TEntity}.WithFunc"/>.
+        /// Must be followed by <see cref="ICyclopsCommandBuilderContextMap{TEntity}.WithFunc"/>.
         /// </summary>
-        ISprockerCommandBuilderContextMap<TEntity> Map(string parameterName);
+        ICyclopsCommandBuilderContextMap<TEntity> Map(string parameterName);
 
         /// <summary>
         /// Automatically map enums assuming convention EnumType maps to @EnumTypeId
         /// </summary>
-        ISprockerCommandBuilderContext<TEntity> MapAllEnums();
+        ICyclopsCommandBuilderContext<TEntity> MapAllEnums();
 
-        SprockerCommand Build(TEntity entity);
+        CyclopsCommand Build(TEntity entity);
 
-        SprockerCommand Build();
+        CyclopsCommand Build();
     }
 
     /// <summary>
     /// Fluent interface for defining mapping functions 
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public interface ISprockerCommandBuilderContextMap<TEntity> : IFluentInterface
+    public interface ICyclopsCommandBuilderContextMap<TEntity> : IFluentInterface
         where TEntity : class
     {
         /// <summary>
-        /// Defines the mapping function for the parameter specified in the preceding <see cref="ISprockerCommandBuilderContext{TEntity}.Map"/>.
+        /// Defines the mapping function for the parameter specified in the preceding <see cref="ICyclopsCommandBuilderContext{TEntity}.Map"/>.
         /// </summary>
-        ISprockerCommandBuilderContext<TEntity> WithFunc(Func<TEntity, object> mappingFunc);
+        ICyclopsCommandBuilderContext<TEntity> WithFunc(Func<TEntity, object> mappingFunc);
 
         /// <summary>
         /// Syntactic sugar to easily map in a null
         /// </summary>
-        ISprockerCommandBuilderContext<TEntity> WithNull();
+        ICyclopsCommandBuilderContext<TEntity> WithNull();
     }
 }

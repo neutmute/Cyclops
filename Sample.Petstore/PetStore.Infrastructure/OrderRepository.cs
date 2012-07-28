@@ -7,7 +7,7 @@ using System.Linq;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using Omu.ValueInjecter;
 using PetStore.Domain;
-using TheSprocker.Core;
+using Cyclops;
 
 namespace PetStore.Infrastructure
 {
@@ -21,7 +21,7 @@ namespace PetStore.Infrastructure
     }
     #endregion
 
-    public class OrderRepository : SqlRepository //, IOrderRepository
+    public class OrderRepository : CyclopsRepository //, IOrderRepository
     {
         private static IRowMapper<OrderLine> __orderLineMapper;
         private static IRowMapper<Order> __orderRowMapper;
@@ -79,13 +79,13 @@ namespace PetStore.Infrastructure
 
         public void ExecuteWithBadAutoMapping()
         {
-            SprockerCommand command = ConstructCommand("dbo.Order_Get");
+            CyclopsCommand command = ConstructCommand("dbo.Order_Get");
             command.ExecuteTableSet("this", "set", "of params won't automap");
         }
 
         public List<Order> GetWorker(int? id)
         {
-            SprockerCommand command = ConstructCommand("dbo.Order_Get");
+            CyclopsCommand command = ConstructCommand("dbo.Order_Get");
             
             var tableSet = command.ExecuteTableSet(id);
             
@@ -109,7 +109,7 @@ namespace PetStore.Infrastructure
             const string orderLineTableType = "OrderLineTableType";
             DataTable linesTableValuedParam = MapToDataTable(orderLineTableType, instance.OrderLines);
             
-            SprockerCommand command = ConstructCommand<Order>("dbo.Order_Save")
+            CyclopsCommand command = ConstructCommand<Order>("dbo.Order_Save")
                                        .MapAllParameters()
                                        .Map("@CustomerId").WithFunc(o => o.Customer.Id)
                                        .Map("@StatusId").WithFunc(o => o.Status)
@@ -151,7 +151,7 @@ namespace PetStore.Infrastructure
     #region DataRowInjection class
 
     /// <summary>
-    /// This can go up into Sprocker (will require ValueInjector dependency)
+    /// This can go up into Cyclops (will require ValueInjector dependency)
     /// </summary>
     public class DataRowInjection : KnownTargetValueInjection<DataRow>
     {

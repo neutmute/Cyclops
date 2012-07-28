@@ -2,14 +2,14 @@
 using System.Runtime.CompilerServices;
 
 
-[assembly: AssemblyTitle("Sprocker.DependencyInjection")]
-[assembly: AssemblyDescription("Sprocker DependencyInjection")]
+[assembly: AssemblyTitle("Cyclops.DependencyInjection")]
+[assembly: AssemblyDescription("Cyclops DependencyInjection")]
 [assembly: AssemblyConfiguration("")]
 
 #if DEBUG
-[assembly: AssemblyProduct("Sprocker.DependencyInjection (Debug)")]
+[assembly: AssemblyProduct("Cyclops.DependencyInjection (Debug)")]
 #else
-[assembly: AssemblyProduct("Sprocker.DependencyInjection (Release)")]
+[assembly: AssemblyProduct("Cyclops.DependencyInjection (Release)")]
 #endif
 
 // [AS] remove this once we have a DependencyInjection test project 

@@ -8,7 +8,7 @@ using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PetStore.Domain;
 using PetStore.Infrastructure;
-using TheSprocker.Core;
+using Cyclops;
 
 namespace PetStore.IntegrationTest
 {
@@ -45,9 +45,9 @@ namespace PetStore.IntegrationTest
 
         //}
 
-        [ExpectedException(typeof(SprockerException), "Failed to auto assign parameters. [this,set,of params won't automap] => dbo.Order_Get(@Id)")]
+        [ExpectedException(typeof(CyclopsException), "Failed to auto assign parameters. [this,set,of params won't automap] => dbo.Order_Get(@Id)")]
         [TestMethod]
-        public void SprockerCommand_GivenBadAutoMapParameters_ReturnsUsefulException()
+        public void CyclopsCommand_GivenBadAutoMapParameters_ReturnsUsefulException()
         {
             var repo = GetNewRepo();
             repo.ExecuteWithBadAutoMapping();

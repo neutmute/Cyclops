@@ -4,11 +4,11 @@ using System.Data;
 using System.Linq;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using PetStore.Domain;
-using TheSprocker.Core;
+using Cyclops;
 
 namespace PetStore.Infrastructure
 {
-    public class AddressRepository : SqlRepository, IAddressRepository
+    public class AddressRepository : CyclopsRepository, IAddressRepository
     {
         public Address GetOne(Predicate<Address> filter)
         {

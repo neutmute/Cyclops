@@ -11,18 +11,18 @@ using Microsoft.Practices.EnterpriseLibrary.Data.Instrumentation;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using NLog;
 
-namespace TheSprocker.Core
+namespace Cyclops
 {
     /// <summary>
     /// </summary>
-    /// <remarks>SprockerCommand name since 'Sprocker' by itself conflicts with namespace</remarks>
-    public class SprockerCommand
+    /// <remarks>CyclopsCommand name since 'Cyclops' by itself conflicts with namespace</remarks>
+    public class CyclopsCommand
     {
         #region Fields
 
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
-        private readonly SprockerParameterMapper _parameterMapper;
+        private readonly CyclopsParameterMapper _parameterMapper;
         #endregion
         
         #region Properties
@@ -38,13 +38,13 @@ namespace TheSprocker.Core
         #endregion
 
         #region Constructor
-        public SprockerCommand(Database database, CommandType commandType, string commandTextFormat, params object[] commandTextArgs) : this(database, "placeholderCommand")
+        public CyclopsCommand(Database database, CommandType commandType, string commandTextFormat, params object[] commandTextArgs) : this(database, "placeholderCommand")
         {
             DbCommand.CommandText = string.Format(commandTextFormat, commandTextArgs);
             DbCommand.CommandType = commandType;
         }
 
-        public SprockerCommand(Database database, string procedureName)
+        public CyclopsCommand(Database database, string procedureName)
         {
             if (database == null)
             {
@@ -59,7 +59,7 @@ namespace TheSprocker.Core
             Database = database;
             CommandText = procedureName;
             DbCommand = Database.GetStoredProcCommand(CommandText);
-            _parameterMapper = new SprockerParameterMapper(Database);
+            _parameterMapper = new CyclopsParameterMapper(Database);
         }
 
         #endregion
@@ -184,11 +184,11 @@ namespace TheSprocker.Core
     /// This private class is replicated without alteration from the base <see cref="CommandAccessor{TResult}"/> class
     /// as it is called here by some overridden mehtods.
     /// </summary>
-    class SprockerResultSetMapper<TResult> : IResultSetMapper<TResult>
+    class CyclopsResultSetMapper<TResult> : IResultSetMapper<TResult>
     {
         readonly IRowMapper<TResult> _rowMapper;
 
-        public SprockerResultSetMapper(IRowMapper<TResult> rowMapper)
+        public CyclopsResultSetMapper(IRowMapper<TResult> rowMapper)
         {
             _rowMapper = rowMapper;
         }
@@ -213,10 +213,10 @@ namespace TheSprocker.Core
     /// This private class is replicated without alteration from the base <see cref="SprocAccessor{TResult}"/> class
     /// as it is called here by some overridden mehtods.
     /// </summary>
-    internal class SprockerParameterMapper : IParameterMapper
+    internal class CyclopsParameterMapper : IParameterMapper
     {
         readonly Database _database;
-        public SprockerParameterMapper(Database database)
+        public CyclopsParameterMapper(Database database)
         {
             _database = database;
         }
@@ -245,7 +245,7 @@ namespace TheSprocker.Core
                         , command.CommandText
                         );
 
-                    throw SprockerException.Create(e, message);
+                    throw CyclopsException.Create(e, message);
                 }
             }
         }

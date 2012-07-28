@@ -1,25 +1,25 @@
 ﻿using System;
 
-namespace TheSprocker.Core
+namespace Cyclops
 {
-    public class SprockerException : Exception
+    public class CyclopsException : Exception
     {
-        public SprockerException(string message, Exception innerException) :base (message,innerException)
+        public CyclopsException(string message, Exception innerException) :base (message,innerException)
         {
             
         }
 
         /// <summary>
-        /// Easily a new SprockerException without needing a string.Format
+        /// Easily a new CyclopsException without needing a string.Format
         /// </summary>
-        public static SprockerException Create(Exception innerException, string format, params object[] args)
+        public static CyclopsException Create(Exception innerException, string format, params object[] args)
         {
             string message = string.Format(format, args);
-            SprockerException exception = new SprockerException(message, innerException);
+            CyclopsException exception = new CyclopsException(message, innerException);
             return exception;
         }
 
-        public static SprockerException Create(string format, params object[] args)
+        public static CyclopsException Create(string format, params object[] args)
         {
             return Create(null, format, args);
         }

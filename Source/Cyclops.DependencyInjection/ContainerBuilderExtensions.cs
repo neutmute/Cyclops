@@ -10,19 +10,19 @@ using Autofac.Core;
 using Microsoft.Practices.EnterpriseLibrary.Data;
 using NLog;
 
-namespace TheSprocker.Core.ExtensionMethods
+namespace Cyclops.ExtensionMethods
 {
     public static class ContainerBuilderExtensions
     {
         private static readonly Logger Log = LogManager.GetCurrentClassLogger();
 
         /// <summary>
-        /// Helper to auto wire an assembly with sprocker repositories
+        /// Helper to auto wire an assembly with Cyclops repositories
         /// </summary>
         /// <typeparam name="T">Base type contained in the Data assembly</typeparam>
         /// <param name="builder"></param>
         /// <param name="serviceName"></param>
-        public static void RegisterSprockerRepositories<T>(this ContainerBuilder builder, string serviceName)
+        public static void RegisterCyclopsRepositories<T>(this ContainerBuilder builder, string serviceName)
         {
             var dataAssembly = typeof(T).Assembly;
             List<Type> repositories = GetImplementationsOf<T>(dataAssembly);
@@ -31,7 +31,7 @@ namespace TheSprocker.Core.ExtensionMethods
 
             foreach (Type repository in repositories)
             {
-                if (repository.IsSubclassOf(typeof(SqlRepository)))
+                if (repository.IsSubclassOf(typeof(CyclopsRepository)))
                 {
                     var resolvedParameter = new ResolvedParameter(
                         (p, c) => p.ParameterType == typeof(Database)

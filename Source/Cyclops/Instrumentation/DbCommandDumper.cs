@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using NLog;
 
-namespace TheSprocker.Core
+namespace Cyclops
 {
     internal class DbCommandDumper
     {

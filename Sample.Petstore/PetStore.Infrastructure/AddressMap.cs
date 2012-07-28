@@ -3,13 +3,13 @@
 //using System.Linq;
 //using System.Text;
 //using PetStore.Domain;
-//using TheSprocker.Core.Mapping;
-//using TheSprocker.Core.FluentInterface;
-//using TheSprocker.Core.ExtensionMethods;
+//using Cyclops.Mapping;
+//using Cyclops.FluentInterface;
+//using Cyclops.ExtensionMethods;
 
 //namespace PetStore.Infrastructure
 //{
-//    public class AddressMap : SprockerMap
+//    public class AddressMap : CyclopsMap
 //    {
 //        public AddressMap()
 //        {

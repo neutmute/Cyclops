@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NLog.Targets;
 using PetStore.Domain;
 using PetStore.Infrastructure;
-using TheSprocker.Core;
+using Cyclops;
 using NLog;
 
 namespace PetStore.IntegrationTest
@@ -100,7 +100,7 @@ exec Customer_Save @Id=@p1 output,@Title=N'Super He',@FirstName=N'Captain',@Last
         }
 
         [TestMethod]
-        public void Sprocker_MapsParameters_Success()
+        public void Cyclops_MapsParameters_Success()
         {
             CustomerRepository customerRepository = CreateCustomerRepo();
             Customer customer = new Customer {Id = 1, IsDeleted = false};
@@ -108,7 +108,7 @@ exec Customer_Save @Id=@p1 output,@Title=N'Super He',@FirstName=N'Captain',@Last
         }
 
         [TestMethod]
-        public void Sprocker_LogsFailure()
+        public void Cyclops_LogsFailure()
         {
             MemoryTarget target = GetMemoryTarget();
             try

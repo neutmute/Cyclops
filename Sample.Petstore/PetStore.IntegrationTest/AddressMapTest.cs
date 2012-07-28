@@ -5,7 +5,7 @@
 //using Microsoft.VisualStudio.TestTools.UnitTesting;
 //using PetStore.Domain;
 //using PetStore.Infrastructure;
-//using TheSprocker.Core.Mapping;
+//using Cyclops.Mapping;
 
 //namespace PetStore.IntegrationTest
 //{
@@ -16,12 +16,12 @@
 //        public void AddressMap_CanDiscover_ProcPerameters()
 //        {
 //            AddressMap addressMap = new AddressMap();
-//            SprockerMapContext sprockerMapContext = addressMap.GetMapContext();
+//            CyclopsMapContext CyclopsMapContext = addressMap.GetMapContext();
 
-//            sprockerMapContext.AutoMap();
+//            CyclopsMapContext.AutoMap();
 
-//            Assert.IsNotNull(sprockerMapContext.SprocParameters);
-//            Assert.IsTrue(sprockerMapContext.SprocParameters.Count>0);
+//            Assert.IsNotNull(CyclopsMapContext.SprocParameters);
+//            Assert.IsTrue(CyclopsMapContext.SprocParameters.Count>0);
 //        }
 
 //        [TestMethod]

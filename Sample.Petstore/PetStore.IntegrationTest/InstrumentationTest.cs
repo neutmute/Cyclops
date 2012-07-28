@@ -8,7 +8,7 @@ using Kraken.Framework.TestMonkey;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NLog.Targets;
 using PetStore.Infrastructure;
-using TheSprocker.Core;
+using Cyclops;
 
 namespace PetStore.IntegrationTest
 {
@@ -43,12 +43,12 @@ namespace PetStore.IntegrationTest
         {
             // Normally this would be a singleton across all scope
             PerformanceMonitor perfMonitor = new PerformanceMonitor();
-            perfMonitor.Description = "Demonstration of Sprocker PerfMon";
+            perfMonitor.Description = "Demonstration of Cyclops PerfMon";
 
             // Wire up the notification to perf monitor
             DbCommandLogger.PerformanceMonitorNotify += (sender, p) =>
                                                            {
-                                                               // Convert sprocker point to consuming solutions perf capture tool..in this case a Kraken library
+                                                               // Convert Cyclops point to consuming solutions perf capture tool..in this case a Kraken library
                                                                var perfPoint = new PerformancePoint
                                                                                    {
                                                                                        Name = p.CommandText,
