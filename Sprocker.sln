@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sprocker.Core.UnitTest", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sprocker.DependencyInjection", "Sprocker.DependencyInjection\Sprocker.DependencyInjection.csproj", "{99F86154-F1F9-4EF0-A022-E24A590152E1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample.Petstore", "Sample.Petstore", "{3CD4CD3C-B22C-4637-90C5-6318324C491D}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Sprocker.vsmdi
