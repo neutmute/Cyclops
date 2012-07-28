@@ -9,8 +9,11 @@ namespace TheSprocker.Core
     /// <summary>
     /// Inherit from this and inject to your your own SqlRepository
     /// </summary>
+
+    [Obsolete("Use Extension Methods")]
     public class MapHelper
     {
+        [Obsolete("Use ToColumnAsEnum")]
         public T ToEnum<T>(IDataRecord row, string columnName)
         {
             var valueObject = row[columnName];
@@ -28,6 +31,7 @@ namespace TheSprocker.Core
             return (T)Enum.ToObject(typeof(T), valueByte);
         }
 
+        [Obsolete("Use ToColumn")]
         public virtual int ToInt(IDataRecord dr, string columnName)
         {
             object value = dr[columnName];
@@ -38,12 +42,13 @@ namespace TheSprocker.Core
             return Convert.ToInt32(value);
         }
 
-        [Obsolete("Use ToIntNullable - more discoverable via intellisense")]
+        [Obsolete("Use ToColumn")]
         public virtual int? ToNullableInt(IDataRecord dr, string columnName)
         {
             return ToIntNullable(dr, columnName);
         }
 
+        [Obsolete("Use ToColumn")]
         public virtual int? ToIntNullable(IDataRecord dr, string columnName)
         {
             if (dr[columnName] == DBNull.Value)
@@ -53,7 +58,7 @@ namespace TheSprocker.Core
             return Convert.ToInt32(dr[columnName]);
         }
 
-
+        [Obsolete("Use ToColumn")]
         public string ToStringNullable(IDataRecord dr, string columnName)
         {
             if (dr[columnName] == DBNull.Value)

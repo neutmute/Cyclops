@@ -42,29 +42,6 @@ namespace TheSprocker.Core.UnitTest
                 new ParameterExpression[] { instance, parameter }).Compile();
         }
 
-        //[TestMethod]
-        //public void ExpressionTest()
-        //{
-        //    ParameterExpression<AddressCriteria,
-
-
-
-        //}
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <typeparam name="TCritera"></typeparam>
-        ///// <typeparam name="TParameters"></typeparam>
-        ///// <typeparam name="TResult"></typeparam>
-        ///// <param name="?"></param>
-        ///// <returns></returns>
-        //public Func<TCritera, TParameters, TResult> ParameterExpression<TCritera, TParameters, TResult>(List<IDataParameter> SprocParameters)
-        //{
-
-
-
-        //}
 
     }
 }
