@@ -31,17 +31,17 @@ namespace TheSprocker.Core
         /// </remarks>
         public Database Database { get; set; }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether commands executed from this repository should forcibly execute on a new
-        /// connection rather than reuse and existing open connection. The default value is <code>false</code>.
-        /// </summary>
-        /// <remarks>
-        /// This property is used to force commands to execute on a new connection rathear than the default behaviour or the 
-        /// DAAB which is to reuse any existing open connection when in a Transaction. This behaviour is undesirable when one
-        /// repository is called from an IRowMapper in another repository as an InvalidOperationException will be thrown if
-        /// you attempt to open a DataReader on a connection that already has an open DataReader associated with it.
-        /// </remarks>
-        public bool ForceNewConnection { get; set; }
+        ///// <summary>
+        ///// Gets or sets a value indicating whether commands executed from this repository should forcibly execute on a new
+        ///// connection rather than reuse and existing open connection. The default value is <code>false</code>.
+        ///// </summary>
+        ///// <remarks>
+        ///// This property is used to force commands to execute on a new connection rathear than the default behaviour or the 
+        ///// DAAB which is to reuse any existing open connection when in a Transaction. This behaviour is undesirable when one
+        ///// repository is called from an IRowMapper in another repository as an InvalidOperationException will be thrown if
+        ///// you attempt to open a DataReader on a connection that already has an open DataReader associated with it.
+        ///// </remarks>
+        //public bool ForceNewConnection { get; set; }
 
         /// <summary>
         /// Property inject your own map helper
@@ -61,7 +61,6 @@ namespace TheSprocker.Core
             return new SprockerCommand(Database, procedureName);
         }
 
-
         public SprockerCommand ConstructCommand(CommandType commandType, string commandTextFormat, params object[] commandTextArgs)
         {
             return new SprockerCommand(Database, commandType, commandTextFormat, commandTextArgs);
@@ -71,7 +70,5 @@ namespace TheSprocker.Core
         {
             return new SprockerCommandBuilder<TEntity>(Database, procedureName);
         }
-
-
     }
 }

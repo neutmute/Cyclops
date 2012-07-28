@@ -99,8 +99,8 @@
     </Compile>
     <Compile Include="SprockerCommandBuilder.cs" />
     <Compile Include="DbCommandDumper.cs" />
-    <Compile Include="ExtensionMethods.cs" />
-    <Compile Include="MapBuilderExtensionMethods.cs" />
+    <Compile Include="ExtensionMethods\EnumExtensionMethods.cs" />
+    <Compile Include="ExtensionMethods\MapBuilderExtensionMethods.cs" />
     <Compile Include="ParameterMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SprockerCommand.cs" />
@@ -113,7 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Mapping\NOTES.txt" />
-    <Content Include="README.txt" />
+    <Content Include="_Readme.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Mapping\Overrides\" />

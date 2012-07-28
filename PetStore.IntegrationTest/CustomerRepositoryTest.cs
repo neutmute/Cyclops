@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NLog.Targets;
 using PetStore.Domain;
@@ -56,7 +57,7 @@ namespace PetStore.IntegrationTest
         public void Customer_Get_Success()
         {
             CustomerRepository customerRepository = new CustomerRepository();
-            customerRepository.Database = new SprockerSqlDatabase(Constants.TestDatabaseConnectionString);
+            customerRepository.Database = new SqlDatabase(Constants.TestDatabaseConnectionString);
 
             customerRepository.Database.ExecuteNonQuery(CommandType.Text,
                                                         @"
@@ -94,7 +95,7 @@ exec Customer_Save @Id=@p1 output,@Title=N'Super He',@FirstName=N'Captain',@Last
         public static CustomerRepository CreateCustomerRepo()
         {
             CustomerRepository customerRepository = new CustomerRepository();
-            customerRepository.Database = new SprockerSqlDatabase(Constants.TestDatabaseConnectionString);
+            customerRepository.Database = new SqlDatabase(Constants.TestDatabaseConnectionString);
             return customerRepository;
         }
 

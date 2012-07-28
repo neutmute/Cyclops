@@ -1,7 +1,7 @@
-﻿namespace TheSprocker.Core.Mapping
-{
-    public class SprockerChildNodeBuilder
-    {
+﻿//namespace TheSprocker.Core.Mapping
+//{
+//    public class SprockerChildNodeBuilder
+//    {
 
-    }
-}
+//    }
+//}

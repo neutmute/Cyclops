@@ -2,6 +2,7 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PetStore.Domain;
 using PetStore.Infrastructure;
@@ -21,7 +22,7 @@ namespace PetStore.IntegrationTest
          public void MyTestInitialize()
          {
              _addressRepository = new AddressRepository();
-             ((SqlRepository)_addressRepository).Database = new SprockerSqlDatabase(Constants.TestDatabaseConnectionString);
+             ((SqlRepository)_addressRepository).Database = new SqlDatabase(Constants.TestDatabaseConnectionString);
          }
 
 

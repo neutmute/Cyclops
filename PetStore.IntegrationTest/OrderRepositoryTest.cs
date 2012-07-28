@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using Kraken.Framework.TestMonkey;
+using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PetStore.Domain;
 using PetStore.Infrastructure;
@@ -30,7 +31,8 @@ namespace PetStore.IntegrationTest
         public static OrderRepository GetNewRepo()
         {
             OrderRepository repo = new OrderRepository();
-            repo.Database = new SprockerSqlDatabase(Constants.TestDatabaseConnectionString);
+            //SqlDatabase sqlDAtabase = new SqlRepository{Database = new SqlDatabase(Constants.TestDatabaseConnectionString);}
+            repo.Database = new SqlDatabase(Constants.TestDatabaseConnectionString);
             return repo;
         }
 

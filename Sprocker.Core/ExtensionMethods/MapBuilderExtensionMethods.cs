@@ -63,7 +63,8 @@ namespace TheSprocker.Core
                                                    case "System.Int32":
                                                        return (TEnum) row.GetValue(fieldOrdinal);
                                                    default:
-                                                       return row[fieldOrdinal].ToString().ToEnumFromCode<TEnum>();
+                                                       throw SprockerException.Create("Mapping from the value not currently supported");
+                                                       //return row[fieldOrdinal].ToString().ToEnumFromCode<TEnum>();
                                                }
                                            });
         }

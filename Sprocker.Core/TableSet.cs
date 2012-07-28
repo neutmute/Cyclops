@@ -10,7 +10,6 @@ namespace TheSprocker.Core
     /// When using the load pattern, preceed each dataTable with a single row and column of the name of the dataTable
     /// This avoids requiring magic numbers to infer the content of each dataTable
     /// </summary>
-    /// [TODO]  override indexers with some name safety checks - better exception messages later
     public class TableSet : Dictionary<string, DataTable>
     {
 
@@ -29,9 +28,7 @@ namespace TheSprocker.Core
         public static TableSet Create(DataSet dataSet)
         {
             TableSet tableSet = new TableSet();
-
-            //[TODO] add some sanity checks/exception handling on expected form of DataSet  
-
+            
             for (int tableIndex = 0; tableIndex < dataSet.Tables.Count - 1; tableIndex += 2)
             {
                 string tableSetName = dataSet.Tables[tableIndex].Rows[0].Field<string>(0);
