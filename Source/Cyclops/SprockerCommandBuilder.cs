@@ -11,8 +11,6 @@ using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace TheSprocker.Core
 {
-  
-
     public class SprockerCommandBuilder<TEntity> where TEntity : class
     {
         private readonly string _procedureName;

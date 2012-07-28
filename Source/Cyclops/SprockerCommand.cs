@@ -13,7 +13,6 @@ using NLog;
 
 namespace TheSprocker.Core
 {
-
     /// <summary>
     /// </summary>
     /// <remarks>SprockerCommand name since 'Sprocker' by itself conflicts with namespace</remarks>
@@ -207,8 +206,7 @@ namespace TheSprocker.Core
 
     }
     #endregion
-
-
+    
     #region ParameterMapper
 
     /// <summary>
@@ -265,5 +263,4 @@ namespace TheSprocker.Core
     }
 
     #endregion
-
 }

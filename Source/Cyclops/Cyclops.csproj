@@ -73,33 +73,11 @@
     <Compile Include="..\SolutionItems\GlobalAssemblyInfo.cs">
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Config.cs" />
-    <Compile Include="DbCommandLogger.cs" />
+    <Compile Include="Instrumentation\DbCommandLogger.cs" />
     <Compile Include="EntityMapper.cs" />
-    <Compile Include="ExtensionMethods\FluentInterfaceExtensionMethods.cs" />
-    <Compile Include="ExtensionMethods\IEnumerableExtensionMethods.cs" />
-    <Compile Include="FluentInterface\Behaviours\AggregateMapBuilder.cs" />
-    <Compile Include="FluentInterface\Behaviours\IExplicitMapBuilder.cs" />
-    <Compile Include="FluentInterface\Behaviours\IRootBuilder.cs" />
-    <Compile Include="FluentInterface\ExtensionMethods.cs" />
     <Compile Include="MapHelper.cs" />
-    <Compile Include="Mapping\SprockerMap.cs" />
-    <Compile Include="Mapping\SprocInspector.cs" />
-    <Compile Include="Mapping\TypeReflector.cs" />
-    <Compile Include="Mapping\AutoMapOverrides.cs" />
-    <Compile Include="Mapping\ResultExpressionTree.cs" />
-    <Compile Include="Mapping\ParameterExpressionTree.cs" />
-    <Compile Include="FluentInterface\SprockerBuilder.cs" />
-    <Compile Include="FluentInterface\SprockerChildNodeBuilder.cs" />
-    <Compile Include="Mapping\SprockerMapContext.cs" />
-    <Compile Include="Mapping\Sprocker.cs" />
-    <Compile Include="SprockerSprocAccessor.cs" />
-    <Compile Include="SprockerSqlDatabase.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="SprockerCommandBuilder.cs" />
-    <Compile Include="DbCommandDumper.cs" />
-    <Compile Include="ExtensionMethods\EnumExtensionMethods.cs" />
+    <Compile Include="Instrumentation\DbCommandDumper.cs" />
     <Compile Include="ExtensionMethods\MapBuilderExtensionMethods.cs" />
     <Compile Include="ParameterMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -112,12 +90,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Mapping\NOTES.txt" />
     <Content Include="_Readme.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Mapping\Overrides\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
