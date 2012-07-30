@@ -23,6 +23,14 @@ namespace Cyclops
             return Map(dataTable, mapper);
         }
 
+        /// <summary>
+        /// Useful consistent syntax/shortcut for mapping an sub object in the graph - eg: AlarmTrigger options
+        /// </summary>
+        public static TEntity Map<TEntity>(IDataRecord dataRecord, IRowMapper<TEntity> mapper)
+        {
+            return mapper.MapRow(dataRecord);
+        }
+
         public static List<TEntity> Map<TEntity>(DataTable dataTable, IRowMapper<TEntity> mapper)
         {
             CyclopsResultSetMapper<TEntity> setMapper = new CyclopsResultSetMapper<TEntity>(mapper);
