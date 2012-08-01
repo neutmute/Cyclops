@@ -11,6 +11,8 @@ using Microsoft.Practices.EnterpriseLibrary.Data;
 
 namespace Cyclops
 {
+    #region CyclopsCommandBuilder
+
     public class CyclopsCommandBuilder<TEntity> where TEntity : class
     {
         private readonly string _procedureName;
@@ -53,8 +55,8 @@ namespace Cyclops
             {
                 const BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public;
                 var properties =    (from property in typeof(TEntity).GetProperties(bindingFlags)
-                                    where IsEnumMappableProperty(property)
-                                    select property).ToList();
+                                     where IsEnumMappableProperty(property)
+                                     select property).ToList();
 
                 for (int propertyIndex = 0; propertyIndex < properties.Count; propertyIndex++)
                 {
@@ -118,9 +120,18 @@ namespace Cyclops
                     _builderContext._parameterMaps[_parameterName] = e => DBNull.Value;
                     return _builderContext;
                 }
+
+                public ICyclopsCommandBuilderContext<TEntity> WithValue(object value)
+                {
+                    _builderContext._parameterMaps[_parameterName] = e => value;
+                    return _builderContext;
+                }
             }
         }
     }
+    #endregion
+
+    #region ICyclopsCommandBuilderContext
 
     /// <summary>
     /// Fluent interface for defining parameter mappings
@@ -143,6 +154,9 @@ namespace Cyclops
         CyclopsCommand Build();
     }
 
+    #endregion
+    
+    #region ICyclopsCommandBuilderContextMap
     /// <summary>
     /// Fluent interface for defining mapping functions 
     /// </summary>
@@ -159,5 +173,8 @@ namespace Cyclops
         /// Syntactic sugar to easily map in a null
         /// </summary>
         ICyclopsCommandBuilderContext<TEntity> WithNull();
+
+        ICyclopsCommandBuilderContext<TEntity> WithValue(object value);
     }
+    #endregion
 }
