@@ -25,8 +25,6 @@ namespace Cyclops
         /// <summary>
         /// Log a simulated, reproducible command text to the log
         /// </summary>
-        /// <remarks>Does not recreate TVP</remarks>
-        /// <returns></returns>
         public string GetLogDump()
         {
             // Format parameters into a user friendly string
@@ -214,6 +212,11 @@ namespace Cyclops
                 else if (type == typeof(string))
                 {
                     s = string.Format("'{0}'", Convert.ToString(o).Replace("'", "''"));
+                }
+                else if (type == typeof(byte[]))
+                {
+                    var bytes = (byte[])o;
+                    s = "0x"  + BitConverter.ToString(bytes).Replace("-", string.Empty);
                 }
                 else // for remaining data types; for most purposes these should only be numerics
                 {

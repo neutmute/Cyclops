@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 
-
 [assembly: AssemblyTitle("Cyclops")]
 [assembly: AssemblyDescription("Cyclops Core")]
 [assembly: AssemblyConfiguration("")]
@@ -12,3 +11,4 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyProduct("Cyclops (Release)")]
 #endif
 
+[assembly: InternalsVisibleTo("PetStore.IntegrationTest")]

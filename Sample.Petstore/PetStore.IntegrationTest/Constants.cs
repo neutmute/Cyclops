@@ -7,6 +7,6 @@ namespace PetStore.IntegrationTest
 {
     public static class Constants
     {
-        public const string TestDatabaseConnectionString = @"Data Source=(local)\Sql2008;Initial Catalog=PetStore.TestDatabase;Integrated Security=SSPI;";
+        public const string TestDatabaseConnectionString = @"Data Source=(local)\SQL2012;Initial Catalog=PetStore;Integrated Security=SSPI;";
     }
 }

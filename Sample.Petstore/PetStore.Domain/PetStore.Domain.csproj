@@ -51,15 +51,12 @@
     <Compile Include="Core\IEntityRepository.cs" />
     <Compile Include="Core\IValueObjectRepository.cs" />
     <Compile Include="Customer.cs" />
-    <Compile Include="IAddressRepository.cs" />
-    <Compile Include="ICustomerRepository.cs" />
+    <Compile Include="Repositories\IAddressRepository.cs" />
+    <Compile Include="Repositories\ICustomerRepository.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderLine.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="README.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Diagram.cd" />

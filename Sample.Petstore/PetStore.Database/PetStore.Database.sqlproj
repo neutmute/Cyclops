@@ -269,15 +269,14 @@
     <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\OrderLine_Load.proc.sql">
       <SubType>Code</SubType>
     </Build>
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Types\User Defined Table Types\BinaryTableType.sql" />
+    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\Test_BinaryLogDump.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data Generation Plans\DataGenerationPlan.FunctionalTesting.dgen">
       <SubType>NotInBuild</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Debug.publish.xml" />
-    <None Include="Release.publish.xml" />
+    <None Include="PetStore.Database.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="Scripts\Pre-Deployment\Script.PreDeployment.sql" />

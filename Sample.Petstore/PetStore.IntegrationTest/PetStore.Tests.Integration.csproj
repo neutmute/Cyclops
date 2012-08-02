@@ -83,13 +83,14 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddressRepositoryTest.cs" />
+    <Compile Include="BrokenTests\AddressRepositoryTest.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="CustomerRepositoryTest.cs" />
-    <Compile Include="InstrumentationTest.cs" />
-    <Compile Include="OrderRepositoryTest.cs" />
+    <Compile Include="BrokenTests\CustomerRepositoryTest.cs" />
+    <Compile Include="BrokenTests\InstrumentationTest.cs" />
+    <Compile Include="BrokenTests\OrderRepositoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="AddressMapTest.cs" />
+    <Compile Include="BrokenTests\AddressMapTest.cs" />
+    <Compile Include="Tests\TestRepositoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="README.txt" />
