@@ -218,6 +218,12 @@ namespace Cyclops
                     var bytes = (byte[])o;
                     s = "0x"  + BitConverter.ToString(bytes).Replace("-", string.Empty);
                 }
+                else if (type == typeof(Enum))
+                {
+                    // assumes a convention of always wanting an enum to be passed as an int
+                    var enumValue = (Enum) o;
+                    s = Convert.ToInt32(enumValue).ToString();
+                }
                 else // for remaining data types; for most purposes these should only be numerics
                 {
                     s = Convert.ToString(o);
