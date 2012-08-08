@@ -77,16 +77,16 @@ namespace Cyclops
         public static EventHandler<CyclopsPerformancePoint> PerformanceMonitorNotify { get; set; }
 
         private readonly CyclopsPerformancePoint _peformancePoint;
-        private readonly CyclopsCommand _CyclopsCommand;
+        private readonly CyclopsCommand _cyclopsCommand;
         private Exception _exceptionTrapped;
         
         public LogLevel LogLevel { get; set; }
 
-        public DbCommandLogger(CyclopsCommand CyclopsCommand)
+        public DbCommandLogger(CyclopsCommand cyclopsCommand)
         {
             LogLevel = LogLevel.Trace;
             _peformancePoint = new CyclopsPerformancePoint();
-            _CyclopsCommand = CyclopsCommand;
+            _cyclopsCommand = cyclopsCommand;
         }
 
         /// <summary>
@@ -104,14 +104,14 @@ namespace Cyclops
 
             if (PerformanceMonitorNotify != null)
             {
-                _peformancePoint.CommandText = _CyclopsCommand.CommandText;
+                _peformancePoint.CommandText = _cyclopsCommand.CommandText;
                 PerformanceMonitorNotify(this, _peformancePoint);
             }
 
             if (Log.IsEnabled(LogLevel))
             {
                 int durationMs = Convert.ToInt32(_peformancePoint.Duration.TotalMilliseconds);
-                var commandDumper = new DbCommandDumper(_CyclopsCommand.DbCommand);
+                var commandDumper = new DbCommandDumper(_cyclopsCommand.DbCommand);
                 commandDumper.ExceptionTrapped = _exceptionTrapped;
                 commandDumper.DurationMs = durationMs;
                 LogEventInfo eventInfo = new LogEventInfo(LogLevel, Log.Name, commandDumper.GetLogDump());
