@@ -95,7 +95,6 @@
     <Folder Include="Scripts" />
     <Folder Include="Scripts\Pre-Deployment" />
     <Folder Include="Scripts\Post-Deployment" />
-    <Folder Include="Data Generation Plans" />
     <Folder Include="Schema Comparisons" />
     <Folder Include="Properties\" />
     <Folder Include="Schema Objects\" />
@@ -273,9 +272,6 @@
     <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\Test_BinaryLogDump.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Data Generation Plans\DataGenerationPlan.FunctionalTesting.dgen">
-      <SubType>NotInBuild</SubType>
-    </None>
     <None Include="PetStore.Database.publish.xml" />
   </ItemGroup>
   <ItemGroup>

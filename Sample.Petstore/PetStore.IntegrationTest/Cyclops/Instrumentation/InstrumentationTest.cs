@@ -9,6 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NLog.Targets;
 using PetStore.Infrastructure;
 using Cyclops;
+using PetStore.IntegrationTest.Infrastructure;
 
 namespace PetStore.IntegrationTest
 {
@@ -63,7 +64,8 @@ namespace PetStore.IntegrationTest
             var customerRepo = CustomerRepositoryTest.CreateCustomerRepo();
             for (int i = 0; i < 10; i++)
             {
-                var customer = customerRepo.GetAll().FirstOrDefault();
+                var customer = CustomerRepositoryTests.GetUnpersistedCustomer();
+                customer.FirstName = i.ToString();
                 customerRepo.Save(customer);
             }
 

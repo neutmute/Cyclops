@@ -199,7 +199,7 @@ namespace Cyclops
             else
             {
                 Type type = o.GetType();
-
+                
                 if (type == typeof(DateTime))
                 {
                     s = string.Format("'{0}'", Convert.ToDateTime(o).ToString("yyyy-MM-dd HH:mm:ss"));
