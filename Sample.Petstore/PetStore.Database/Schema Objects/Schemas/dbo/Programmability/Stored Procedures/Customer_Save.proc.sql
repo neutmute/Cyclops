@@ -11,6 +11,7 @@
 	,@CreatedBy			VARCHAR(80)
 	,@DateModified		DATETIME
 	,@ModifiedBy		VARCHAR(80)
+	,@DateOfBirth		DATETIMEOFFSET = NULL		-- Testing mapping of DateTimeOffset
 )
 AS
 BEGIN

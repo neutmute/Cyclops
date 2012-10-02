@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using NodaTime;
 
 namespace PetStore.Domain
 {
@@ -18,6 +19,7 @@ namespace PetStore.Domain
         public string CreatedBy { get; set; }
         public DateTime DateModified { get; set; }
         public string ModifiedBy { get; set; }
+        public DateTimeOffset? DateOfBirth { get; set; }
 
         public Customer()
         {

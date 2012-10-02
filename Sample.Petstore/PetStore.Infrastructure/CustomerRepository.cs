@@ -38,13 +38,21 @@ namespace PetStore.Infrastructure
 
         public Customer Save(Customer customer)
         {
-            CyclopsCommand command = ConstructCommand<Customer>("dbo.Customer_Save")
-                                        .MapAllParameters()
-                                        .Build(customer);
-
+            var command = BuildCustomerSaveCommand(customer);
             command.ExecuteNonQuery();
             customer.Id = command.GetParameterValue<int>("@Id");
             return customer;
+        }
+
+        /// <summary>
+        /// Useful for testing
+        /// </summary>
+        protected CyclopsCommand BuildCustomerSaveCommand(Customer customer)
+        {
+            var command = ConstructCommand<Customer>("dbo.Customer_Save")
+                                        .MapAllParameters()
+                                        .Build(customer);
+            return command;
         }
 
         public void Delete(Customer instance)

@@ -209,7 +209,7 @@ namespace Cyclops
                     bool b = Convert.ToBoolean(o);
                     s = b ? "1" : "0";
                 }
-                else if (type == typeof(string))
+                else if (type == typeof(string) || type == typeof(DateTimeOffset))
                 {
                     s = string.Format("'{0}'", Convert.ToString(o).Replace("'", "''"));
                 }

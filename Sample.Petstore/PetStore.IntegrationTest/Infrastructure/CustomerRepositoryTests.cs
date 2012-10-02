@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PetStore.Domain;
 
 namespace PetStore.IntegrationTest.Infrastructure
 {
+    [TestClass]
     public class CustomerRepositoryTests
     {
 
@@ -22,6 +24,15 @@ namespace PetStore.IntegrationTest.Infrastructure
             customer.CreatedBy = "unit test";
             customer.ModifiedBy = "unit test";
             return customer;
+        }
+
+        [TestMethod]
+        public void Save_DoesNotThrow()
+        {
+            var customer = GetUnpersistedCustomer();
+
+            var customerRepo = CustomerRepositoryTest.CreateCustomerRepo();
+            customerRepo.Save(customer);
         }
     }
 }

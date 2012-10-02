@@ -7,6 +7,7 @@ using Kraken.Core.Instrumentation;
 using Kraken.Framework.TestMonkey;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NLog.Targets;
+using PetStore.Domain;
 using PetStore.Infrastructure;
 using Cyclops;
 using PetStore.IntegrationTest.Infrastructure;
@@ -38,6 +39,8 @@ namespace PetStore.IntegrationTest
                 Assert.IsTrue(memoryTarget.Logs[0].StartsWith("\r\n-- COMMAND FAILED"));
             }
         }
+
+       
 
         [TestMethod]
         public void DbCommandLogger_PerformanceMonitorNotify_Demo()
