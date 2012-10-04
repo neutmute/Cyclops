@@ -7,13 +7,15 @@ using System.Text;
 namespace Cyclops
 {
     /// <summary>
+    /// Used for some quick unpacking where a full row mapper is not required or suitable.
+    /// Use of this should be the exception rather than the rule
     /// Inherit from this and inject to your your own SqlRepository
     /// </summary>
-
-    [Obsolete("Use Extension Methods")]
     public class MapHelper
     {
-        [Obsolete("Use ToColumnAsEnum")]
+        /// <summary>
+        /// You should prefer ToColumnAsEnum extension over this where possible as it is less verbose
+        /// </summary>
         public T ToEnum<T>(IDataRecord row, string columnName)
         {
             var valueObject = row[columnName];
@@ -31,7 +33,6 @@ namespace Cyclops
             return (T)Enum.ToObject(typeof(T), valueByte);
         }
 
-        [Obsolete("Use ToColumn")]
         public virtual int ToInt(IDataRecord dr, string columnName)
         {
             object value = dr[columnName];
@@ -42,13 +43,11 @@ namespace Cyclops
             return Convert.ToInt32(value);
         }
 
-        [Obsolete("Use ToColumn")]
         public virtual int? ToNullableInt(IDataRecord dr, string columnName)
         {
             return ToIntNullable(dr, columnName);
         }
 
-        [Obsolete("Use ToColumn")]
         public virtual int? ToIntNullable(IDataRecord dr, string columnName)
         {
             if (dr[columnName] == DBNull.Value)
@@ -58,7 +57,6 @@ namespace Cyclops
             return Convert.ToInt32(dr[columnName]);
         }
 
-        [Obsolete("Use ToColumn")]
         public string ToStringNullable(IDataRecord dr, string columnName)
         {
             if (dr[columnName] == DBNull.Value)
