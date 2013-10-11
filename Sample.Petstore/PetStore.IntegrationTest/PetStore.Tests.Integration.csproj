@@ -79,13 +79,10 @@
     <Compile Include="Cyclops\Instrumentation\DbCommandDumperTests.cs" />
     <Compile Include="Cyclops\Instrumentation\InstrumentationTest.cs" />
     <Compile Include="Infrastructure\OrderRepositoryTest.cs" />
-    <Compile Include="ExposedCustomerRepository.cs" />
+    <Compile Include="Infrastructure\ExposedCustomerRepository.cs" />
     <Compile Include="Infrastructure\CustomerRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\TestRepositoryTest.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="README.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
