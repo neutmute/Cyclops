@@ -31,19 +31,10 @@ namespace PetStore.IntegrationTest
         public static OrderRepository GetNewRepo()
         {
             OrderRepository repo = new OrderRepository();
-            //SqlDatabase sqlDAtabase = new SqlRepository{Database = new SqlDatabase(Constants.TestDatabaseConnectionString);}
             repo.Database = new SqlDatabase(Constants.TestDatabaseConnectionString);
             return repo;
         }
 
-        //[TestMethod]
-        //public void Order_Get()
-        //{
-        //    OrderRepository repo = GetNewRepo();
-        //    Order order = repo.GetOne(o => o.Id == 1);
-
-
-        //}
 
         [ExpectedException(typeof(CyclopsException), "Failed to auto assign parameters. [this,set,of params won't automap] => dbo.Order_Get(@Id)")]
         [TestMethod]
@@ -84,7 +75,7 @@ namespace PetStore.IntegrationTest
         /// AssertBuilder! OMG! sorry - had to for testing my valueinjector
         /// </summary>
         [TestMethod]
-        public void OrderLineList_MapsTo_DataTAble()
+        public void OrderLineList_MapsTo_DataTable()
         {
 
             OrderRepository repo = GetNewRepo();
