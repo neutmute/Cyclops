@@ -20,8 +20,6 @@ namespace Cyclops.ExtensionMethods
         /// Helper to auto wire an assembly with Cyclops repositories
         /// </summary>
         /// <typeparam name="T">Base type contained in the Data assembly</typeparam>
-        /// <param name="builder"></param>
-        /// <param name="serviceName"></param>
         public static void RegisterCyclopsRepositories<T>(this ContainerBuilder builder, string serviceName)
         {
             var dataAssembly = typeof(T).Assembly;
