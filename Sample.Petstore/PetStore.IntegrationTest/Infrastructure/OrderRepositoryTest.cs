@@ -17,11 +17,11 @@ namespace PetStore.IntegrationTest
     {
         public static Order GetUnpersistedOrder()
         {
-            Order order = new Order();
-            order.Customer = new Customer {Id = 1};
+            var order = new Order();
+            order.Customer = CustomerRepositoryTest.GetPersistedCustomer();
             order.CreatedBy = "Toot";
             order.ModifiedBy = "Xandir";
-
+            
             order.OrderLines.Add(new OrderLine { ProductId = 1, UnitPriceCents = 100, CreatedBy = "Captain Hero", ModifiedBy = "Wooldoor" });
             order.OrderLines.Add(new OrderLine { ProductId = 2, UnitPriceCents = 89, CreatedBy = "Toot", ModifiedBy="Xandir" });
 
@@ -31,19 +31,10 @@ namespace PetStore.IntegrationTest
         public static OrderRepository GetNewRepo()
         {
             OrderRepository repo = new OrderRepository();
-            //SqlDatabase sqlDAtabase = new SqlRepository{Database = new SqlDatabase(Constants.TestDatabaseConnectionString);}
             repo.Database = new SqlDatabase(Constants.TestDatabaseConnectionString);
             return repo;
         }
 
-        //[TestMethod]
-        //public void Order_Get()
-        //{
-        //    OrderRepository repo = GetNewRepo();
-        //    Order order = repo.GetOne(o => o.Id == 1);
-
-
-        //}
 
         [ExpectedException(typeof(CyclopsException), "Failed to auto assign parameters. [this,set,of params won't automap] => dbo.Order_Get(@Id)")]
         [TestMethod]
@@ -60,10 +51,13 @@ namespace PetStore.IntegrationTest
         [TestMethod]
         public void Order_Get_Success()
         {
-            OrderRepository repo = GetNewRepo();
-            Order order = repo.Get(1);
+            var repo = GetNewRepo();
+            var unprersistedOrder = GetUnpersistedOrder();
 
-            Assert.AreEqual(1, order.Id);
+            repo.Save(unprersistedOrder);
+            var order = repo.Get(unprersistedOrder.Id);
+
+            Assert.IsTrue(order.Id > 0);
             Assert.IsTrue(order.OrderLines.Count > 0);
             Assert.IsNotNull(order.Customer);
         }
@@ -75,7 +69,7 @@ namespace PetStore.IntegrationTest
         [TestMethod]
         public void TableValuedParameterDemo()
         {
-            OrderRepository repo = GetNewRepo();
+            var repo = GetNewRepo();
             Order order = GetUnpersistedOrder();
             repo.Save(order);
         }
@@ -84,7 +78,7 @@ namespace PetStore.IntegrationTest
         /// AssertBuilder! OMG! sorry - had to for testing my valueinjector
         /// </summary>
         [TestMethod]
-        public void OrderLineList_MapsTo_DataTAble()
+        public void OrderLineList_MapsTo_DataTable()
         {
 
             OrderRepository repo = GetNewRepo();

@@ -32,6 +32,7 @@ BEGIN
 			,CreatedBy
 			,DateModified
 			,ModifiedBy
+			,DateOfBirth
 		)
 		VALUES
 		(
@@ -45,6 +46,7 @@ BEGIN
 			,@CreatedBy
 			,@DateModified
 			,@ModifiedBy
+			,@DateOfBirth
 		)	
 		
 		SET @Id = SCOPE_IDENTITY()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using Kraken.Framework.TestMonkey;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NLog.Targets;
@@ -16,6 +17,35 @@ namespace PetStore.IntegrationTest
     [TestClass]
     public class CustomerRepositoryTest
     {
+        public static CustomerRepository GetCustomerRepository()
+        {
+            var customerRepository = new CustomerRepository();
+            customerRepository.Database = new SqlDatabase(Constants.TestDatabaseConnectionString);
+            return customerRepository;
+        }
+
+        public static Customer GetPersistedCustomer()
+        {
+            var repo = GetCustomerRepository();
+            var customer = GetWellKnownCustomer();
+            repo.Save(customer);
+            return customer;
+        }
+
+        public static Customer GetWellKnownCustomer()
+        {
+            Customer customer = new Customer
+                                    {
+                                        FirstName = "Captain",
+                                        LastName = "Hero",
+                                        Title = "Super Hero",
+                                        IsActive = true,
+                                        CreatedBy = "Dave Jesser",
+                                        ModifiedBy = "Xandir"
+                                    };
+            return customer;
+        }
+
         public static MemoryTarget GetMemoryTarget()
         {
             return GetMemoryTarget("${message}|${exception:format=tostring}", LogLevel.Info);
@@ -39,26 +69,16 @@ namespace PetStore.IntegrationTest
             return memoryTarget;
         }
 
-        public Customer GetWellKnownCustomer()
+        [TestMethod]
+        public void Customer_Save_Success()
         {
-            Customer customer = new Customer
-                                    {
-                                        FirstName = "Captain",
-                                        LastName = "Hero",
-                                        Title = "Super Hero",
-                                        IsActive = true,
-                                        CreatedBy = "Dave Jesser",
-                                        ModifiedBy = "Xandir"
-                                    };
-            return customer;
+            GetPersistedCustomer();
         }
 
         [TestMethod]
         public void Customer_Get_Success()
         {
-            CustomerRepository customerRepository = new CustomerRepository();
-            customerRepository.Database = new SqlDatabase(Constants.TestDatabaseConnectionString);
-
+           var customerRepository = GetCustomerRepository();
             customerRepository.Database.ExecuteNonQuery(CommandType.Text,
                                                         @"
 DELETE FROM OrderLine;
@@ -79,7 +99,7 @@ exec Customer_Save @Id=@p1 output,@Title=N'Super He',@FirstName=N'Captain',@Last
         [TestMethod]
         public void Customer_Saves_Success()
         {
-            CustomerRepository customerRepository = CreateCustomerRepo();
+            var customerRepository = CreateCustomerRepo();
 
             Customer customer = GetWellKnownCustomer();
 
@@ -87,9 +107,10 @@ exec Customer_Save @Id=@p1 output,@Title=N'Super He',@FirstName=N'Captain',@Last
             
             customerRepository.Save(customer);
 
-            Assert.IsTrue(customer.Id > 0, "Persisted! Probably.");
+            var customerReloaded = customerRepository.GetOne(c => c.Id == customer.Id);
 
-            
+            Assert.IsTrue(customer.Id > 0, "Persisted! Probably.");
+            Assert.IsTrue(customerReloaded.Id == customer.Id, "Persisted! Definitely.");
         }
 
         public static CustomerRepository CreateCustomerRepo()
@@ -123,7 +144,7 @@ exec Customer_Save @Id=@p1 output,@Title=N'Super He',@FirstName=N'Captain',@Last
             }
 
             List<string> logs = target.Logs.ToList();
-            Assert.AreEqual(logs[0], "Failed CommandText: \r\nDECLARE @RETURN_VALUE INT\r\n\t\t,@Id INT\r\n\t\t,@IsDeleted BIT;\r\nSELECT @RETURN_VALUE = -5\r\n\t\t,@Id = 1\r\n\t\t,@IsDeleted = 1;\r\nEXEC dbo.Customer_Delete\r\n\t\t@RETURN_VALUE = @RETURN_VALUE \r\n\t\t,@Id = @Id \r\n\t\t,@IsDeleted = @IsDeleted ;|");
+            Assert.IsTrue(logs[0].Contains("You cannot delete an already deleted customer"));
         }
     }
 }
