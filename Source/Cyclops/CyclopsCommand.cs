@@ -7,8 +7,6 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using Microsoft.Practices.EnterpriseLibrary.Data;
-using Microsoft.Practices.EnterpriseLibrary.Data.Instrumentation;
-using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using NLog;
 
 namespace Cyclops
