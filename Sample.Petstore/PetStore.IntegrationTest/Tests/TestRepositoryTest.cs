@@ -27,7 +27,7 @@ namespace PetStore.IntegrationTest.Tests
 
             var input = new List<KeyValuePair<int, byte[]>>();
 
-            input.Add(new KeyValuePair<int, byte[]>(1, new byte[] {0x01, 0x02}));
+            input.Add(new KeyValuePair<int, byte[]>(1, new byte[] { 0x01, 0x02 }));
 
             var command = repo.BinaryLogDump(input);
             DbCommandDumper dump = new DbCommandDumper(command.DbCommand);

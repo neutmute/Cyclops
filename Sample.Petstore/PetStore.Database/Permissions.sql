@@ -1,3 +1,3 @@
 ﻿
-GRANT EXECUTE ON OBJECT::BinaryTableType TO public;
-GO
+--GRANT EXECUTE ON OBJECT::BinaryTableType TO public;
+--GO
