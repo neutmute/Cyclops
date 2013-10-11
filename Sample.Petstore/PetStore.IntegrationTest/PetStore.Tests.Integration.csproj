@@ -75,10 +75,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
-    <Compile Include="BrokenTests\CustomerRepositoryTest.cs" />
+    <Compile Include="Infrastructure\CustomerRepositoryTest.cs" />
     <Compile Include="Cyclops\Instrumentation\DbCommandDumperTests.cs" />
     <Compile Include="Cyclops\Instrumentation\InstrumentationTest.cs" />
-    <Compile Include="BrokenTests\OrderRepositoryTest.cs" />
+    <Compile Include="Infrastructure\OrderRepositoryTest.cs" />
     <Compile Include="ExposedCustomerRepository.cs" />
     <Compile Include="Infrastructure\CustomerRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

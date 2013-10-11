@@ -10,5 +10,6 @@
 	DateCreated				datetime		NOT NULL,
 	CreatedBy				varchar(80)		NOT NULL,
 	DateModified			datetime		NOT NULL,
-	ModifiedBy				varchar(80)		NOT NULL
+	ModifiedBy				varchar(80)		NOT NULL,
+	DateOfBirth				DATETIMEOFFSET NULL
 )

@@ -23,6 +23,7 @@ BEGIN
 			,CreatedBy
 			,DateModified
 			,ModifiedBy
+			,DateOfBirth
 	FROM	dbo.Customer			C
 	JOIN	dbo.#__CustomerLoad		L ON C.Id = L.CustomerId
 	ORDER BY	L.SortOrder

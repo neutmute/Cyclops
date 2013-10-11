@@ -17,6 +17,35 @@ namespace PetStore.IntegrationTest
     [TestClass]
     public class CustomerRepositoryTest
     {
+        public static CustomerRepository GetCustomerRepository()
+        {
+            var customerRepository = new CustomerRepository();
+            customerRepository.Database = new SqlDatabase(Constants.TestDatabaseConnectionString);
+            return customerRepository;
+        }
+
+        public static Customer GetPersistedCustomer()
+        {
+            var repo = GetCustomerRepository();
+            var customer = GetWellKnownCustomer();
+            repo.Save(customer);
+            return customer;
+        }
+
+        public static Customer GetWellKnownCustomer()
+        {
+            Customer customer = new Customer
+                                    {
+                                        FirstName = "Captain",
+                                        LastName = "Hero",
+                                        Title = "Super Hero",
+                                        IsActive = true,
+                                        CreatedBy = "Dave Jesser",
+                                        ModifiedBy = "Xandir"
+                                    };
+            return customer;
+        }
+
         public static MemoryTarget GetMemoryTarget()
         {
             return GetMemoryTarget("${message}|${exception:format=tostring}", LogLevel.Info);
@@ -40,26 +69,16 @@ namespace PetStore.IntegrationTest
             return memoryTarget;
         }
 
-        public Customer GetWellKnownCustomer()
+        [TestMethod]
+        public void Customer_Save_Success()
         {
-            Customer customer = new Customer
-                                    {
-                                        FirstName = "Captain",
-                                        LastName = "Hero",
-                                        Title = "Super Hero",
-                                        IsActive = true,
-                                        CreatedBy = "Dave Jesser",
-                                        ModifiedBy = "Xandir"
-                                    };
-            return customer;
+            GetPersistedCustomer();
         }
 
         [TestMethod]
         public void Customer_Get_Success()
         {
-            CustomerRepository customerRepository = new CustomerRepository();
-            customerRepository.Database = new SqlDatabase(Constants.TestDatabaseConnectionString);
-
+           var customerRepository = GetCustomerRepository();
             customerRepository.Database.ExecuteNonQuery(CommandType.Text,
                                                         @"
 DELETE FROM OrderLine;
@@ -80,7 +99,7 @@ exec Customer_Save @Id=@p1 output,@Title=N'Super He',@FirstName=N'Captain',@Last
         [TestMethod]
         public void Customer_Saves_Success()
         {
-            CustomerRepository customerRepository = CreateCustomerRepo();
+            var customerRepository = CreateCustomerRepo();
 
             Customer customer = GetWellKnownCustomer();
 

@@ -113,8 +113,8 @@ namespace PetStore.Infrastructure
                                        .MapAllParameters()
                                        .Map("@CustomerId").WithFunc(o => o.Customer.Id)
                                        .Map("@StatusId").WithFunc(o => o.Status)
-                                       .Map("@BillToAddressId").WithFunc(o => 1)
-                                       .Map("@ShipToAddressId").WithFunc(o => 1)
+                                       .Map("@BillToAddressId").WithNull()
+                                       .Map("@ShipToAddressId").WithNull()
                                        .Map("@Lines").WithFunc(o => linesTableValuedParam)
                                        .Build(instance);
 
