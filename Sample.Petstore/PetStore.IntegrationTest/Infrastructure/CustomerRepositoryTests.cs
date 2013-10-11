@@ -10,7 +10,6 @@ namespace PetStore.IntegrationTest.Infrastructure
     [TestClass]
     public class CustomerRepositoryTests
     {
-
         public static Customer GetUnpersistedCustomer()
         {
             var customer = new Customer();
@@ -30,7 +29,6 @@ namespace PetStore.IntegrationTest.Infrastructure
         public void Save_DoesNotThrow()
         {
             var customer = GetUnpersistedCustomer();
-
             var customerRepo = CustomerRepositoryTest.CreateCustomerRepo();
             customerRepo.Save(customer);
         }

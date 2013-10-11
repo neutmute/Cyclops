@@ -22,7 +22,6 @@ namespace PetStore.Infrastructure
 
             command.SetParameterToStructuredType("@Input", readingTableType);
             return command;
-            command.ExecuteNonQuery();
         }
 
 

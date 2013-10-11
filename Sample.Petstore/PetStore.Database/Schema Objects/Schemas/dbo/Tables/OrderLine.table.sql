@@ -12,3 +12,8 @@
 	DateModified		datetime2		NOT NULL,
 	ModifiedBy			varchar(80)		NOT NULL
 )
+--ALTER TABLE [dbo].[OrderLine]
+--	ADD CONSTRAINT [FK_OrderLine_Product] 
+--	FOREIGN KEY (ProductId)
+--	REFERENCES Product (Id)	
+

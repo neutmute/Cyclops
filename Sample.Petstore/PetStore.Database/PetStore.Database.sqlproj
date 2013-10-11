@@ -216,9 +216,6 @@
     <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\OrderLine.Order.fkey.sql">
       <SubType>Code</SubType>
     </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\OrderLine.Product.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
     <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\Customer_Order.Customer.fkey.sql">
       <SubType>Code</SubType>
     </Build>
