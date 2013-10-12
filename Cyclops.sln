@@ -4,6 +4,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D9DCC52C-A4E1-447F-B1C7-08C9A95DE4C6}"
 	ProjectSection(SolutionItems) = preProject
 		Source\SolutionItems\GlobalAssemblyInfo.cs = Source\SolutionItems\GlobalAssemblyInfo.cs
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample.PetStore", "Sample.PetStore", "{3CD4CD3C-B22C-4637-90C5-6318324C491D}"

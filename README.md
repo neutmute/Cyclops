@@ -1,2 +1,2 @@
 # Cyclops #
-A small wrapper around entlib DAAB
+A small wrapper around entlib DAAB.
