@@ -102,8 +102,6 @@ namespace PetStore.Infrastructure
                                        .Map("@Lines").WithFunc(o => linesTableValuedParam)
                                        .Build(instance);
 
-
-            // Make this a Map.WithFunc?
             command.SetParameterToStructuredType("@Lines", orderLineTableType);
 
             command.ExecuteNonQuery();

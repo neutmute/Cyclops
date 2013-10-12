@@ -18,14 +18,21 @@ namespace PetStore.IntegrationTest.Tests
         public void Demonstrate()
         {
             var repo = new DemoRepository { Database = new SqlDatabase(Config.ConnectionString) };
+             
+            repo.ExecProcForNonQuery();
+            repo.ExecProcForDataTable();
 
-            repo.SimpleParametersNonQuery();
-            repo.SimpleParametersDataTable();
-            repo.MappedNonQuery(new MyClass {Param1 = 3, Param2 = "MappedNonQuery!"});
-            repo.MappedEnum(new MyEnumClass { Param1 = 4, Param2 = "MappedEnum", Colour = Colour.Green });
+            repo.MapToProcFromObject(new MyClass {Param1 = 3, Param2 = "MappedNonQuery!"});
+            repo.MapToProcFromEnum(new MyEnumClass { Param1 = 4, Param2 = "MappedEnum", Colour = Colour.Green });
 
-            repo.MappedManualValue(new MyClass { Param1 = 5, Param2 = "Call Enum proc with no matching property so map manually" });
-            repo.MappedManualValue(new MyClass { Param1 = 6, Param2 = "Call Enum proc with no matching property so map manually with null" });
+            repo.MapToProcWithValue(new MyClass { Param1 = 5, Param2 = "Call Enum proc with no matching property so map manually" });
+            repo.MapToProcWithNull(new MyClass { Param1 = 6, Param2 = "Call Enum proc with no matching property so map manually with null" });
+            repo.MapToProcWithFunc(new MyClass { Param1 = 6, Param2 = "Call proc with custom mapping" });
+
+            repo.MapToObjectSimple();
+            repo.MapToObjectWithColumns();
+            repo.MapToObjectWithEnum();
+            repo.MapToObjectWithFunc();
         }
     }
 }
