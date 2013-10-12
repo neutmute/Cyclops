@@ -23,6 +23,7 @@ namespace PetStore.IntegrationTest.Tests
             repo.SimpleParametersDataTable();
             repo.MappedNonQuery(new MyClass {Param1 = 3, Param2 = "MappedNonQuery!"});
             repo.MappedEnum(new MyEnumClass { Param1 = 4, Param2 = "MappedEnum", Colour = Colour.Green });
+
             repo.MappedManualValue(new MyClass { Param1 = 5, Param2 = "Call Enum proc with no matching property so map manually" });
             repo.MappedManualValue(new MyClass { Param1 = 6, Param2 = "Call Enum proc with no matching property so map manually with null" });
         }
