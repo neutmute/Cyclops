@@ -55,12 +55,12 @@ namespace PetStore.Infrastructure
             return command;
         }
 
-        public void Delete(Customer instance)
+        public void Delete(Customer customer)
         {
-            ConstructCommand("dbo.Customer_Delete").ExecuteNonQuery(instance.Id, instance.IsDeleted);
+            ConstructCommand("dbo.Customer_Delete").ExecuteNonQuery(customer.Id, customer.IsDeleted);
         }
 
-        public static List<Customer> MapAddresses(DataTable customerTable)
+        public static List<Customer> MapCustomers(DataTable customerTable)
         {
             return EntityMapper.Map(customerTable, _rowMapper);
         }

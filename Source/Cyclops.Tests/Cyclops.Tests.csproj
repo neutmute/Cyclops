@@ -86,7 +86,8 @@
     <Compile Include="Config.cs" />
     <Compile Include="Cyclops\Instrumentation\DbCommandDumperTests.cs" />
     <Compile Include="Cyclops\Instrumentation\InstrumentationTest.cs" />
-    <Compile Include="Cyclops\Instrumentation\TestRepositoryTest.cs" />
+    <Compile Include="__DEMO\DemoRepository.cs" />
+    <Compile Include="__DEMO\DemoRepositoryTest.cs" />
     <Compile Include="DependencyInjection\AutofacModule.cs" />
     <Compile Include="DependencyInjection\ContainerBuilderExtensionsFixture.cs" />
     <Compile Include="PetStore.Integration\Infrastructure\CustomerRepositoryTest.cs" />

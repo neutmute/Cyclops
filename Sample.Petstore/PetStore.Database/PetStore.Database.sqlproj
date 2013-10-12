@@ -149,6 +149,8 @@
     <Build Include="Tables\Order.table.sql" />
     <Build Include="Tables\OrderLine.table.sql" />
     <Build Include="Tables\Product.table.sql" />
+    <Build Include="Stored Procedures\DemoSimple.sql" />
+    <Build Include="Stored Procedures\DemoEnum.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PetStore.Database.publish.xml" />
