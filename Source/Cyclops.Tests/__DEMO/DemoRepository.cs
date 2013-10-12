@@ -63,5 +63,23 @@ namespace Cyclops.Tests.__DEMO
                 .Build(myClass)
                 .ExecuteNonQuery();
         }
+
+        public void MappedManualValue(MyClass myClass)
+        {
+            ConstructCommand<MyClass>("dbo.DemoEnum")
+                .MapAllParameters()
+                .Map("@ColourId").WithValue(100)
+                .Build(myClass)
+                .ExecuteNonQuery();
+        }
+
+        public void MappedManualNull(MyClass myClass)
+        {
+            ConstructCommand<MyClass>("dbo.DemoEnum")
+                .MapAllParameters()
+                .Map("@ColourId").WithNull()
+                .Build(myClass)
+                .ExecuteNonQuery();
+        }
     }
 }
