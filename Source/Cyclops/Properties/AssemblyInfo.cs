@@ -11,4 +11,4 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyProduct("Cyclops (Release)")]
 #endif
 
-[assembly: InternalsVisibleTo("PetStore.IntegrationTest")]
+[assembly: InternalsVisibleTo("Cyclops.Tests")]

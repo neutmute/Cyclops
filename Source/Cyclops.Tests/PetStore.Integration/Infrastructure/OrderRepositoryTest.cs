@@ -31,7 +31,7 @@ namespace PetStore.IntegrationTest
         public static OrderRepository GetNewRepo()
         {
             OrderRepository repo = new OrderRepository();
-            repo.Database = new SqlDatabase(Constants.TestDatabaseConnectionString);
+            repo.Database = new SqlDatabase(Config.ConnectionString);
             return repo;
         }
 

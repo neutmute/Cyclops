@@ -29,7 +29,7 @@ namespace PetStore.IntegrationTest.Infrastructure
         public void Save_DoesNotThrow()
         {
             var customer = GetUnpersistedCustomer();
-            var customerRepo = CustomerRepositoryTest.CreateCustomerRepo();
+            var customerRepo = CustomerRepositoryTest.GetCustomerRepository();
             customerRepo.Save(customer);
         }
     }

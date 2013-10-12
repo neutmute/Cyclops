@@ -20,7 +20,7 @@ namespace PetStore.IntegrationTest
         public static CustomerRepository GetCustomerRepository()
         {
             var customerRepository = new CustomerRepository();
-            customerRepository.Database = new SqlDatabase(Constants.TestDatabaseConnectionString);
+            customerRepository.Database = new SqlDatabase(Config.ConnectionString);
             return customerRepository;
         }
 
@@ -99,7 +99,7 @@ exec Customer_Save @Id=@p1 output,@Title=N'Super He',@FirstName=N'Captain',@Last
         [TestMethod]
         public void Customer_Saves_Success()
         {
-            var customerRepository = CreateCustomerRepo();
+            var customerRepository = GetCustomerRepository();
 
             Customer customer = GetWellKnownCustomer();
 
@@ -113,17 +113,10 @@ exec Customer_Save @Id=@p1 output,@Title=N'Super He',@FirstName=N'Captain',@Last
             Assert.IsTrue(customerReloaded.Id == customer.Id, "Persisted! Definitely.");
         }
 
-        public static CustomerRepository CreateCustomerRepo()
-        {
-            CustomerRepository customerRepository = new CustomerRepository();
-            customerRepository.Database = new SqlDatabase(Constants.TestDatabaseConnectionString);
-            return customerRepository;
-        }
-
         [TestMethod]
         public void Cyclops_MapsParameters_Success()
         {
-            CustomerRepository customerRepository = CreateCustomerRepo();
+            CustomerRepository customerRepository = GetCustomerRepository();
             Customer customer = new Customer {Id = 1, IsDeleted = false};
             customerRepository.Delete(customer);
         }
@@ -134,7 +127,7 @@ exec Customer_Save @Id=@p1 output,@Title=N'Super He',@FirstName=N'Captain',@Last
             MemoryTarget target = GetMemoryTarget();
             try
             {
-                CustomerRepository customerRepository = CreateCustomerRepo();
+                CustomerRepository customerRepository = GetCustomerRepository();
                 Customer customer = new Customer { Id = 1, IsDeleted = true };
                 customerRepository.Delete(customer);
             }

@@ -16,7 +16,7 @@ namespace PetStore.IntegrationTest.Tests
         public static TestRepository GetNewRepo()
         {
             var repo = new TestRepository();
-            repo.Database = new SqlDatabase(Constants.TestDatabaseConnectionString);
+            repo.Database = new SqlDatabase(Config.ConnectionString);
             return repo;
         }
 

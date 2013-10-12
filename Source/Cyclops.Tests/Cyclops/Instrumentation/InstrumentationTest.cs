@@ -64,7 +64,7 @@ namespace PetStore.IntegrationTest
                                                            };
 
             // Do some work
-            var customerRepo = CustomerRepositoryTest.CreateCustomerRepo();
+            var customerRepo = CustomerRepositoryTest.GetCustomerRepository();
             for (int i = 0; i < 10; i++)
             {
                 var customer = CustomerRepositoryTests.GetUnpersistedCustomer();
