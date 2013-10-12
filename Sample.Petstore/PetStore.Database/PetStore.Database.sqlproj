@@ -100,178 +100,57 @@
     <Folder Include="Scripts" />
     <Folder Include="Scripts\Pre-Deployment" />
     <Folder Include="Scripts\Post-Deployment" />
-    <Folder Include="Schema Comparisons" />
     <Folder Include="Properties\" />
-    <Folder Include="Schema Objects\" />
-    <Folder Include="Schema Objects\Schemas\" />
-    <Folder Include="Schema Objects\Schemas\dbo\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Programmability\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Defaults\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Functions\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Rules\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Types\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Types\User Defined Data Types\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Types\User Defined Types CLR\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Types\User Defined Table Types\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Programmability\Types\XML Schema Collections\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Service Broker\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Service Broker\Queues\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Synonyms\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Tables\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Tables\Constraints\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Tables\Indexes\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Tables\Keys\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Tables\Triggers\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Tables\Statistics\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Views\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Views\Indexes\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Views\Triggers\" />
-    <Folder Include="Schema Objects\Schemas\dbo\Views\Statistics\" />
-    <Folder Include="Schema Objects\Database Level Objects\" />
-    <Folder Include="Schema Objects\Database Level Objects\Assemblies\" />
-    <Folder Include="Schema Objects\Database Level Objects\Database Triggers\" />
-    <Folder Include="Schema Objects\Database Level Objects\Security\" />
-    <Folder Include="Schema Objects\Database Level Objects\Security\Schemas\" />
-    <Folder Include="Schema Objects\Database Level Objects\Security\Users\" />
-    <Folder Include="Schema Objects\Database Level Objects\Security\Certificates\" />
-    <Folder Include="Schema Objects\Database Level Objects\Security\Asymmetric Keys\" />
-    <Folder Include="Schema Objects\Database Level Objects\Security\Master Keys\" />
-    <Folder Include="Schema Objects\Database Level Objects\Security\Signatures\" />
-    <Folder Include="Schema Objects\Database Level Objects\Security\Symmetric Keys\" />
-    <Folder Include="Schema Objects\Database Level Objects\Security\Database Encryption Keys\" />
-    <Folder Include="Schema Objects\Database Level Objects\Security\Database Audit Specification\" />
-    <Folder Include="Schema Objects\Database Level Objects\Security\Roles\" />
-    <Folder Include="Schema Objects\Database Level Objects\Security\Roles\Application Roles\" />
-    <Folder Include="Schema Objects\Database Level Objects\Security\Roles\Database Roles\" />
-    <Folder Include="Schema Objects\Database Level Objects\Service Broker\" />
-    <Folder Include="Schema Objects\Database Level Objects\Service Broker\Broker Priorities\" />
-    <Folder Include="Schema Objects\Database Level Objects\Service Broker\Contracts\" />
-    <Folder Include="Schema Objects\Database Level Objects\Service Broker\Event Notifications\" />
-    <Folder Include="Schema Objects\Database Level Objects\Service Broker\Message Types\" />
-    <Folder Include="Schema Objects\Database Level Objects\Service Broker\Remote Service Binding\" />
-    <Folder Include="Schema Objects\Database Level Objects\Service Broker\Routes\" />
-    <Folder Include="Schema Objects\Database Level Objects\Service Broker\Services\" />
-    <Folder Include="Schema Objects\Database Level Objects\Storage\" />
-    <Folder Include="Schema Objects\Database Level Objects\Storage\Full Text Stoplists\" />
-    <Folder Include="Schema Objects\Database Level Objects\Storage\Filegroups\" />
-    <Folder Include="Schema Objects\Database Level Objects\Storage\Files\" />
-    <Folder Include="Schema Objects\Database Level Objects\Storage\Full Text Catalogs\" />
-    <Folder Include="Schema Objects\Database Level Objects\Storage\Partition Functions\" />
-    <Folder Include="Schema Objects\Database Level Objects\Storage\Partition Schemes\" />
+    <Folder Include="Stored Procedures" />
+    <Folder Include="User Defined Table Types" />
+    <Folder Include="Tables" />
+    <Folder Include="Tables\Constraints" />
+    <Folder Include="Tables\Keys" />
   </ItemGroup>
   <ItemGroup>
     <BuildContributorArgument Include="OutDir=$(OutDir)" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Permissions.sql" />
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Customer.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Address.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Customer_Order.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Order.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\OrderLine.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Product.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Constraints\Customer.IsDeleted.defconst.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Constraints\Address.IsDeleted.defconst.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Constraints\Product.IsDeleted.defconst.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Constraints\Order.IsDeleted.defconst.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Constraints\OrderLine.IsDeleted.defconst.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\Address.pkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\Customer.pkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\Order.pkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\Product.pkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\OrderLine.pkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\OrderLine.Order.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\Customer_Order.Customer.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\Customer_Order.Order.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\Order.BillToAddress.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\Order.ShipToAddress.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\Address_Get.proc.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\Customer_Save.proc.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\Customer_Get.proc.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\Customer_Delete.proc.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\Order_Get.proc.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\Customer_Load.proc.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\Order_Load.proc.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Tables\Keys\Order.Customer.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\OrderLine_Get.proc.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\OrderLine_Save.proc.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Types\User Defined Table Types\OrderLineTableType.udtt.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\Tool_TableTypeReflector.proc.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\Order_Save.proc.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\OrderLine_Load.proc.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Types\User Defined Table Types\BinaryTableType.sql" />
-    <Build Include="Schema Objects\Schemas\dbo\Programmability\Stored Procedures\Test_BinaryLogDump.sql" />
+    <Build Include="Stored Procedures\Address_Get.proc.sql" />
+    <Build Include="Stored Procedures\Customer_Delete.proc.sql" />
+    <Build Include="Stored Procedures\Customer_Get.proc.sql" />
+    <Build Include="Stored Procedures\Customer_Load.proc.sql" />
+    <Build Include="Stored Procedures\Customer_Save.proc.sql" />
+    <Build Include="Stored Procedures\Order_Get.proc.sql" />
+    <Build Include="Stored Procedures\Order_Load.proc.sql" />
+    <Build Include="Stored Procedures\Order_Save.proc.sql" />
+    <Build Include="Stored Procedures\OrderLine_Get.proc.sql" />
+    <Build Include="Stored Procedures\OrderLine_Load.proc.sql" />
+    <Build Include="Stored Procedures\OrderLine_Save.proc.sql" />
+    <Build Include="Stored Procedures\Test_BinaryLogDump.sql" />
+    <Build Include="Stored Procedures\Tool_TableTypeReflector.proc.sql" />
+    <Build Include="User Defined Table Types\BinaryTableType.sql" />
+    <Build Include="User Defined Table Types\OrderLineTableType.udtt.sql" />
+    <Build Include="Tables\Constraints\Address.IsDeleted.defconst.sql" />
+    <Build Include="Tables\Constraints\Customer.IsDeleted.defconst.sql" />
+    <Build Include="Tables\Constraints\Order.IsDeleted.defconst.sql" />
+    <Build Include="Tables\Constraints\OrderLine.IsDeleted.defconst.sql" />
+    <Build Include="Tables\Constraints\Product.IsDeleted.defconst.sql" />
+    <Build Include="Tables\Keys\Address.pkey.sql" />
+    <Build Include="Tables\Keys\Customer.pkey.sql" />
+    <Build Include="Tables\Keys\Customer_Order.Customer.fkey.sql" />
+    <Build Include="Tables\Keys\Customer_Order.Order.fkey.sql" />
+    <Build Include="Tables\Keys\Order.BillToAddress.fkey.sql" />
+    <Build Include="Tables\Keys\Order.Customer.fkey.sql" />
+    <Build Include="Tables\Keys\Order.pkey.sql" />
+    <Build Include="Tables\Keys\Order.ShipToAddress.fkey.sql" />
+    <Build Include="Tables\Keys\OrderLine.Order.fkey.sql" />
+    <Build Include="Tables\Keys\OrderLine.pkey.sql" />
+    <Build Include="Tables\Keys\Product.pkey.sql" />
+    <Build Include="Tables\Address.table.sql" />
+    <Build Include="Tables\Customer.table.sql" />
+    <Build Include="Tables\Customer_Order.table.sql" />
+    <Build Include="Tables\Order.table.sql" />
+    <Build Include="Tables\OrderLine.table.sql" />
+    <Build Include="Tables\Product.table.sql" />
+    <Build Include="Stored Procedures\DemoSimple.sql" />
+    <Build Include="Stored Procedures\DemoEnum.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PetStore.Database.publish.xml" />

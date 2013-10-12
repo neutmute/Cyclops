@@ -11,26 +11,10 @@ using Cyclops;
 
 namespace PetStore.Infrastructure
 {
-
-    #region OrderMapHelper
-
-    public class OrderMapHelper : MapHelper
-    {
-        // Add custom project map helper methods here
-
-    }
-    #endregion
-
-    public class OrderRepository : CyclopsRepository //, IOrderRepository
+    public class OrderRepository : CyclopsRepository
     {
         private static IRowMapper<OrderLine> __orderLineMapper;
         private static IRowMapper<Order> __orderRowMapper;
-
-
-        public OrderRepository()
-        {
-            Map = new OrderMapHelper();  // superfluous  - cant think of a good example at moment
-        }
 
         public IRowMapper<Order> GetOrderRowMapper(Func<int, Customer> getCustomer, Func<int, List<OrderLine>> getLines)
         {
@@ -90,7 +74,7 @@ namespace PetStore.Infrastructure
             var tableSet = command.ExecuteTableSet(id);
             
             // Construct the customers first (child objects)
-            List<Customer> customerList = CustomerRepository.MapAddresses(tableSet["Customer"]);
+            List<Customer> customerList = CustomerRepository.MapCustomers(tableSet["Customer"]);
 
             List<OrderLine> orderLineCache = MapOrderLines(tableSet["OrderLine"]);
 
@@ -131,9 +115,7 @@ namespace PetStore.Infrastructure
         {
             return EntityMapper.Map(dataTable, GetOrderLineRowMapper());
         }
-
-       
-
+        
         public DataTable MapToDataTable<T>(string tableTypeName, List<T> listT)
         {
             DataTable linesTableValuedParam = ConstructCommand("dbo.Tool_TableTypeReflector").ExecuteDataTable(tableTypeName);
@@ -153,7 +135,7 @@ namespace PetStore.Infrastructure
     #region DataRowInjection class
 
     /// <summary>
-    /// This can go up into Cyclops (will require ValueInjector dependency)
+    /// This could go up into Cyclops but would require ValueInjector dependency
     /// </summary>
     public class DataRowInjection : KnownTargetValueInjection<DataRow>
     {

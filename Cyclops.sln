@@ -4,9 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D9DCC52C-A4E1-447F-B1C7-08C9A95DE4C6}"
 	ProjectSection(SolutionItems) = preProject
 		Source\SolutionItems\GlobalAssemblyInfo.cs = Source\SolutionItems\GlobalAssemblyInfo.cs
+		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample.Petstore", "Sample.Petstore", "{3CD4CD3C-B22C-4637-90C5-6318324C491D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample.PetStore", "Sample.PetStore", "{3CD4CD3C-B22C-4637-90C5-6318324C491D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F187D886-643B-44C0-A77B-EAD7F467BAC5}"
 	ProjectSection(SolutionItems) = preProject
@@ -19,8 +20,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetStore.Domain", "Sample.P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetStore.Infrastructure", "Sample.Petstore\PetStore.Infrastructure\PetStore.Infrastructure.csproj", "{514B73AA-B1D3-4A97-B284-F2DAF29E0C26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetStore.Tests.Integration", "Sample.Petstore\PetStore.IntegrationTest\PetStore.Tests.Integration.csproj", "{436E3CE7-5128-489E-98E6-174C5265FCC2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cyclops", "Source\Cyclops\Cyclops.csproj", "{E5F0B03A-FC55-444D-8EA2-3106C91826A1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cyclops.DependencyInjection", "Source\Cyclops.DependencyInjection\Cyclops.DependencyInjection.csproj", "{BBAB4FC2-1706-452B-8635-AF121F2745C6}"
@@ -28,8 +27,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cyclops.Tests", "Source\Cyclops.Tests\Cyclops.Tests.csproj", "{49AF796F-418A-4A05-9C45-897EDBA4EBC2}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "PetStore.Database", "Sample.Petstore\PetStore.Database\PetStore.Database.sqlproj", "{6824684A-9543-4DAC-A06F-F69A462B1ACD}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{72A5DE7F-8FBC-463A-B56E-FD1F91F10A23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,16 +58,6 @@ Global
 		{514B73AA-B1D3-4A97-B284-F2DAF29E0C26}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{514B73AA-B1D3-4A97-B284-F2DAF29E0C26}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{514B73AA-B1D3-4A97-B284-F2DAF29E0C26}.Release|x86.ActiveCfg = Release|Any CPU
-		{436E3CE7-5128-489E-98E6-174C5265FCC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{436E3CE7-5128-489E-98E6-174C5265FCC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{436E3CE7-5128-489E-98E6-174C5265FCC2}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{436E3CE7-5128-489E-98E6-174C5265FCC2}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{436E3CE7-5128-489E-98E6-174C5265FCC2}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{436E3CE7-5128-489E-98E6-174C5265FCC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{436E3CE7-5128-489E-98E6-174C5265FCC2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{436E3CE7-5128-489E-98E6-174C5265FCC2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{436E3CE7-5128-489E-98E6-174C5265FCC2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{436E3CE7-5128-489E-98E6-174C5265FCC2}.Release|x86.ActiveCfg = Release|Any CPU
 		{E5F0B03A-FC55-444D-8EA2-3106C91826A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E5F0B03A-FC55-444D-8EA2-3106C91826A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5F0B03A-FC55-444D-8EA2-3106C91826A1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -123,11 +110,9 @@ Global
 		{036BBD22-5B99-40BC-AB95-A04E93B8710D} = {3CD4CD3C-B22C-4637-90C5-6318324C491D}
 		{514B73AA-B1D3-4A97-B284-F2DAF29E0C26} = {3CD4CD3C-B22C-4637-90C5-6318324C491D}
 		{6824684A-9543-4DAC-A06F-F69A462B1ACD} = {3CD4CD3C-B22C-4637-90C5-6318324C491D}
-		{49AF796F-418A-4A05-9C45-897EDBA4EBC2} = {72A5DE7F-8FBC-463A-B56E-FD1F91F10A23}
-		{436E3CE7-5128-489E-98E6-174C5265FCC2} = {72A5DE7F-8FBC-463A-B56E-FD1F91F10A23}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35;packages\Unity.Interception.2.1.505.0\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Data.5.0.505.0\lib\NET35;packages\Unity.2.1.505.2\lib\NET35;packages\Unity.Interception.2.1.505.2\lib\NET35
 		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35;packages\Unity.Interception.2.1.505.0\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Data.5.0.505.0\lib\NET35;packages\Unity.2.1.505.2\lib\NET35;packages\Unity.Interception.2.1.505.2\lib\NET35
 	EndGlobalSection
 EndGlobal

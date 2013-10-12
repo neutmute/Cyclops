@@ -14,7 +14,7 @@ namespace PetStore.IntegrationTest
         public static ExposedCustomerRepository Construct()
         {
             var customerRepository = new ExposedCustomerRepository();
-            customerRepository.Database = new SqlDatabase(Constants.TestDatabaseConnectionString);
+            customerRepository.Database = new SqlDatabase(Config.ConnectionString);
             return customerRepository;
         }
 

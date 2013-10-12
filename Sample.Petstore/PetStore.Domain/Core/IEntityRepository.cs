@@ -53,7 +53,7 @@ namespace PetStore.Domain.Core
         /// <summary>
         /// Deletes an object from the backing store.
         /// </summary>
-        /// <param name="instance">The instance to be deleted.</param>
-        void Delete(T instance);
+        /// <param name="customer">The instance to be deleted.</param>
+        void Delete(T customer);
     }
 }
