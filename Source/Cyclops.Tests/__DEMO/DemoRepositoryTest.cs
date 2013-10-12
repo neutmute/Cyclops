@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using Cyclops;
@@ -14,11 +15,16 @@ namespace PetStore.IntegrationTest.Tests
     [TestClass]
     public class DemoRepositoryTest
     {
+        private DemoRepository GetNewRepo()
+        { 
+            return new DemoRepository { Database = new SqlDatabase(Config.ConnectionString) };
+        }
+
         [TestMethod]
         public void Demonstrate()
         {
-            var repo = new DemoRepository { Database = new SqlDatabase(Config.ConnectionString) };
-             
+            var repo = GetNewRepo();
+            
             repo.ExecProcForNonQuery();
             repo.ExecProcForDataTable();
 
@@ -34,5 +40,6 @@ namespace PetStore.IntegrationTest.Tests
             repo.MapToObjectWithEnum();
             repo.MapToObjectWithFunc();
         }
+
     }
 }

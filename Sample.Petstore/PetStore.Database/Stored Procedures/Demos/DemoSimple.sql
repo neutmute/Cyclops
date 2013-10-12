@@ -4,4 +4,9 @@
 AS
 	SELECT	@Param1		AS Param1	
 			,@Param2	AS Param2
+
+	IF (@Param1 = 999)
+	BEGIN
+		RAISERROR('The demoSimple proc throws on param1=999', 15, 1)
+	END
 RETURN 0

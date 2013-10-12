@@ -26,8 +26,6 @@ namespace Cyclops.Tests.__DEMO
 
     public class MyEnumClass : MyClass
     {
-        public int Param1 { get; set; }
-        public string Param2 { get; set; }
         public Colour Colour { get; set; }
     }
 
@@ -141,5 +139,6 @@ namespace Cyclops.Tests.__DEMO
             var orders = EntityMapper.Map(dataTable, mapBuilder);
             return orders;
         }
+
     }
 }
