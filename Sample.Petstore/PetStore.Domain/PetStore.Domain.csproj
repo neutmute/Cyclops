@@ -37,7 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NodaTime">
-      <HintPath>..\..\packages\NodaTime.0.9.0\lib\net35-Client\NodaTime.dll</HintPath>
+      <HintPath>..\..\packages\NodaTime.1.1.1\lib\net35-Client\NodaTime.dll</HintPath>
     </Reference>
     <Reference Include="Omu.ValueInjecter">
       <HintPath>..\..\packages\valueinjecter.2.3.3\lib\net35\Omu.ValueInjecter.dll</HintPath>
