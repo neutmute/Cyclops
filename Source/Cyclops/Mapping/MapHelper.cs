@@ -43,12 +43,16 @@ namespace Cyclops
             return Convert.ToInt32(value);
         }
 
-        public virtual int? ToNullableInt(IDataRecord dr, string columnName)
+        public virtual int? ToIntNullable(IDataRecord dr, string columnName)
         {
-            return ToIntNullable(dr, columnName);
+            if (dr[columnName] == DBNull.Value)
+            {
+                return null;
+            }
+            return Convert.ToInt32(dr[columnName]);
         }
 
-        public virtual int? ToIntNullable(IDataRecord dr, string columnName)
+        public virtual int? ToIntNullable(DataRow dr, string columnName)
         {
             if (dr[columnName] == DBNull.Value)
             {
