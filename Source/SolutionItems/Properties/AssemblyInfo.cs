@@ -5,6 +5,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("https://github.com/neutmute/Cyclops")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: AssemblyVersion("3.0.*")]
+[assembly: AssemblyVersion("4.0.*")]
 [assembly: ComVisible(false)]
 
