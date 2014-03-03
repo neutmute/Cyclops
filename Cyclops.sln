@@ -1,9 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D9DCC52C-A4E1-447F-B1C7-08C9A95DE4C6}"
 	ProjectSection(SolutionItems) = preProject
-		Source\SolutionItems\GlobalAssemblyInfo.cs = Source\SolutionItems\GlobalAssemblyInfo.cs
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -27,6 +28,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cyclops.Tests", "Source\Cyclops.Tests\Cyclops.Tests.csproj", "{49AF796F-418A-4A05-9C45-897EDBA4EBC2}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "PetStore.Database", "Sample.Petstore\PetStore.Database\PetStore.Database.sqlproj", "{6824684A-9543-4DAC-A06F-F69A462B1ACD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Properties", "Properties", "{CE620D74-C6B2-4EC6-8380-A11B7C614331}"
+	ProjectSection(SolutionItems) = preProject
+		Source\SolutionItems\Properties\AssemblyInfo.cs = Source\SolutionItems\Properties\AssemblyInfo.cs
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -107,12 +113,13 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{CE620D74-C6B2-4EC6-8380-A11B7C614331} = {D9DCC52C-A4E1-447F-B1C7-08C9A95DE4C6}
 		{036BBD22-5B99-40BC-AB95-A04E93B8710D} = {3CD4CD3C-B22C-4637-90C5-6318324C491D}
 		{514B73AA-B1D3-4A97-B284-F2DAF29E0C26} = {3CD4CD3C-B22C-4637-90C5-6318324C491D}
 		{6824684A-9543-4DAC-A06F-F69A462B1ACD} = {3CD4CD3C-B22C-4637-90C5-6318324C491D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35;packages\Unity.Interception.2.1.505.0\lib\NET35;packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;packages\EnterpriseLibrary.Data.5.0.505.0\lib\NET35;packages\Unity.2.1.505.2\lib\NET35;packages\Unity.Interception.2.1.505.2\lib\NET35
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45
 	EndGlobalSection
 EndGlobal
