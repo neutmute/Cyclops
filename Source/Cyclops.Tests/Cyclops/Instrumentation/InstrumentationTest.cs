@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using Kraken.Core.Instrumentation;
-using Kraken.Framework.TestMonkey;
+using Kraken.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NLog.Targets;
 using PetStore.Domain;
@@ -53,12 +53,7 @@ namespace PetStore.IntegrationTest
             DbCommandLogger.PerformanceMonitorNotify += (sender, p) =>
                                                            {
                                                                // Convert Cyclops point to consuming solutions perf capture tool..in this case a Kraken library
-                                                               var perfPoint = new PerformancePoint
-                                                                                   {
-                                                                                       Name = p.CommandText,
-                                                                                       DateStart = p.Start,
-                                                                                       DateEnd = p.End
-                                                                                   };
+                                                               var perfPoint = new PerformancePoint(p.CommandText, p.Start, p.End - p.Start);
 
                                                                perfMonitor.LogPoint(perfPoint);
                                                            };

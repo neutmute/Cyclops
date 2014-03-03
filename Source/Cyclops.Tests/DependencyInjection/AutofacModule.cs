@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Autofac;
 using Cyclops.ExtensionMethods;
-using NLog;
+using Common.Logging;
 using PetStore.Infrastructure;
 
 namespace Cyclops.Tests.DependencyInjection
 {
     public class AutofacModule : Module
     {
-        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// Override to add registrations to the container.

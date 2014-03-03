@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
-using Kraken.Framework.TestMonkey;
+using Kraken.Tests;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NLog.Targets;
 using PetStore.Domain;
 using PetStore.Infrastructure;
 using Cyclops;
-using NLog;
+using Common.Logging;
 
 namespace PetStore.IntegrationTest
 {
@@ -48,13 +48,13 @@ namespace PetStore.IntegrationTest
 
         public static MemoryTarget GetMemoryTarget()
         {
-            return GetMemoryTarget("${message}|${exception:format=tostring}", LogLevel.Info);
+            return GetMemoryTarget("${message}|${exception:format=tostring}", NLog.LogLevel.Info);
         }
 
         /// <summary>
         /// Get a target to allow assertions to be made against the Nlog
         /// </summary>
-        public static MemoryTarget GetMemoryTarget(LogLevel logLevel)
+        public static MemoryTarget GetMemoryTarget(NLog.LogLevel logLevel)
         {
             return GetMemoryTarget("${message}", logLevel);
         }
@@ -62,7 +62,7 @@ namespace PetStore.IntegrationTest
         /// <summary>
         /// Get a target to allow assertions to be made against the Nlog
         /// </summary>
-        public static MemoryTarget GetMemoryTarget(string layout, LogLevel logLevel)
+        public static MemoryTarget GetMemoryTarget(string layout, NLog.LogLevel logLevel)
         {
             MemoryTarget memoryTarget = new MemoryTarget { Layout = layout };
             NLog.Config.SimpleConfigurator.ConfigureForTargetLogging(memoryTarget, logLevel);
