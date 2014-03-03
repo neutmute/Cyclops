@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
-using Kraken.Framework.TestMonkey;
+using Kraken.Tests;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PetStore.Domain;

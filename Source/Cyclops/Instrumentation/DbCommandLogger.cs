@@ -4,7 +4,8 @@ using System.Data.Common;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using NLog;
+using Common.Logging;
+using Cyclops.ExtensionMethods;
 
 namespace Cyclops
 {
@@ -69,7 +70,7 @@ namespace Cyclops
 
     public class DbCommandLogger
     {
-        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// Allow an external class to subscribe to performance events
@@ -108,15 +109,16 @@ namespace Cyclops
                 PerformanceMonitorNotify(this, _peformancePoint);
             }
 
-            if (Log.IsEnabled(LogLevel))
+            if (DbCommandLogger.Log.IsEnabled(this.LogLevel))
             {
-                int durationMs = Convert.ToInt32(_peformancePoint.Duration.TotalMilliseconds);
-                var commandDumper = new DbCommandDumper(_cyclopsCommand.DbCommand);
-                commandDumper.ExceptionTrapped = _exceptionTrapped;
-                commandDumper.DurationMs = durationMs;
-                LogEventInfo eventInfo = new LogEventInfo(LogLevel, Log.Name, commandDumper.GetLogDump());
-                eventInfo.Properties["Duration"] = string.Format("{0}ms", durationMs);
-                Log.Log(eventInfo);
+                int durationMs = Convert.ToInt32(this._peformancePoint.Duration.TotalMilliseconds);
+                DbCommandDumper commandDumper = new DbCommandDumper(this._cyclopsCommand.DbCommand);
+                commandDumper.ExceptionTrapped = this._exceptionTrapped;
+                commandDumper.DurationMs = new int?(durationMs);
+                DbCommandLogger.Log.Log(this.LogLevel, delegate(FormatMessageHandler m)
+                {
+                    m(commandDumper.GetLogDump(), new object[0]);
+                });
             }
         }
     }

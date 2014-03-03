@@ -5,7 +5,7 @@ using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
-using NLog;
+using Common.Logging;
 
 namespace Cyclops
 {

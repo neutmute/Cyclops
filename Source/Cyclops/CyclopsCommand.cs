@@ -6,8 +6,9 @@ using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using Common.Logging;
 using Microsoft.Practices.EnterpriseLibrary.Data;
-using NLog;
+
 
 namespace Cyclops
 {
@@ -18,7 +19,7 @@ namespace Cyclops
     {
         #region Fields
 
-        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
 
         private readonly CyclopsParameterMapper _parameterMapper;
         #endregion

@@ -8,13 +8,13 @@ using Autofac;
 using Autofac.Configuration;
 using Autofac.Core;
 using Microsoft.Practices.EnterpriseLibrary.Data;
-using NLog;
+using Common.Logging;
 
 namespace Cyclops.ExtensionMethods
 {
     public static class ContainerBuilderExtensions
     {
-        private static readonly Logger Log = LogManager.GetCurrentClassLogger();
+        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// Helper to auto wire an assembly with Cyclops repositories
@@ -35,7 +35,7 @@ namespace Cyclops.ExtensionMethods
                         (p, c) => p.ParameterType == typeof(Database)
                         , (p, c) => c.ResolveNamed<Database>(serviceName));
 
-                    Log.Trace("Registering {0}", repository);
+                    Log.Trace(m=>m("Registering {0}", repository));
                     builder
                         .RegisterType(repository)
                         .WithParameter(resolvedParameter)
@@ -73,11 +73,11 @@ namespace Cyclops.ExtensionMethods
                     sb.AppendLine();
                 }
                 string errorMessage = sb.ToString();
-                Log.WarnException(errorMessage, ex);
+                Log.Warn(errorMessage, ex);
             }
             catch (Exception e)
             {
-                Log.WarnException("Failed to load types for " + assembly.GetName().Name, e);
+                Log.Warn("Failed to load types for " + assembly.GetName().Name, e);
             }
 
             return allAssemblyTypes;
