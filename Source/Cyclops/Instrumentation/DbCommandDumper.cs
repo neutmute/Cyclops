@@ -105,6 +105,8 @@ namespace Cyclops
                     case SqlDbType.NChar:
                     case SqlDbType.VarChar:
                     case SqlDbType.Char:
+                    case SqlDbType.VarBinary:
+                    case SqlDbType.Binary:
                         string sizeString = p.Size.ToString();
                         if (p.Size == -1)   // handle varchar max
                         {
