@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
@@ -32,6 +33,12 @@ namespace Cyclops
 
         public string CommandText { get; set; }
 
+        public int CommandTimeout
+        {
+            get { return DbCommand.CommandTimeout; }
+            set { DbCommand.CommandTimeout = value; }
+        }
+
         public DbParameterCollection Parameters { get { return DbCommand.Parameters; } }
 
         #endregion
@@ -59,8 +66,18 @@ namespace Cyclops
             CommandText = procedureName;
             DbCommand = Database.GetStoredProcCommand(CommandText);
             _parameterMapper = new CyclopsParameterMapper(Database);
+
+            ReadGlobalConfig();
         }
 
+        private void ReadGlobalConfig()
+        {
+            const string commandTimeoutKey = "CommandTimeout";
+            if (ConfigurationManager.AppSettings[commandTimeoutKey] != null)
+            {
+                CommandTimeout = Convert.ToInt32(ConfigurationManager.AppSettings[commandTimeoutKey]);
+            }
+        }
         #endregion
         
         #region Execute* Methods

@@ -95,6 +95,7 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Config.cs" />
+    <Compile Include="Cyclops\CyclopsCommandTest.cs" />
     <Compile Include="Cyclops\Instrumentation\DbCommandDumperTests.cs" />
     <Compile Include="Cyclops\Instrumentation\InstrumentationTest.cs" />
     <Compile Include="__DEMO\DemoRepository.cs" />

@@ -155,9 +155,6 @@
     <Build Include="Stored Procedures\Demos\DemoSimple.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="PetStore.Database.publish.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <PreDeploy Include="Scripts\Pre-Deployment\Script.PreDeployment.sql" />
   </ItemGroup>
   <ItemGroup>
