@@ -32,13 +32,11 @@ namespace Cyclops.UnitTest
         public void CreateSetterFromGetter2()
         {
             var p1 = new Person();
-            SetIfNotNull(p1, p => p.Name, "magic");
+            MagicSetter(p1, p => p.Name, "magic");
             Assert.AreEqual("tada!", p1.Name);
 
-            SetIfNotNull(p1, p => p.Name, "foo3333");
+            MagicSetter(p1, p => p.Name, "foo3333");
             Assert.AreEqual("foo3333", p1.Name);
-
-            
         }
 
         public class Person { public int Age { get; set; } public string Name { get; set; } }
@@ -57,7 +55,7 @@ namespace Cyclops.UnitTest
             return action;
         }
 
-        public static void SetIfNotNull<Person, TProperty>(Person target, Expression<Func<Person, TProperty>> getter, string settingKey)
+        public static void MagicSetter<Person, TProperty>(Person target, Expression<Func<Person, TProperty>> getter, string settingKey)
         {
             var propertyInfo = (getter.Body as MemberExpression).Member as PropertyInfo;
 
