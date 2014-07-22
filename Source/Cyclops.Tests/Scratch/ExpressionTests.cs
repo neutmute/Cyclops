@@ -28,6 +28,19 @@ namespace Cyclops.UnitTest
             Assert.IsTrue(p1.Age == 29);
         }
 
+        [TestMethod]
+        public void CreateSetterFromGetter2()
+        {
+            var p1 = new Person();
+            SetIfNotNull(p1, p => p.Name, "magic");
+            Assert.AreEqual("tada!", p1.Name);
+
+            SetIfNotNull(p1, p => p.Name, "foo3333");
+            Assert.AreEqual("foo3333", p1.Name);
+
+            
+        }
+
         public class Person { public int Age { get; set; } public string Name { get; set; } }
 
         public static Action<TContainer, TProperty> InitializeSet<TContainer, TProperty>(Expression<Func<TContainer, TProperty>> getter)
@@ -37,9 +50,32 @@ namespace Cyclops.UnitTest
             ParameterExpression instance = Expression.Parameter(typeof(TContainer), "instance");
             ParameterExpression parameter = Expression.Parameter(typeof(TProperty), "param");
 
-            return Expression.Lambda<Action<TContainer, TProperty>>(
+            var action = Expression.Lambda<Action<TContainer, TProperty>>(
                 Expression.Call(instance, propertyInfo.GetSetMethod(), parameter),
-                new ParameterExpression[] { instance, parameter }).Compile();
+                new [] { instance, parameter }).Compile();
+
+            return action;
+        }
+
+        public static void SetIfNotNull<Person, TProperty>(Person target, Expression<Func<Person, TProperty>> getter, string settingKey)
+        {
+            var propertyInfo = (getter.Body as MemberExpression).Member as PropertyInfo;
+
+            ParameterExpression instance = Expression.Parameter(typeof(Person), "instance");
+            ParameterExpression parameter = Expression.Parameter(typeof(TProperty), "param");
+
+            Action<Person, string> action = Expression.Lambda<Action<Person, string>>(
+                Expression.Call(instance, propertyInfo.GetSetMethod(), parameter),
+                new[] { instance, parameter }).Compile();
+
+            if (settingKey == "magic")
+            {
+                action(target, "tada!");
+            }
+            else
+            {
+                action(target, settingKey);
+            }
         }
 
 
