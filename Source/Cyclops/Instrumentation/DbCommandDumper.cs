@@ -34,31 +34,42 @@ namespace Cyclops
 
             // When formulating the log text, need to do a little more work when it is a stored proc
             // in order to simulate executable text
-            if (Command.CommandType == CommandType.StoredProcedure)
+            switch (Command.CommandType)
             {
-                simulatedCommandText.Append("EXEC " + Command.CommandText + "\r\n");
-                bool prePendCommaForParameter = false;
-                foreach (SqlParameter p in Command.Parameters)
-                {
-                    if (p.ParameterName == "@RETURN_VALUE")
+                case CommandType.StoredProcedure:
+                    simulatedCommandText.Append("EXEC " + Command.CommandText + "\r\n");
+                    bool prePendCommaForParameter = false;
+                    foreach (SqlParameter p in Command.Parameters)
                     {
-                        continue;
+                        if (p.ParameterName == "@RETURN_VALUE")
+                        {
+                            continue;
+                        }
+
+                        simulatedCommandText.AppendFormat(
+                            "\t\t{1}{0} = {0} "
+                            , p.ParameterName
+                            , prePendCommaForParameter ? "," : string.Empty);
+
+                        prePendCommaForParameter = true;
+
+                        if (p.Direction == ParameterDirection.InputOutput || p.Direction == ParameterDirection.Output)
+                        {
+                            simulatedCommandText.Append(" OUTPUT");
+                        }
+                        simulatedCommandText.Append("\r\n");
                     }
+                    simulatedCommandText = simulatedCommandText.Remove(simulatedCommandText.Length - 2, 2); // remove trailing semi colon
+                    break;
 
-                    simulatedCommandText.AppendFormat(
-                        "\t\t{1}{0} = {0} "
-                        , p.ParameterName
-                        , prePendCommaForParameter ? "," : string.Empty);
+                case CommandType.Text:
+                    simulatedCommandText.AppendLine(Command.CommandText);
+                    break;
 
-                    prePendCommaForParameter = true;
-
-                    if (p.Direction == ParameterDirection.InputOutput || p.Direction == ParameterDirection.Output)
-                    {
-                        simulatedCommandText.Append(" OUTPUT");
-                    }
-                    simulatedCommandText.Append("\r\n");
-                }
-                simulatedCommandText = simulatedCommandText.Remove(simulatedCommandText.Length - 2, 2); // remove trailing semi colon
+                default:
+                    simulatedCommandText.AppendFormat("CommandType={0}\r\n", Command.CommandType);
+                    simulatedCommandText.AppendLine(Command.CommandText);
+                    break;
             }
 
             // Construct final log dump string
