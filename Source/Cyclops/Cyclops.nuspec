@@ -9,5 +9,6 @@
     <authors>neutmute</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <projectUrl>https://github.com/neutmute/cyclops</projectUrl>
+	<iconUrl>https://raw.githubusercontent.com/neutmute/Cyclops/master/SolutionItems/cyclops.png</iconUrl>
   </metadata>
 </package>
