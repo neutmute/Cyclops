@@ -43,6 +43,26 @@ namespace Cyclops
             return Convert.ToInt32(value);
         }
 
+        public virtual long ToLong(IDataRecord dr, string columnName)
+        {
+            object value = dr[columnName];
+            if (value is DBNull)
+            {
+                throw CyclopsException.Create("{0} was unexpectedly NULL", columnName);
+            }
+            return Convert.ToInt64(value);
+        }
+
+        public virtual bool ToBoolean(IDataRecord dr, string columnName)
+        {
+            object value = dr[columnName];
+            if (value is DBNull)
+            {
+                throw CyclopsException.Create("{0} was unexpectedly NULL", columnName);
+            }
+            return Convert.ToBoolean(value);
+        }
+
         public virtual int? ToIntNullable(IDataRecord dr, string columnName)
         {
             if (dr[columnName] == DBNull.Value)
