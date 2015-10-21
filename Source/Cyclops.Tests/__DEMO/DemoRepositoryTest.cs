@@ -39,6 +39,9 @@ namespace PetStore.IntegrationTest.Tests
             repo.MapToObjectWithColumns();
             repo.MapToObjectWithEnum();
             repo.MapToObjectWithFunc();
+
+            repo.ExtractOutputParameter();
+            repo.AdHocSqlWithParameters();
         }
 
     }

@@ -82,6 +82,7 @@ namespace Cyclops
                 return new CyclopsCommandBuilderContextParameterMap(parameterName, this);
             }
 
+
             public CyclopsCommand Build(TEntity entity)
             {
                 CyclopsCommand command = new CyclopsCommand(_database, _procedureName);

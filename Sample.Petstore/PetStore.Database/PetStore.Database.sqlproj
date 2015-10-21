@@ -108,6 +108,7 @@
     <Folder Include="Tables\Constraints" />
     <Folder Include="Tables\Keys" />
     <Folder Include="Stored Procedures\Demos" />
+    <Folder Include="_Publish" />
   </ItemGroup>
   <ItemGroup>
     <BuildContributorArgument Include="OutDir=$(OutDir)" />
@@ -130,7 +131,6 @@
     <Build Include="User Defined Table Types\BinaryTableType.sql" />
     <Build Include="User Defined Table Types\OrderLineTableType.udtt.sql" />
     <Build Include="Tables\Constraints\Address.IsDeleted.defconst.sql" />
-    <Build Include="Tables\Constraints\Customer.IsDeleted.defconst.sql" />
     <Build Include="Tables\Constraints\Order.IsDeleted.defconst.sql" />
     <Build Include="Tables\Constraints\OrderLine.IsDeleted.defconst.sql" />
     <Build Include="Tables\Constraints\Product.IsDeleted.defconst.sql" />
@@ -160,5 +160,8 @@
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Post-Deployment\Script.PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="_Publish\localhost2012.publish.xml" />
   </ItemGroup>
 </Project>

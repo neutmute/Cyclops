@@ -191,7 +191,80 @@ namespace Cyclops
             ((SqlParameter)DbCommand.Parameters[parameterName]).SqlDbType = SqlDbType.Structured;
             ((SqlParameter)DbCommand.Parameters[parameterName]).TypeName = typeName;
         }
+        #endregion
 
+        #region AddParameter helpers (for when dynamic SQL is used and parameters can't be automatically bound)
+
+        /// <summary>
+        /// Create and set the parameter (use when commandType is Text)
+        /// </summary>
+        public void AddParameter(string name, int value)
+        {
+            AddParameter(name, value, ParameterDirection.Input);
+        }
+
+        /// <summary>
+        /// Create and set the parameter (use when commandType is Text)
+        /// </summary>
+        public void AddParameter(string name, int value, ParameterDirection direction)
+        {
+            var parameter = new SqlParameter(name, value);
+            parameter.Direction = direction;
+            AddParameter(parameter);
+        }
+
+        /// <summary>
+        /// Create and set the parameter (use when commandType is Text)
+        /// </summary>
+        public void AddParameter(string name, string value)
+        {
+            var p = new SqlParameter(name, SqlDbType.NVarChar);
+            p.Value = value;
+            AddParameter(p);
+        }
+
+        /// <summary>
+        /// Create and set the parameter (use when commandType is Text)
+        /// </summary>
+        public void AddParameter(string name, DateTime value)
+        {
+            SqlParameter parameter = new SqlParameter(name, value);
+            AddParameter(parameter);
+        }
+
+        /// <summary>
+        /// Create and set the parameter (use when commandType is Text)
+        /// </summary>
+        public void AddParameter(string name, object value)
+        {
+            if (value == null)
+            {
+                value = DBNull.Value;
+            }
+
+            var parameter = new SqlParameter(name, value);
+            AddParameter(parameter);
+        }
+
+        /// <summary>
+        /// Create and set the parameter (use when commandType is Text)
+        /// </summary>
+        public void AddParameter(string name, object value, SqlDbType dataType)
+        {
+            if (value == null)
+            {
+                value = DBNull.Value;
+            }
+
+            SqlParameter parameter = new SqlParameter(name, dataType);
+            parameter.Value = value;
+            AddParameter(parameter);
+        }
+
+        public void AddParameter(DbParameter parameter)
+        {
+            Parameters.Add(parameter);
+        }
         #endregion
     }
 

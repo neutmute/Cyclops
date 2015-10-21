@@ -52,6 +52,9 @@ namespace PetStore.Infrastructure
             var command = ConstructCommand<Customer>("dbo.Customer_Save")
                                         .MapAllParameters()
                                         .Build(customer);
+
+            customer.Id = command.GetParameterValue<int>("@Id");
+
             return command;
         }
 

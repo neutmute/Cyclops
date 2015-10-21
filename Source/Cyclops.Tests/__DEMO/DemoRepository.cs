@@ -140,5 +140,25 @@ namespace Cyclops.Tests.__DEMO
             return orders;
         }
 
+        public void ExtractOutputParameter()
+        {
+            var customer = new Customer{FirstName = "Sterling", LastName="Archer", CreatedBy="Pam"};
+
+            var command = ConstructCommand<Customer>("dbo.Customer_Save")
+                                        .MapAllParameters()
+                                        .Build(customer);
+
+            command.ExecuteNonQuery();
+
+            customer.Id = command.GetParameterValue<int>("@Id");
+        }
+
+        public void AdHocSqlWithParameters()
+        {
+            var command = ConstructCommand(CommandType.Text, "SELECT * FROM Customer WHERE Id = @Id");
+            command.AddParameter("@Id", 1);
+
+            var dt = command.ExecuteDataTable();
+        }
     }
 }
