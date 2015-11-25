@@ -17,7 +17,7 @@ if "%VsTestConsole%" == "" (
    set VsTestConsole="C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\MSTest.exe"
 )
 
-%VsTestConsole% /testcontainer:'.\Source\Cyclops.Tests\bin\%config%\Cyclops.Tests.dll' /TestCaseFilter:TestCategory=myget
+%VsTestConsole% /testcontainer:'.\Source\Cyclops.Tests\bin\%config%\Cyclops.Tests.dll' /category:myget
 
 REM Package
 mkdir Build
