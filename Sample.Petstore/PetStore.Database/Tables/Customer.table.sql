@@ -7,7 +7,7 @@
 	EmailPromotion			int				NULL,
 	IsActive				bit				NOT NULL CONSTRAINT DF_Customer_IsActive	DEFAULT(1),
 	IsDeleted				bit				NOT NULL CONSTRAINT DF_Customer_IsDeleted	DEFAULT(0),
-	DateCreated				datetimeoffset	NOT NULL CONSTRAINT DF_Customer_DateCreated	DEFAULT(SYSDATETIMEOFFSET()),
+	DateCreated				datetime		NOT NULL CONSTRAINT DF_Customer_DateCreated	DEFAULT(GETDATE()),
 	CreatedBy				varchar(80)		NOT NULL,
 	DateModified			datetime		NULL,
 	ModifiedBy				varchar(80)		NULL,
