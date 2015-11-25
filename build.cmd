@@ -24,6 +24,7 @@ if "%VsTestConsole%" == "" (
 REM Package
 mkdir Build
 call %nuget% pack "Source\Cyclops\Cyclops.csproj" -o Build -p Configuration=%config% %version%
+call %nuget% pack "Source\Cyclops.DependencyInjection\Cyclops.DependencyInjection.csproj" -o Build -p Configuration=%config% %version%
 
 REM Publish
 %nuget% push .\build\* %nugetapikey%
