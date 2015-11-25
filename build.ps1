@@ -33,7 +33,7 @@ if(!(Test-Path Env:\version )){
 &$env:nuget pack $rootFolder\Source\Cyclops\Cyclops.csproj -o _output -p Configuration=$configuration -Version $env:PackageVersion
 &$env:nuget pack $rootFolder\Source\Cyclops.DependencyInjection\Cyclops.DependencyInjection.csproj -o _output -p Configuration=$configuration -Version $env:PackageVersion
 
-if(Test-Path Env:\myget ){
+if(Test-Path Env:\BuildRunner ){
     Write-Host "Nuget publish"
     &$env:nuget push .\_output\* $env:nugetapikey
 }
