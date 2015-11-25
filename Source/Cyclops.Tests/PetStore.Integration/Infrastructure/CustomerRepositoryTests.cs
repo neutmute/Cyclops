@@ -26,6 +26,7 @@ namespace PetStore.IntegrationTest.Infrastructure
         }
 
         [TestMethod]
+        [TestCategory("SqlIntegration")]
         public void Save_DoesNotThrow()
         {
             var customer = GetUnpersistedCustomer();

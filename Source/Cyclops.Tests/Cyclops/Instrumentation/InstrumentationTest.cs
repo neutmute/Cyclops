@@ -19,6 +19,7 @@ namespace PetStore.IntegrationTest
     {
         [ExpectedException(typeof(SqlException))]
         [TestMethod]
+        [TestCategory("myget")]
         public void DbCommandLogger_SqlException_EscalatesLogLevelToWarn()
         {
             var memoryTarget = CustomerRepositoryTest.GetMemoryTarget(NLog.LogLevel.Warn);
@@ -34,8 +35,6 @@ namespace PetStore.IntegrationTest
             }
             finally
             {
-                var assertBuilder = new AssertBuilder();
-                //assertBuilder.Generate(memoryTarget.Logs, "memoryTarget.Logs");
                 Assert.IsTrue(memoryTarget.Logs[0].StartsWith("\r\n-- COMMAND FAILED"));
             }
         }
@@ -43,6 +42,7 @@ namespace PetStore.IntegrationTest
        
 
         [TestMethod]
+        [TestCategory("SqlIntegration")]
         public void DbCommandLogger_PerformanceMonitorNotify_Demo()
         {
             // Normally this would be a singleton across all scope

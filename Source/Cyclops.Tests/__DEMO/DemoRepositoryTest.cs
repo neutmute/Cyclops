@@ -21,6 +21,7 @@ namespace PetStore.IntegrationTest.Tests
         }
 
         [TestMethod]
+        [TestCategory("SqlIntegration")]
         public void Demonstrate()
         {
             var repo = GetNewRepo();

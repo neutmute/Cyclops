@@ -24,6 +24,7 @@ namespace PetStore.IntegrationTest.Cyclops.Instrumentation
         /// Didn't quote the text when started using this data type.
         /// Tests that quotes are contained in the expected data
         /// </summary>
+        [TestCategory("SqlIntegration")]
         [TestMethod]
         public void DateTimeOffset_LoggedOk()
         {
@@ -39,6 +40,7 @@ namespace PetStore.IntegrationTest.Cyclops.Instrumentation
             Assert.IsTrue(dump.Contains("'28-Sep-12 05:15:14 +10:00'"));
         }
 
+        [TestCategory("SqlIntegration")]
         [TestMethod]
         public void BinaryLogDump_EmitsExpectedBinary()
         {

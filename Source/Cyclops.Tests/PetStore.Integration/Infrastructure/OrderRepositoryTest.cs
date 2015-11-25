@@ -36,6 +36,7 @@ namespace PetStore.IntegrationTest
         }
 
 
+        [TestCategory("SqlIntegration")]
         [ExpectedException(typeof(CyclopsException), "Failed to auto assign parameters. [this,set,of params won't automap] => dbo.Order_Get(@Id)")]
         [TestMethod]
         public void CyclopsCommand_GivenBadAutoMapParameters_ReturnsUsefulException()
@@ -48,6 +49,7 @@ namespace PetStore.IntegrationTest
         /// Test expects data to have been generated and requries transactions to rollback other tests.
         /// just hacked for now
         /// </summary>
+        [TestCategory("SqlIntegration")]
         [TestMethod]
         public void Order_Get_Success()
         {
@@ -67,6 +69,7 @@ namespace PetStore.IntegrationTest
         /// just hacked for now
         /// </summary>
         [TestMethod]
+        [TestCategory("SqlIntegration")]
         public void TableValuedParameterDemo()
         {
             var repo = GetNewRepo();
@@ -78,6 +81,7 @@ namespace PetStore.IntegrationTest
         /// AssertBuilder! OMG! sorry - had to for testing my valueinjector
         /// </summary>
         [TestMethod]
+        [TestCategory("SqlIntegration")]
         public void OrderLineList_MapsTo_DataTable()
         {
 

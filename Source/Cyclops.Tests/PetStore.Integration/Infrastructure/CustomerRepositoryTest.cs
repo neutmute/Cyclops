@@ -69,12 +69,14 @@ namespace PetStore.IntegrationTest
             return memoryTarget;
         }
 
+        [TestCategory("SqlIntegration")]
         [TestMethod]
         public void Customer_Save_Success()
         {
             GetPersistedCustomer();
         }
 
+        [TestCategory("SqlIntegration")]
         [TestMethod]
         public void Customer_Get_Success()
         {
@@ -96,6 +98,7 @@ exec Customer_Save @Id=@p1 output,@Title=N'Super He',@FirstName=N'Captain',@Last
             Assert.AreEqual(1, customers.Count);
         }
 
+        [TestCategory("SqlIntegration")]
         [TestMethod]
         public void Customer_Saves_Success()
         {
@@ -113,6 +116,7 @@ exec Customer_Save @Id=@p1 output,@Title=N'Super He',@FirstName=N'Captain',@Last
             Assert.IsTrue(customerReloaded.Id == customer.Id, "Persisted! Definitely.");
         }
 
+        [TestCategory("SqlIntegration")]
         [TestMethod]
         public void Cyclops_MapsParameters_Success()
         {
@@ -121,6 +125,7 @@ exec Customer_Save @Id=@p1 output,@Title=N'Super He',@FirstName=N'Captain',@Last
             customerRepository.Delete(customer);
         }
 
+        [TestCategory("SqlIntegration")]
         [TestMethod]
         public void Cyclops_LogsFailure()
         {

@@ -15,6 +15,7 @@ namespace Cyclops.UnitTest
     public class ExpressionTests
     {
         [TestMethod]
+        [TestCategory("myget")]
         public void CreateSetterFromGetter()
         {
             Action<Person, int> ageSetter = InitializeSet((Person p) => p.Age);
@@ -29,6 +30,7 @@ namespace Cyclops.UnitTest
         }
 
         [TestMethod]
+        [TestCategory("myget")]
         public void CreateSetterFromGetter2()
         {
             var p1 = new Person();
