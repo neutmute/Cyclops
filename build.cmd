@@ -23,9 +23,8 @@ if "%VsTestConsole%" == "" (
 
 REM Package
 mkdir Build
-call %nuget% pack "Source\Cyclops\Cyclops.csproj" -symbols -o Build -p Configuration=%config% %version%
+call %nuget% pack "Source\Cyclops\Cyclops.csproj" -o Build -p Configuration=%config% %version%
 
 REM Publish
-%nuget% setApiKey %nugetapikey%
-%nuget% push .\build\*
+%nuget% push .\build\* %nugetapikey%
 
