@@ -24,6 +24,6 @@ mkdir Build
 call %nuget% pack "Source\Cyclops\Cyclops.csproj" -symbols -o Build -p Configuration=%config% %version%
 
 REM Publish
-nuget.exe setApiKey %nugetapikey%
-nuget.exe push build/*
+REM %nuget% setApiKey %nugetapikey%
+%nuget% push build/*
 
