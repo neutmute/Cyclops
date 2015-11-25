@@ -1,4 +1,6 @@
 rem @echo off
+REM myget build script
+
 set config=%1
 if "%config%" == "" (
    set config=Release
@@ -24,6 +26,6 @@ mkdir Build
 call %nuget% pack "Source\Cyclops\Cyclops.csproj" -symbols -o Build -p Configuration=%config% %version%
 
 REM Publish
-REM %nuget% setApiKey %nugetapikey%
+%nuget% setApiKey %nugetapikey%
 %nuget% push build/*
 
