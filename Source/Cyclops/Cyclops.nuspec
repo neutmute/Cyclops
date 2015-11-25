@@ -10,5 +10,8 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <projectUrl>https://github.com/neutmute/cyclops</projectUrl>
 	<iconUrl>https://raw.githubusercontent.com/neutmute/Cyclops/master/SolutionItems/cyclops.png</iconUrl>
-  </metadata>
+  </metadata>  
+  <files>
+		<file src="bin\release\cyclops.pdb" target="lib\net45\" />    
+	</files>
 </package>
