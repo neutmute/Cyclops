@@ -14,10 +14,10 @@ REM Build
 
 REM test
 if "%VsTestConsole%" == "" (
-   set VsTestConsole="C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\MSTest.exe"
+   set VsTestConsole="C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe"
 )
 
-%VsTestConsole% /testcontainer:'.\Source\Cyclops.Tests\bin\%config%\Cyclops.Tests.dll' /category:myget
+%VsTestConsole% .\Source\Cyclops.Tests\bin\%config%\Cyclops.Tests.dll /TestCaseFilter:"TestCategory=myget"
 
 REM Package
 mkdir Build
