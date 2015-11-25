@@ -12,7 +12,7 @@ namespace Cyclops.Tests.DependencyInjection
 {
     public class AutofacModule : Module
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private static readonly ILog Log = LogManager.GetLogger< AutofacModule>();
 
         /// <summary>
         /// Override to add registrations to the container.

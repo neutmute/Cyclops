@@ -20,7 +20,7 @@ namespace Cyclops
     {
         #region Fields
 
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private static readonly ILog Log = LogManager.GetLogger< CyclopsCommand>();
 
         private readonly CyclopsParameterMapper _parameterMapper;
         #endregion

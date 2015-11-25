@@ -70,7 +70,7 @@ namespace Cyclops
 
     public class DbCommandLogger
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private static readonly ILog Log = LogManager.GetLogger<DbCommandLogger>();
 
         /// <summary>
         /// Allow an external class to subscribe to performance events

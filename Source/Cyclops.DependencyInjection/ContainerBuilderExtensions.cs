@@ -14,7 +14,7 @@ namespace Cyclops.ExtensionMethods
 {
     public static class ContainerBuilderExtensions
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private static readonly ILog Log = LogManager.GetLogger("ContainerBuilderExtensions");
 
         /// <summary>
         /// Helper to auto wire an assembly with Cyclops repositories
