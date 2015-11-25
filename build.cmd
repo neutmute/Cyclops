@@ -27,5 +27,5 @@ call %nuget% pack "Source\Cyclops\Cyclops.csproj" -symbols -o Build -p Configura
 
 REM Publish
 %nuget% setApiKey %nugetapikey%
-%nuget% push build/*
+%nuget% push .\build\*
 
