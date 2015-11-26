@@ -5,6 +5,21 @@ param(
 
 . ".\build.common.ps1"
 
+$solutionName = "Cyclops"
+$sourceUrl = "https://github.com/neutmute/Cyclops"
+
+function init {
+    # Initialization
+    $global:rootFolder = Split-Path -parent $script:MyInvocation.MyCommand.Path
+    $global:rootFolder = Join-Path $rootFolder .
+    $global:packagesFolder = Join-Path $rootFolder packages
+    $global:outputFolder = Join-Path $rootFolder _output
+    $global:msbuild = "C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe"
+
+    _WriteOut -ForegroundColor $ColorScheme.Banner "-= $solutionName Build =-"
+    _WriteConfig "rootFolder" $rootFolder
+}
+
 function restorePackages{
     _WriteOut -ForegroundColor $ColorScheme.Banner "nuget, gitlink restore"
     
@@ -17,7 +32,7 @@ function restorePackages{
 function nugetPack{
     _WriteOut -ForegroundColor $ColorScheme.Banner "Nuget pack"
     
-    New-Item -Force -ItemType directory -Path $rootFolder\_output
+    New-Item -Force -ItemType directory -Path $outputFolder
 
     if(!(Test-Path Env:\nuget )){
         $env:nuget = nuget
@@ -26,10 +41,8 @@ function nugetPack{
         $env:PackageVersion = "1.0.0.0"
     }
 
-    #&$env:nuget pack $rootFolder\Source\Cyclops\Cyclops.csproj -o _output -p Configuration=$configuration -Version $env:PackageVersion
-    #&$env:nuget pack $rootFolder\Source\Cyclops.DependencyInjection\Cyclops.DependencyInjection.csproj -o _output -p Configuration=$configuration -Version $env:PackageVersion
-    nuget pack $rootFolder\Source\Cyclops\Cyclops.csproj -o _output -p Configuration=$configuration -Version $env:PackageVersion
-    nuget pack $rootFolder\Source\Cyclops.DependencyInjection\Cyclops.DependencyInjection.csproj -o _output -p Configuration=$configuration -Version $env:PackageVersion
+    nuget pack $rootFolder\Source\Cyclops\Cyclops.csproj -o $outputFolder -p Configuration=$configuration -Version $env:PackageVersion
+    nuget pack $rootFolder\Source\Cyclops.DependencyInjection\Cyclops.DependencyInjection.csproj -o $outputFolder -p Configuration=$configuration -Version $env:PackageVersion
 }
 
 function nugetPublish{
@@ -38,7 +51,9 @@ function nugetPublish{
         _WriteOut -ForegroundColor $ColorScheme.Banner "Nuget publish"
         &$env:nuget push .\_output\* $env:nugetapikey
     }
-
+    else{
+        _WriteOut -ForegroundColor Yellow "MyGet builder runner not detected. Skipping nuget publish"
+    }
 }
 
 function buildSolution{
@@ -59,18 +74,7 @@ function executeTests{
 
 }
 
-# Initialization
-$rootFolder = Split-Path -parent $script:MyInvocation.MyCommand.Path
-$rootFolder = Join-Path $rootFolder .
-$packagesFolder  = Join-Path $rootFolder packages
-$msbuild = "C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe"
-
-# Solution
-$solutionName = "Cyclops"
-$sourceUrl = "https://github.com/neutmute/Cyclops"
-
-_WriteOut -ForegroundColor $ColorScheme.Banner "-= $solutionName Build =-"
-_WriteConfig "rootFolder" $rootFolder
+init
 
 restorePackages
 
@@ -81,3 +85,5 @@ executeTests
 nugetPack
 
 nugetPublish
+
+Write-Host "Build $env:PackageVersion complete"
