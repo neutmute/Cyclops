@@ -7,6 +7,8 @@ param(
 
 function restorePackages{
     _WriteOut -ForegroundColor $ColorScheme.Banner "nuget, gitlink restore"
+    
+    New-Item -Force -ItemType directory -Path $packagesFolder
     _DownloadNuget $packagesFolder
     nuget restore
     nuget install gitlink -SolutionDir "$rootFolder" -ExcludeVersion
@@ -64,10 +66,10 @@ $packagesFolder  = Join-Path $rootFolder packages
 $msbuild = "C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe"
 
 # Solution
-$solutionName = "cyclops"
+$solutionName = "Cyclops"
 $sourceUrl = "https://github.com/neutmute/Cyclops"
 
-_WriteOut -ForegroundColor $ColorScheme.Banner "-= Cyclops Build =-"
+_WriteOut -ForegroundColor $ColorScheme.Banner "-= $solutionName Build =-"
 _WriteConfig "rootFolder" $rootFolder
 
 restorePackages
