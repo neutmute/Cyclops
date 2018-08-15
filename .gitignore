@@ -39,3 +39,4 @@ _ReSharper*/
 /Sample.Petstore\PetStore.Database\Sandbox/PetStore.mdf
 packages
 _output/
+.vs/
