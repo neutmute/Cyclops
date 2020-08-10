@@ -125,11 +125,11 @@ namespace Cyclops
 
                         if (p.SqlDbType == SqlDbType.VarBinary && p.Size == int.MaxValue)
                         {
-                            sizeString = "MAX"; // datatype=IMAGE Acp_Common_UniversalEmailService_Email_Create uses this deprecated type
+                            sizeString = "MAX"; // datatype=IMAGE
                         }
                         else if (p.SqlDbType == SqlDbType.NVarChar && p.Size == 1073741823)
                         {
-                            sizeString = "MAX"; // datatype=NTEXT Acp_Common_UniversalEmailService_Email_Create uses this deprecated type
+                            sizeString = "MAX"; // datatype=NTEXT
                         }
 
                         sqlTypeText += string.Format("({0})", sizeString);
