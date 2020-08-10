@@ -8,9 +8,6 @@ using System.Text;
 
 namespace Cyclops
 {
-    /// <summary>
-    /// https://github.com/neutmute/Cyclops/blob/master/Source/Cyclops/Instrumentation/DbCommandDumper.cs
-    /// </summary>
     public class DbCommandDumper
     {
         public DbCommand Command { get; set; }
@@ -227,7 +224,7 @@ namespace Cyclops
 
                 if (type == typeof(DateTime))
                 {
-                    s = string.Format("'{0}'", Convert.ToDateTime(o).ToString("yyyy-MM-dd HH:mm:ss"));
+                    s = $"'{Convert.ToDateTime(o):yyyy-MM-dd HH:mm:ss}'";
                 }
                 else if (type == typeof(bool))
                 {
@@ -236,7 +233,7 @@ namespace Cyclops
                 }
                 else if (type == typeof(string) || type == typeof(DateTimeOffset))
                 {
-                    s = string.Format("'{0}'", Convert.ToString(o).Replace("'", "''"));
+                    s = $"'{Convert.ToString(o).Replace("'", "''")}'";
                 }
                 else if (type == typeof(byte[]))
                 {
