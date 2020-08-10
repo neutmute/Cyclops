@@ -5,18 +5,20 @@ using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
-using Common.Logging;
 
 namespace Cyclops
 {
-    internal class DbCommandDumper
+    /// <summary>
+    /// https://github.com/neutmute/Cyclops/blob/master/Source/Cyclops/Instrumentation/DbCommandDumper.cs
+    /// </summary>
+    public class DbCommandDumper
     {
         public DbCommand Command { get; set; }
 
         public int? DurationMs { get; set; }
 
         public Exception ExceptionTrapped { get; set; }
-        
+
         public DbCommandDumper(DbCommand command)
         {
             Command = command;
@@ -30,7 +32,7 @@ namespace Cyclops
             // Format parameters into a user friendly string
             string parametersAsString = ConvertSqlParametersToCsv();
 
-            StringBuilder simulatedCommandText = new StringBuilder();
+            var simulatedCommandText = new StringBuilder();
 
             // When formulating the log text, need to do a little more work when it is a stored proc
             // in order to simulate executable text
@@ -73,7 +75,7 @@ namespace Cyclops
             }
 
             // Construct final log dump string
-            StringBuilder traceMessage = new StringBuilder();
+            var traceMessage = new StringBuilder();
             traceMessage.Append("\r\n");
 
             if (ExceptionTrapped != null)
@@ -123,6 +125,16 @@ namespace Cyclops
                         {
                             sizeString = "MAX";
                         }
+
+                        if (p.SqlDbType == SqlDbType.VarBinary && p.Size == int.MaxValue)
+                        {
+                            sizeString = "MAX"; // datatype=IMAGE Acp_Common_UniversalEmailService_Email_Create uses this deprecated type
+                        }
+                        else if (p.SqlDbType == SqlDbType.NVarChar && p.Size == 1073741823)
+                        {
+                            sizeString = "MAX"; // datatype=NTEXT Acp_Common_UniversalEmailService_Email_Create uses this deprecated type
+                        }
+
                         sqlTypeText += string.Format("({0})", sizeString);
                         break;
 
@@ -137,7 +149,7 @@ namespace Cyclops
                             foreach (DataRow dataRow in dataTable.Rows)
                             {
                                 tableInserts.AppendFormat("INSERT INTO {0} VALUES (", p.ParameterName);
-                                for(int columnIndex = 0; columnIndex < dataTable.Columns.Count; columnIndex++)
+                                for (int columnIndex = 0; columnIndex < dataTable.Columns.Count; columnIndex++)
                                 {
                                     tableInserts.AppendFormat("{0},", ConvertToSqlString(dataRow[columnIndex]));
                                 }
@@ -212,7 +224,7 @@ namespace Cyclops
             else
             {
                 Type type = o.GetType();
-                
+
                 if (type == typeof(DateTime))
                 {
                     s = string.Format("'{0}'", Convert.ToDateTime(o).ToString("yyyy-MM-dd HH:mm:ss"));
@@ -229,12 +241,12 @@ namespace Cyclops
                 else if (type == typeof(byte[]))
                 {
                     var bytes = (byte[])o;
-                    s = "0x"  + BitConverter.ToString(bytes).Replace("-", string.Empty);
+                    s = "0x" + BitConverter.ToString(bytes).Replace("-", string.Empty);
                 }
                 else if (type == typeof(Enum))
                 {
                     // assumes a convention of always wanting an enum to be passed as an int
-                    var enumValue = (Enum) o;
+                    var enumValue = (Enum)o;
                     s = Convert.ToInt32(enumValue).ToString();
                 }
                 else // for remaining data types; for most purposes these should only be numerics
